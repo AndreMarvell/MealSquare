@@ -30,7 +30,7 @@ parameters:
 
 ```
 
-Ensuite faite un update de composer (qui va se charger de télécharger toutes les dépendances), puis un assets:install pour installé l'ensemble des ressources publiques des bundles.
+Ensuite faite un *_+update de composer (qui va se charger de télécharger toutes les dépendances), puis un *_+assets:install+_* pour installer l'ensemble des ressources publiques des bundles.
 
 ## Etude du projet
 
