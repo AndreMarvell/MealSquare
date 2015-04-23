@@ -1,4 +1,5 @@
 /vendor/
+/nbproject/
 /app/logs/
 /app/cache/
 /web/bundles/
