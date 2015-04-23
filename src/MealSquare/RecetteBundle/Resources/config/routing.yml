@@ -1,0 +1,3 @@
+meal_square_recette_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MealSquareRecetteBundle:Default:index }

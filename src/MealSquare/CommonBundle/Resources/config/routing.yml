@@ -1,0 +1,3 @@
+meal_square_common_homepage:
+    path:     /
+    defaults: { _controller: MealSquareCommonBundle:Default:index }

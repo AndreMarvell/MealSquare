@@ -1,0 +1,11 @@
+services:
+    sonata.admin.recette:
+        class: MealSquare\RecetteBundle\Admin\RecetteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Recette", label: "Recette" }
+        arguments:
+            - ~
+            - MealSquare\RecetteBundle\Entity\Recette
+            - ~
+        calls:
+            - [ setTranslationDomain, [MealSquareRecetteBundle]]
