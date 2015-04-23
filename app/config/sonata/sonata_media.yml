@@ -31,47 +31,26 @@ sonata_media:
                 wide:   { width: 600 , quality: 90}
                 square: { width: 100, height: 100 , quality: 80}
                 
-        destination:
+        recette:
             providers:
                 - sonata.media.provider.image
 
             formats:
                 small: { width: 150 , quality: 95}
                 big:   { width: 480 , quality: 95}
-                square: { width: 100, height: 100, quality: 80}
+                square: { width: 100, height: 100, quality: 90}
                 
-        aeroport:
+        ingredient:
             providers:
                 - sonata.media.provider.image
 
             formats:
+                small: { width: 150 , quality: 95}
                 big:   { width: 480 , quality: 95}
-                square: { width: 100, height: 100, quality: 80}
+                square: { width: 100, height: 100, quality: 90}
                 
-        hotel:
-            providers:
-                - sonata.media.provider.image
-
-            formats:
-                small: { width: 150 , quality: 95}
-                big:   { width: 500 , quality: 95}
-                square: { width: 100, height: 100, quality: 80}
                 
-        site:
-            providers:
-                - sonata.media.provider.image
-
-            formats:
-                small: { width: 150 , quality: 95}
-                square: { width: 100, height: 100, quality: 80}
-                
-        compagnie:
-            providers:
-                - sonata.media.provider.image
-
-            formats:
-                small: { width: 50 , quality: 95}
-                normal: { width: 150, quality: 95}
+        
 
     cdn:
         server:
