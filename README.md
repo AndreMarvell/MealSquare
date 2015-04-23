@@ -24,7 +24,7 @@ MealSquare est une application web de gestion de recette MARMITON like. Dévelop
 
 
 
-### Plus d'infos
+## Plus d'infos
 
 
 ## Bundles Utilisés
