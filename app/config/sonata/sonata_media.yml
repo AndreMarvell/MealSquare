@@ -33,6 +33,8 @@ sonata_media:
                 
         recette:
             providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
                 - sonata.media.provider.image
 
             formats:
@@ -42,6 +44,8 @@ sonata_media:
                 
         ingredient:
             providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
                 - sonata.media.provider.image
 
             formats:
