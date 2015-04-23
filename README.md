@@ -3,9 +3,7 @@
 MealSquare
 ========================
 
-MealSquare est une application web de gestion de 
-
-Web service basé sur le framework PHP [Symphony2](http://symfony.com/)
+MealSquare est une application web de gestion de recette Marmitton like. Développé avec le framework PHP [Symphony2](http://symfony.com/), il permettra d'apporter en plus une multitude de fonctionnalités.
 
 ## Présentation
 
