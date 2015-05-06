@@ -27,6 +27,13 @@ class User extends BaseUser
      * @var integer $id
      */
     protected $id;
+    
+    /**
+     * 
+     */
+    private $badges;
+    
+    private $recettes_favoris;
 
     /**
      * Get id
@@ -36,5 +43,73 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add badge
+     *
+     * @param \Application\Sonata\UserBundle\Entity\Badge $badge
+     *
+     * @return User
+     */
+    public function addBadge(\Application\Sonata\UserBundle\Entity\Badge $badge)
+    {
+        $this->badges[] = $badge;
+
+        return $this;
+    }
+
+    /**
+     * Remove badge
+     *
+     * @param \Application\Sonata\UserBundle\Entity\Badge $badge
+     */
+    public function removeBadge(\Application\Sonata\UserBundle\Entity\Badge $badge)
+    {
+        $this->badges->removeElement($badge);
+    }
+
+    /**
+     * Get badges
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBadges()
+    {
+        return $this->badges;
+    }
+
+    /**
+     * Add recettesFavori
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $recettesFavori
+     *
+     * @return User
+     */
+    public function addRecettesFavori(\MealSquare\RecetteBundle\Entity\Recette $recettesFavori)
+    {
+        $this->recettes_favoris[] = $recettesFavori;
+
+        return $this;
+    }
+
+    /**
+     * Remove recettesFavori
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $recettesFavori
+     */
+    public function removeRecettesFavori(\MealSquare\RecetteBundle\Entity\Recette $recettesFavori)
+    {
+        $this->recettes_favoris->removeElement($recettesFavori);
+    }
+
+    /**
+     * Get recettesFavoris
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecettesFavoris()
+    {
+        return $this->recettes_favoris;
     }
 }

@@ -126,6 +126,12 @@ class Recette
      */
     protected $image;
     
+    /**
+     * @var \Application\Sonata\ClassificationBundle\Entity\Category
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\ClassificationBundle\Entity\Category", cascade={"persist"}, fetch="LAZY")
+     */
+    protected $categorie;
+    
     
     /**
     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
@@ -133,12 +139,53 @@ class Recette
     */
     private $auteur;
     
+    /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag", cascade={"persist"})
+     */
+    private $tags;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\InfosBlock", mappedBy="Recette")
+     *      
+     */        
+    private $recetteBlocks;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\IngredientRecette", mappedBy="Recette")
+     *      
+     */        
+    private $ingredients;
+    
+    /** 
+     *
+     * @ORM\OneToOne(targetEntity="MealSquare\RecetteBundle\Entity\Note\RateThread", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $note;
+    
     function __construct() {
         $this->dateCreation = new \DateTime();
         $this->dateMAJ = new \DateTime();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->recetteBlocks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Creer les entités comment thread
+     *
+     * @return void 
+     */
+    public function createThread(){
+        $this->note = new \MealSquare\RecetteBundle\Entity\Note\RateThread("recette".$this->id);
+    
     }
 
-        /**
+    /**
      * @param MediaInterface $image
      */
     public function setImage(MediaInterface $media)
@@ -509,5 +556,162 @@ class Recette
     public function getAuteur()
     {
         return $this->auteur;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \Application\Sonata\ClassificationBundle\Tag $tag
+     *
+     * @return Recette
+     */
+    public function addTag(\Application\Sonata\ClassificationBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Application\Sonata\ClassificationBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Application\Sonata\ClassificationBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \Sonata\ClassificationBundle\Model\CategoryInterface $categorie
+     *
+     * @return Recette
+     */
+    public function setCategorie(\Sonata\ClassificationBundle\Model\CategoryInterface $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Application\Sonata\ClassificationBundle\Entity\Category
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set note
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Note\RateThread $note
+     *
+     * @return Recette
+     */
+    public function setNote(\MealSquare\RecetteBundle\Entity\Note\RateThread $note = null)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return \MealSquare\RecetteBundle\Entity\Note\RateThread
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    
+
+    /**
+     * Add recetteBlock
+     *
+     * @param \MealSquare\RecetteBundle\Entity\InfosBlock $recetteBlock
+     *
+     * @return Recette
+     */
+    public function addRecetteBlock(\MealSquare\RecetteBundle\Entity\InfosBlock $recetteBlock)
+    {
+        $this->recetteBlocks[] = $recetteBlock;
+
+        return $this;
+    }
+
+    /**
+     * Remove recetteBlock
+     *
+     * @param \MealSquare\RecetteBundle\Entity\InfosBlock $recetteBlock
+     */
+    public function removeRecetteBlock(\MealSquare\RecetteBundle\Entity\InfosBlock $recetteBlock)
+    {
+        $this->recetteBlocks->removeElement($recetteBlock);
+    }
+
+    /**
+     * Get recetteBlocks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecetteBlocks()
+    {
+        return $this->recetteBlocks;
+    }
+    
+    public function __toString() {
+        return $this->titre;
+    }
+
+
+    /**
+     * Add ingredient
+     *
+     * @param \MealSquare\RecetteBundle\Entity\IngredientRecette $ingredient
+     *
+     * @return Recette
+     */
+    public function addIngredient(\MealSquare\RecetteBundle\Entity\IngredientRecette $ingredient)
+    {
+        $this->ingredients[] = $ingredient;
+
+        return $this;
+    }
+
+    /**
+     * Remove ingredient
+     *
+     * @param \MealSquare\RecetteBundle\Entity\IngredientRecette $ingredient
+     */
+    public function removeIngredient(\MealSquare\RecetteBundle\Entity\IngredientRecette $ingredient)
+    {
+        $this->ingredients->removeElement($ingredient);
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
     }
 }

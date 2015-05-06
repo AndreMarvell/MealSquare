@@ -1,6 +1,6 @@
 sonata_media:
     # if you don't use default namespace configuration
-    #class:
+    # class:
     #    media: MyVendor\MediaBundle\Entity\Media
     #    gallery: MyVendor\MediaBundle\Entity\Gallery
     #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
@@ -51,6 +51,14 @@ sonata_media:
             formats:
                 small: { width: 150 , quality: 95}
                 big:   { width: 480 , quality: 95}
+                square: { width: 100, height: 100, quality: 90}
+                
+        badge:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 48, height: 48 , quality: 95}
                 square: { width: 100, height: 100, quality: 90}
                 
                 

@@ -9,6 +9,18 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        
+        <many-to-many field="badges" target-entity="Application\Sonata\UserBundle\Entity\Badge">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-many>
+        
+        <many-to-many field="recettes_favoris" target-entity="MealSquare\RecetteBundle\Entity\Recette">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-many>
 
     </entity>
 

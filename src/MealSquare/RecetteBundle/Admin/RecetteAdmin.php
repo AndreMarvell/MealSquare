@@ -16,7 +16,7 @@ class RecetteAdmin extends Admin
             ->with('Information', array(
                     'class' => 'col-md-8'
                 ))
-                ->add('auteur')
+                ->add('auteur', 'sonata_type_model_list')
                 ->add('titre')
                 ->add('source')
                 ->add('nbPersonne')
@@ -27,6 +27,17 @@ class RecetteAdmin extends Admin
                         'context' => 'recette',
                         'hide_context' => true
                     )
+                ))
+                
+                ->add('categorie', 'sonata_type_model_list', array('required' => false), array(
+                    'link_parameters' => array(
+                        'context' => 'recette',
+                        'hide_context' => true
+                    )
+                ))
+                ->add('tags', 'sonata_type_model_autocomplete', array(
+                    'property' => 'name',
+                    'multiple' => 'true'
                 ))
             ->end()
             ->with('Stats', array(
@@ -45,9 +56,16 @@ class RecetteAdmin extends Admin
                 ))
                 ->add('dateCreation', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
                 ->add('dateMAJ', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
-            
             ->end()
-                   
+            ->with('Recette', array(
+                    'class' => 'col-md-8'
+                ))    
+                ->add('recetteBlocks', 'sonata_type_collection', array(), array(
+	                 'edit' => 'inline',
+	                 'sortable'  => 'position'
+                    
+                ))
+            ->end()       
         ;
     }
 

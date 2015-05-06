@@ -9,3 +9,17 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [MealSquareRecetteBundle]]
+
+    mealsquare.admin.infosblock:
+        class: MealSquare\RecetteBundle\Admin\InfosBlockAdmin
+        arguments: [~, MealSquare\RecetteBundle\Entity\InfosBlock, SonataAdminBundle:CRUD, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: InfosBlock}
+        calls:
+            - [ setTranslationDomain, [MealSquareRecetteBundle]]
+
+    mealsquare.admin.ingredient:
+        class: MealSquare\RecetteBundle\Admin\IngredientAdmin
+        arguments: [~, MealSquare\RecetteBundle\Entity\Ingredient, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Ingredient}

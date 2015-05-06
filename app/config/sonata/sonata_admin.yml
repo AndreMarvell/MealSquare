@@ -52,6 +52,8 @@ sonata_admin:
                 icon:            '<i class="fa fa-cutlery"></i>'
                 items:
                     - sonata.admin.recette
+                    - mealsquare.admin.ingredient
+                    - mealsquare.admin.infosblock
                     
             sonata.admin.group.news:
                 label:           Actualité
@@ -102,6 +104,7 @@ sonata_admin:
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - sonata.user.admin.user
+                    - sonata.user.admin.badge
                     - sonata.user.admin.group
                     #- sonata.page.admin.site
                     #- sonata.notification.admin.message
