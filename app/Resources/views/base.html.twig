@@ -2,12 +2,40 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>
+            {% block title %} 
+            {% endblock %}
+        </title>
+            
+{#      block css commun à toute les pages  #}
+
+        {% stylesheets '@MealSquareCommonBundle/Resources/public/css/style.css'
+                       '@MealSquareCommonBundle/Resources/public/css/animate.css'
+                       'http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('@MealSquareCommonBundle/Resources/public/images/ico/logo.png') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+        {% endblock %}
+        
+{#      block javascript commun à toute les pages  #}
+
+        {% javascripts '@MealSquareCommonBundle/Resources/public/js/jquery-1.11.1.min.js'
+               '@MealSquareCommonBundle/Resources/public/js/jquery.uniform.min.js'
+               '@MealSquareCommonBundle/Resources/public/js/wow.min.js'
+               '@MealSquareCommonBundle/Resources/public/js/jquery.slicknav.min.js'
+               '@MealSquareCommonBundle/Resources/public/js/scripts.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        
+{#      block pour l' Ajout de javascript dans les bocks fille  #}
+        
+        {% block script %}
+        {% endblock %}
     </body>
 </html>

@@ -1,0 +1,39 @@
+{# header Twig template #}
+<header class="head" role="banner">
+    <!--wrap-->
+    <div class="wrap clearfix">
+        <a href="#" title="SocialChef" class="logo">
+            {% image '@MealSquareCommonBundle/Resources/public/images/ico/logo.png'  output="images/ico/logo.jpg" %}
+            <img src="{{ asset_url }}" alt="MealSquare logo">
+            {% endimage %}
+        </a>
+
+        <nav class="main-nav" role="navigation" id="menu">
+            <ul>
+                <li><a href="#" title="Accueil"><span>Accueil</span></a></li>
+                <li>
+                    <a href="#" title="Recettes"><span>Les Recettes</span></a>
+                </li>
+                <li>
+                    <a href="blog.html" title="Ingredients"><span>Les ingredients</span></a>
+                </li>
+                <li>
+                    <a href="#" title="Forum"><span>Le Forum</span></a>
+                </li>
+                <li>
+                    <a href="#" title="Contact"><span>Nous Contacter</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav class="user-nav" role="navigation">
+            <ul>
+                <li class="light"><a href="#" title="Rechercher un ingredient"><i class="ico i-search"></i> <span>Ingredient</span></a></li>
+                <li class="medium"><a href="#" title="Rechercher une recette"><i class="ico i-search"></i> <span>Recette</span></a></li>
+               {# <li class="medium"><a href="my_profile.html" title="My account"><i class="ico i-account"></i> <span>My account</span></a></li>
+                <li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="ico i-submitrecipe"></i> <span>Submit a recipe</span></a></li>#}
+            </ul>
+        </nav>
+
+    </div>
+</header>

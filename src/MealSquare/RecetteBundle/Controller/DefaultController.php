@@ -10,4 +10,14 @@ class DefaultController extends Controller
     {
         return $this->render('MealSquareRecetteBundle:Default:index.html.twig', array('name' => $name));
     }
+    
+    public function loginAction()
+    {
+        return $this->render('ApplicationSonataUserBundle:Security:login.html.twig');
+    }
+    
+    public function registerAction()
+    {
+        return $this->render('ApplicationSonataUserBundle:Registration:register.html.twig');
+    }
 }

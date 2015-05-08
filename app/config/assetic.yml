@@ -3,7 +3,7 @@ assetic:
     use_controller: false
     read_from:      %kernel.root_dir%/../web
     write_to:       %kernel.root_dir%/../web
-    bundles:        [] # disable bundles parsing
+    bundles:        [MealSquareCommonBundle] # disable bundles parsing
 
     filters:
         cssrewrite: ~

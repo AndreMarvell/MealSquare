@@ -1,0 +1,27 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+{% block title %}
+    Inscription - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--row-->
+			<div class="row">
+			<!--content-->
+				<section class="content center full-width wow fadeInUp">
+					 {% render controller("SonataUserBundle:RegistrationFOSUser1:register") %}
+				</section>
+				<!--//content-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+{% endblock %}
+{% block script %}
+   <script> new WOW().init(); </script>
+{% endblock %}

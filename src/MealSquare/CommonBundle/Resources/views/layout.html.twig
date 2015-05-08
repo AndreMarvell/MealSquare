@@ -1,0 +1,21 @@
+{# empty Twig template #}
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    MealSquare
+{% endblock %}
+
+{% block body %}
+    {% block header %}
+        {{ include("MealSquareCommonBundle:Parts:header.html.twig") }}
+    {% endblock %}
+    {% block main %}
+    
+    {% endblock %}
+    {% block footer %}
+        {{ include("MealSquareCommonBundle:Parts:footer.html.twig") }}
+    {% endblock %}
+    {% block preloader %}
+        {{ include("MealSquareCommonBundle:Parts:preloader.html.twig") }}
+    {% endblock %}
+{% endblock %}
