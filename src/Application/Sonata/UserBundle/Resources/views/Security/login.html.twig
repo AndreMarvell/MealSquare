@@ -18,7 +18,12 @@
                     <div class="modal container">
                         <h3>{{ 'link_login'|trans({}, 'SonataUserBundle') }} </h3>
                         {% if error %}
-                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            
+                            <div class="alert alert-danger" role="alert">
+                                <button class="close">x</button>
+                                {{ error|trans }}
+                            </div>
+                            {#<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
                         {% endif %}
 
                         <form action="{{ path("fos_user_security_check") }}" method="post">
