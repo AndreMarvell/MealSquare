@@ -1,0 +1,109 @@
+
+# Global strings: title, logo, footer, etc.
+# Used in base.html.twig
+base:
+    title: MealSquare | Votre recueil de recettes à portée de main
+    description: Ce que tout le monde devrait savoir à propos de cuisine 
+    meta: |
+        Un recueil de recettes de cuisine collaboratif. Le plus grand choix de recettes de cuisine du web est sur MealSquare !
+
+    # Logo
+    logo:
+        alt: Logo du site
+        title: MealSquare | Votre recueil de recettes à portée de main
+
+    # Header menu
+    menu:
+        home: Accueil
+        recipes: Les recettes
+        forums: Forum
+        search: Recherche
+        more: Plus
+        connexion: Connexion
+        ingredients: Les ingrédients
+        contacts: Contactez nous
+        submit_recipes: Soumettre une recette
+        account: Mon compte
+        search_recipes: Rechercher une recette
+
+    # User account box
+    user:
+        # Users types
+        types:
+            user: Membre
+            visitor: Visiteur
+
+        # User menu
+        menu:
+            flux: Mon flux
+            account: Mon compte
+            buckutt: BuckUTT
+            dailymail: Mon daymail
+            emails: E-mails
+            table: Mon emploi du temps
+            logout: Déconnexion
+            help: Aide
+            admin: Administration
+            members: Membres
+            pages: Pages statiques
+            orgas: Mes associations
+
+        # Sex
+        sex:
+            male: Homme
+            female: Femme
+
+    # Sidebar
+    sidebar:
+        services:
+            title: Services
+            items:
+                uvs: Guide des UV
+                trombi: Trombinoscope
+                table: Cumul d'emplois du temps
+                wiki: Wiki des associations
+        etu:
+            title: EtuUTT
+            items:
+                team: L'équipe
+
+    # Admin
+    admin_menu:
+        title: Administration générale
+        items:
+            dashboard: Tableau de bord
+            modules: Modules
+            pages: Pages statiques
+            users: Utilisateurs
+            stats: Statistiques
+            logger: Logs
+
+    # Logo
+    page_icon:
+        alt: Icône de la page
+        title: Icône de la page
+
+    # Footer
+    footer:
+        # Links
+        legalities: Mentions légales
+        help_us: Nous aider
+        change_locale: Changer de langue
+        desktop_version: Version ordinateur
+        mobile_version: Version mobile
+
+        # Authors and version
+        text: "Réalisé par Nanocreatives<br />Propulsé par Symfony 2"
+        mobile_text: "Réalisé par Nanocreatives"
+        version: Version
+
+# Errors pages:
+error:
+    404:
+        title: Hum ... 404 !
+        subtitle: D'oh !
+        content: Désolé, la page que vous avez demandée semble introuvable !
+    other:
+        title: Hum ... Erreur !
+        subtitle: Hum ...
+        content: Une erreur s'est produite sur le serveur ...

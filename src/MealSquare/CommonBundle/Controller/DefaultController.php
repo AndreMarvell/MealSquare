@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('MealSquareCommonBundle:Default:index.html.twig');
     }
+    
+    public function contactAction()
+    {
+        return $this->render('MealSquareCommonBundle:Default:contact.html.twig');
+    }
 }

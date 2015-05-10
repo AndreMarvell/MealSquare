@@ -1,0 +1,5 @@
+user:
+    connect: Connexion
+    password_forget: Mot de passe oublié ?
+    register: S'inscrire
+    not_registered: Vous n'avez pas de compte ?

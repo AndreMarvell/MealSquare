@@ -2,7 +2,7 @@
 <header class="head" role="banner">
     <!--wrap-->
     <div class="wrap clearfix">
-        <a href="#" title="SocialChef" class="logo">
+        <a href="#" title="MealSquare" class="logo">
             {% image '@MealSquareCommonBundle/Resources/public/images/ico/logo.png'  output="images/ico/logo.jpg" %}
             <img src="{{ asset_url }}" alt="MealSquare logo">
             {% endimage %}
@@ -10,29 +10,28 @@
 
         <nav class="main-nav" role="navigation" id="menu">
             <ul>
-                <li><a href="#" title="Accueil"><span>Accueil</span></a></li>
+                <li><a href="#" title="{{ 'common.menu.home'|trans }}"><span>{{ 'common.menu.home'|trans }}</span></a></li>
                 <li>
-                    <a href="#" title="Recettes"><span>Les Recettes</span></a>
+                    <a href="#" title="{{ 'common.menu.recipes'|trans }}"><span>{{ 'common.menu.recipes'|trans }}</span></a>
                 </li>
                 <li>
-                    <a href="blog.html" title="Ingredients"><span>Les ingredients</span></a>
+                    <a href="#" title="{{ 'common.menu.ingredients'|trans }}"><span>{{ 'common.menu.ingredients'|trans }}</span></a>
                 </li>
                 <li>
-                    <a href="#" title="Forum"><span>Le Forum</span></a>
+                    <a href="#" title="{{ 'common.menu.forums'|trans }}"><span>{{ 'common.menu.forums'|trans }}</span></a>
                 </li>
                 <li>
-                    <a href="#" title="Contact"><span>Nous Contacter</span></a>
+                    <a href="{{ path('meal_square_common_contact') }}" title="{{ 'common.menu.contacts'|trans }}"><span>{{ 'common.menu.contacts'|trans }}</span></a>
                 </li>
             </ul>
         </nav>
 
         <nav class="user-nav" role="navigation">
-            <ul>
-                <li class="light"><a href="#" title="Rechercher un ingredient"><i class="ico i-search"></i> <span>Ingredient</span></a></li>
-                <li class="medium"><a href="#" title="Rechercher une recette"><i class="ico i-search"></i> <span>Recette</span></a></li>
-               {# <li class="medium"><a href="my_profile.html" title="My account"><i class="ico i-account"></i> <span>My account</span></a></li>
-                <li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="ico i-submitrecipe"></i> <span>Submit a recipe</span></a></li>#}
-            </ul>
+                <ul>
+                        <li class="light"><a href="#" title="{{ 'common.menu.search_recipes'|trans }}"><i class="ico i-search"></i> <span>{{ 'common.menu.search_recipes'|trans }}</span></a></li>
+                        <li class="medium"><a href="{{ path('sonata_user_profile_show') }}" title="{{ 'common.menu.account'|trans }}"><i class="ico i-account"></i> <span>{{ 'common.menu.account'|trans }}</span></a></li>
+                        <li class="dark"><a href="#" title="{{ 'common.menu.submit_recipes'|trans }}"><i class="ico i-submitrecipe"></i> <span>{{ 'common.menu.submit_recipes'|trans }}</span></a></li>
+                </ul>
         </nav>
 
     </div>

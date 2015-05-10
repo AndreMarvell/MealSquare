@@ -1,0 +1,23 @@
+
+# Global strings: title, logo, footer, etc.
+# Used in base.html.twig
+base:
+    title: MealSquare
+    description: Votre recueil de recette 
+
+    # Logo
+    logo:
+        alt: Website logo
+        title: MealSquare
+
+
+# Errors pages:
+error:
+    404:
+        title: Oups ... 404 !
+        subtitle: D'oh !
+        content: Sorry, the page you are looking for doesn't exist !
+    other:
+        title: Oups ... Error !
+        subtitle: Hum ...
+        content: The server has ran into an error ...

@@ -1,6 +1,8 @@
 {# empty Twig template #}
 {% extends "MealSquareCommonBundle::layout.html.twig" %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block title %}
     Connexion - {{ parent() }}
 {% endblock %}
@@ -14,25 +16,34 @@
                 <!--content-->
                 <section class="content center full-width wow fadeInUp">
                     <div class="modal container">
-                        
-                        <h3>Connexion </h3>
-                         <div class="f-row">
-						<input type="text" placeholder="Your username" />
-						</div>
-						<div class="f-row">
-							<input type="password" placeholder="Your password" />
-						</div>
-						
-						<div class="f-row">
-							<input type="checkbox" />
-							<label>Remember me next time</label>
-						</div>
-						
-						<div class="f-row bwrap">
-							<input type="submit" value="login" />
-						</div>
-						<p><a href="#">Forgotten password?</a></p>
-						<p>Dont have an account yet? <a href="register.html">Sign up.</a></p>
+                        <h3>{{ 'link_login'|trans({}, 'SonataUserBundle') }} </h3>
+                        {% if error %}
+                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                            <div class="f-row">
+{#                                <label for="username">{{ 'security.login.username'|trans }}</label>
+#}                                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username'|trans }}" />
+                           </div>
+                           <div class="f-row">
+{#                                <label for="password">{{ 'security.login.password'|trans }}</label>
+#}                                <input type="password" id="password" name="_password" required="required"  placeholder="{{ 'security.login.password'|trans }}"/>
+                           </div>
+
+                           <div class="f-row">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                           </div>
+
+                           <div class="f-row bwrap">
+                                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                           </div>
+                           <p><a href="{{ path('fos_user_resetting_request') }}">{{ 'forgotten_password'|trans({}, 'SonataUserBundle') }}</a></p>
+                           <p>Pas de compte ?&nbsp;<a href="{{ path('sonata_user_registration_register') }}">{{ 'link_register'|trans({}, 'SonataUserBundle') }}</a></p>
+                           
+                           <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        </form>
                     </div>
                 </section>
                 <!--//content-->
@@ -40,8 +51,11 @@
             <!--//row-->
         </div>
         <!--//wrap-->
+
     </main>
 {% endblock %}
 {% block script %}
    <script> new WOW().init(); </script>
 {% endblock %}
+
+

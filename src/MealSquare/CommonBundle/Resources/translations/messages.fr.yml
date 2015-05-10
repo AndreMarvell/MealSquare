@@ -1,0 +1,78 @@
+
+# Global strings: title, logo, footer, etc.
+# Used in base.html.twig
+common:
+
+    # Header menu
+    menu:
+        home: Accueil
+        recipes: Les recettes
+        forums: Forum
+        search: Recherche
+        more: Plus
+        connexion: Connexion
+        ingredients: Les ingrédients
+        contacts: Contactez nous
+        submit_recipes: Ajouter une recette
+        account: Mon compte
+        search_recipes: Rechercher
+
+    # User account box
+    user:
+        # Users types
+        types:
+            user: Membre
+            visitor: Visiteur
+
+        # User menu
+        menu:
+            account: Mon compte
+            emails: E-mails
+            logout: Déconnexion
+            connect: Se connecter
+            register: S'inscrire
+            help: Aide
+            admin: Administration
+            members: Membres
+
+        # Sex
+        sex:
+            male: Homme
+            female: Femme
+
+    # Contact
+    contact:
+        message: Votre message
+        name: Votre nom
+        email: Votre adresse electronique
+        send: Envoyez le message
+        message: Votre message
+        title: Contactez - nous ?
+        
+
+    
+
+    
+
+    # Footer
+    footer:
+        # Links
+        legalities: Mentions légales
+        help_us: Nous aider
+        change_locale: Changer de langue
+        desktop_version: Version ordinateur
+        mobile_version: Version mobile
+        help: Besoin d'aide ?
+        help_text: Contactez nous pour toutes informations concernant le site.
+        follow: Nous suivre
+        about: A propos de MealSquare
+        about_text: MealSquare est un site de recette culinaire.
+        
+
+        # Authors and version
+        text: "Réalisé par Nanocreatives<br />Propulsé par Symfony 2"
+        mobile_text: "Réalisé par Nanocreatives"
+        version: Version
+        
+        #Copyrights
+        copyrights: Copyright © 2015 MealSquare. Tous droits réservés

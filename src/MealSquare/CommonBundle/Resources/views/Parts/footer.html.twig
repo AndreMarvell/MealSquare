@@ -3,38 +3,44 @@
             <div class="wrap clearfix">
                 <div class="row">
                     <article class="one-half">
-                        <h5>A propos de MealSquare</h5>
-                        <p>MealSquare est un site de recette culinaire.</p>
+                        <h5>{{ 'common.footer.about'|trans }}</h5>
+                        <p>{{ 'common.footer.about_text'|trans }}</p>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <p><em>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</em></p>
+                        {% endif %}
                     </article>
                     <article class="one-fourth">
-                        <h5>Besoin d'aide ?</h5>
-                        <p>Contactez-nous via un téléphone phone ou un email</p>
-                        <p><em>T:</em>  +1 555 555 555<br /><em>E:</em>  <a href="#">MealSquare@gmail.com</a></p>
+                        <h5>{{ 'common.footer.help'|trans }}</h5>
+                        <p>{{ 'common.footer.help_text'|trans }}</p>
                     </article>
                     <article class="one-fourth">
-                        <h5>Nous suivre</h5>
+                        <h5>{{ 'common.footer.follow'|trans }}</h5>
                         <ul class="social">
                             <li class="facebook"><a href="#" title="facebook">facebook</a></li>
                             <li class="youtube"><a href="#" title="youtube">youtube</a></li>
-                            <li class="rss"><a href="#" title="rss">rss</a></li>
-                            <li class="gplus"><a href="#" title="gplus">google plus</a></li>
-                            <li class="linkedin"><a href="#" title="linkedin">linkedin</a></li>
                             <li class="twitter"><a href="#" title="twitter">twitter</a></li>
-                            <li class="pinterest"><a href="#" title="pinterest">pinterest</a></li>
-                            <li class="vimeo"><a href="#" title="vimeo">vimeo</a></li>
                         </ul>
                     </article>
 
                     <div class="bottom">
-                        <p class="copy">Copyright 2015 MealSquare. All rights reserved</p>
+                        <p class="copy">{{ 'common.footer.copyrights'|trans }}</p>
 
                         <nav class="foot-nav">
                             <ul>
-                                <li><a href="#" title="Home">ACCUEIL</a></li>
-                                <li><a href="#" title="Recipes">LES RECETTES</a></li>
-                                <li><a href="#" title="Blog">LES INGREDIENTS</a></li>   
-                                <li><a href="#" title="Rechercher une recette">RECHERCHER UNE RECETTE</a></li>
-                                <li><a href="#" title="Se connecter">SE CONNECTER</a></li>	<li><a href="#" title="S'inscrire">S'INSCRIRE</a></li>													
+                                <li><a href="#" title="{{ 'common.menu.home'|trans }}"><span>{{ 'common.menu.home'|trans }}</span></a></li>
+                                <li><a href="#" title="{{ 'common.menu.recipes'|trans }}"><span>{{ 'common.menu.recipes'|trans }}</span></a></li>
+                                <li><a href="" title="{{ 'common.menu.ingredients'|trans }}"><span>{{ 'common.menu.ingredients'|trans }}</span></a></li>
+                                <li><a href="#" title="{{ 'common.menu.forums'|trans }}"><span>{{ 'common.menu.forums'|trans }}</span></a></li>
+                                <li><a href="{{ path('meal_square_common_contact') }}" title="{{ 'common.menu.contacts'|trans }}"><span>{{ 'common.menu.contacts'|trans }}</span></a></li>   
+                                <li><a href="#" title="{{ 'common.menu.search_recipes'|trans }}">{{ 'common.menu.search_recipes'|trans }}</a></li>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                  <li><a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a></li>
+                                {% else %}
+                                    <li><a href="{{ path('sonata_user_security_login') }}" title="{{ 'common.user.menu.connect'|trans }}">{{ 'common.user.menu.connect'|trans }}</a></li>
+                                    <li><a href="{{ path('sonata_user_profile_edit') }}" title="{{ 'common.user.menu.register'|trans }}">{{ 'common.user.menu.register'|trans }}</a></li>
+                                {% endif %}													
                             </ul>
                         </nav>
                     </div>

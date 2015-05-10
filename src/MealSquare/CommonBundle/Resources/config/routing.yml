@@ -1,3 +1,7 @@
 meal_square_common_homepage:
     path:     /
     defaults: { _controller: MealSquareCommonBundle:Default:index }
+    
+meal_square_common_contact:
+    path:     /contacts
+    defaults: { _controller: MealSquareCommonBundle:Default:contact }

@@ -1,0 +1,49 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+{% block title %}
+    Contact - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--row-->
+            <div class="row">
+                <!--content-->
+                <section class="content center full-width wow fadeInUp">
+                    <div class="modal container">
+                        <form method="post" action="#" name="contactform" id="contactform">
+                                <h3>{{ 'common.contact.title'|trans }}</h3>
+                                <div id="message" class="alert alert-danger"></div>
+                                <div class="f-row">
+                                        <input type="text" placeholder="{{ 'common.contact.name'|trans }}" id="name" />
+                                </div>
+                                <div class="f-row">
+                                        <input type="email" placeholder="{{ 'common.contact.email'|trans }}" id="email" />
+                                </div>
+                                <div class="f-row">
+                                        <textarea placeholder="{{ 'common.contact.message'|trans }}" id="comments"></textarea>
+                                </div>
+                                <div class="f-row bwrap">
+                                        <input type="submit" value="{{ 'common.contact.send'|trans }}" />
+                                </div>
+                        </form>
+
+                    </div>
+                </section>
+                <!--//content-->
+            </div>
+            <!--//row-->
+        </div>
+        <!--//wrap-->
+
+    </main>
+{% endblock %}
+{% block script %}
+   <script> new WOW().init(); </script>
+{% endblock %}
+
+
+
