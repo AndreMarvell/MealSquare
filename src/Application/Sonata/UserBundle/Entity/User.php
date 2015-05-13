@@ -34,6 +34,11 @@ class User extends BaseUser
     private $badges;
     
     private $recettes_favoris;
+    
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     */
+    protected $avatar;
 
     /**
      * Get id
@@ -111,5 +116,29 @@ class User extends BaseUser
     public function getRecettesFavoris()
     {
         return $this->recettes_favoris;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $avatar
+     *
+     * @return User
+     */
+    public function setAvatar(\Application\Sonata\MediaBundle\Entity\Media $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }

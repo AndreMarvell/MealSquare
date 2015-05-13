@@ -18,6 +18,11 @@ class Badge
      * @var string
      */
     private $nom;
+    
+    /**
+     * @var string
+     */
+    private $icone;
 
     /**
      * @var string
@@ -119,4 +124,28 @@ class Badge
         return $this->nom;
     }
 
+
+    /**
+     * Set icone
+     *
+     * @param string $icone
+     *
+     * @return Badge
+     */
+    public function setIcone($icone)
+    {
+        $this->icone = $icone;
+
+        return $this;
+    }
+
+    /**
+     * Get icone
+     *
+     * @return string
+     */
+    public function getIcone()
+    {
+        return $this->icone;
+    }
 }

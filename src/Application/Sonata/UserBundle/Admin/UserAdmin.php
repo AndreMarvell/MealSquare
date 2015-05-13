@@ -26,6 +26,12 @@ class UserAdmin extends SonataUserAdmin
                         'property' => 'titre',
                         'multiple' => 'true'
                 ))
+                ->add('avatar', 'sonata_type_model_list', array('required' => false), array(
+                    'link_parameters' => array(
+                        'context' => 'avatar',
+                        'hide_context' => true
+                    )
+                ))
 //                ->with('Recompenses')
 //                    
 //                ->end()

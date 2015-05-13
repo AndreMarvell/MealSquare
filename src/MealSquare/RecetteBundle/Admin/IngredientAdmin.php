@@ -28,9 +28,10 @@ class IngredientAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('custom', 'string', array('template' => 'MealSquareCommonBundle:Admin:list_imagefield_custom.html.twig', 'label' => 'Image'))
             ->add('id')
             ->add('libelle')
-            ->add('description')
+            //->add('description')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

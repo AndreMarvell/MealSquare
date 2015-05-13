@@ -5,6 +5,7 @@
       <generator strategy="AUTO"/>
     </id>
     <field name="nom" type="string" column="nom" length="255"/>
+    <field name="icone" type="string" column="icone" length="255"/>
     <field name="description" type="text" column="description"/>    
     <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Entity\Media">
             <cascade>

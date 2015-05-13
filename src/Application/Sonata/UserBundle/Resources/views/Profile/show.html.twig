@@ -1,7 +1,6 @@
 {# empty Twig template #}
 {% extends "MealSquareCommonBundle::layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
 
 {% block title %}
     Mon profil - {{ parent() }}
@@ -15,7 +14,7 @@
             <nav class="breadcrumbs">
                 <ul>
                     <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
-                    <li><a href="{{path('sonata_user_profile_show')}}" title="{{ 'common.menu.myaccount'|trans }}">{{ 'common.menu.myaccount'|trans }}</a></li>
+                    <li><a href="{{path('sonata_user_profile_show')}}" title="{{ 'user_block_profile'|trans({}, 'SonataUserBundle') }}">{{ 'user_block_profile'|trans({}, 'SonataUserBundle') }}</a></li>
                 </ul>
             </nav>
             <!--//breadcrumbs-->
@@ -29,9 +28,14 @@
                         <!--profile left part-->
                         <div class="my_account one-fourth wow fadeInLeft">
                             <figure>
-                                {% image '@MealSquareCommonBundle/Resources/public/images/avatar.jpg'  output="images/avatar.jpg" %}
-                                <img src="{{ asset_url }}" alt="MealSquare logo">
-                                {% endimage %}
+                                
+                                {% if app.user.avatar is not null %}
+                                    {% thumbnail app.user.avatar, 'square' %}
+                                {% else %}
+                                    {% image '@MealSquareCommonBundle/Resources/public/images/avatar.jpg'  output="images/avatar.jpg" %}
+                                    <img src="{{ asset_url }}" alt="MealSquare logo">
+                                    {% endimage %}
+                                {% endif %}
                             </figure>
                             <div class="container">
                                 <h2>
@@ -44,10 +48,10 @@
                         <div class="three-fourth wow fadeInRight">
                             <nav class="tabs">
                                 <ul>
-                                    <li class="active"><a href="#about" title="About me">About me</a></li>
-                                    <li><a href="#recipes" title="My recipes">My recipes</a></li>
-                                    <li><a href="#favorites" title="My favorites">My favorites</a></li>
-                                    <li><a href="#posts" title="My posts">My posts</a></li>
+                                    <li class="active"><a href="#about" title="{{ 'common.user.profile.about'|trans}}">{{ 'common.user.profile.about'|trans}}</a></li>
+                                    <li><a href="#recipes" title="{{ 'common.user.profile.recipes'|trans}}">{{ 'common.user.profile.recipes'|trans}}</a></li>
+                                    <li><a href="#favorites" title="{{ 'common.user.profile.favourite'|trans}}">{{ 'common.user.profile.favourite'|trans}}</a></li>
+                                    <li><a href="#badges" title="{{ 'common.user.profile.badges'|trans}}">{{ 'common.user.profile.badges'|trans}}</a></li>
                                 </ul>
                             </nav>
 
@@ -55,19 +59,24 @@
                             <div class="tab-content" id="about">
                                 <div class="row">
                                     <dl class="basic two-third">
-                                        <dt>{{ 'common.user.information:username'|trans }}</dt>
+                                        <dt>{{ 'form.username'|trans({}, 'SonataUserBundle') }}</dt>
                                         <dd>{{ app.user.username}}</dd>
-                                        <dt>{{ 'common.user.information:lastname'|trans }}</dt>
+                                        <dt>{{ 'form.label_name'|trans({}, 'SonataUserBundle') }}</dt>
                                         <dd>{{ app.user.lastname}}</dd>
-                                        <dt>{{ 'common.user.information:firstname'|trans }}</dt>
+                                        <dt>{{ 'filter.label_firstname'|trans({}, 'SonataUserBundle') }}</dt>
                                         <dd>{{ app.user.firstname}}</dd>
-                                        <dt>{{ 'common.user.information:email'|trans }}</dt>
+                                        <dt>{{ 'form.label_email'|trans({}, 'SonataUserBundle') }}</dt>
                                         <dd>{{ app.user.email}}</dd>
                                     </dl>
 
                                     <div class="one-third">
                                         <ul class="boxed gold">
-                                            <li class="medium"><a href="#" title="Was featured"><i class="ico i-was_featured"></i> <span>Was featured</span></a></li>
+                                            {% for badge in app.user.badges %}
+                                                <li class="medium"><a href="#badges" title="{{ badge.nom }}"><i class="ico {{ badge.icone }}"></i> <span>{{ badge.nom|e }}</span></a></li>
+                                            {% else %}
+                                                <li class="large">Vous n'avez pas encore obtenu de Badge</li>
+                                            {% endfor %}
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -202,71 +211,29 @@
                             <!--//my favorites-->
 
                             <!--my posts-->
-                            <div class="tab-content" id="posts">
+                            <div class="tab-content" id="badges">
                                 <!--entries-->
-                                <div class="entries row">
+                                <div class="row">
                                     <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="blog_single.html">Barbeque party</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                    {% for badge in app.user.badges %}
+                                    
+                                        <div class="full-width">
+                                            <div class="avatar gold one-fourth" style="border-radius:50%">
+                                                <i class="ico {{ badge.icone }}" style="position: relative; top: 50%; transform: translateY(-50%);"></i>
+                                            </div>
+                                            <div class=" three-fourth"  style="background: white;">
+                                                <h3>{{ badge.nom }}</h3> 
+                                                <div class="excerpt">
+                                                    <p>{{ badge.description }} </p>
                                                 </div>
                                             </div>
-                                            <div class="excerpt">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-                                            </div>
                                         </div>
-                                    </div>
+                                    {% else %}
+                                        <div class="container">Vous n'avez pas encore obtenu de Badge</div>
+                                    {% endfor %}
                                     <!--item-->
 
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="blog_single.html">How to make sushi</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="excerpt">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--item-->
 
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="blog_single.html">Make your own bread</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="excerpt">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--item-->
                                 </div>
                                 <!--//entries-->
                             </div>

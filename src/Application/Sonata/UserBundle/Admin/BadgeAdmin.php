@@ -14,6 +14,7 @@ class BadgeAdmin extends Admin
     {
         $formMapper
             ->add('nom')
+            ->add('icone')
             ->add('description')
             ->add('image', 'sonata_type_model_list', array('required' => false), array(
                     'link_parameters' => array(
@@ -36,8 +37,8 @@ class BadgeAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('custom', 'string', array('template' => 'MealSquareCommonBundle:Admin:list_imagefield_custom.html.twig', 'label' => 'Image'))
             ->addIdentifier('nom')
+            ->add($description)
         ;
     }
 }    
