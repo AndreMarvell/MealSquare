@@ -39,6 +39,13 @@ common:
         sex:
             male: Homme
             female: Femme
+            
+        #User information
+        information:
+            username: Nom d'utilisateur
+            fistname: Prenom
+            lastname: Nom
+            email: Adresse email
 
     # Contact
     contact:

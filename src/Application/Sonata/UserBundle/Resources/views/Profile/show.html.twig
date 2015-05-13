@@ -1,0 +1,289 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}
+    Mon profil - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    <li><a href="{{path('sonata_user_profile_show')}}" title="{{ 'common.menu.myaccount'|trans }}">{{ 'common.menu.myaccount'|trans }}</a></li>
+                </ul>
+            </nav>
+            <!--//breadcrumbs-->
+
+
+            <!--content-->
+            <section class="content">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <!--row-->
+                    <div class="row">
+                        <!--profile left part-->
+                        <div class="my_account one-fourth wow fadeInLeft">
+                            <figure>
+                                {% image '@MealSquareCommonBundle/Resources/public/images/avatar.jpg'  output="images/avatar.jpg" %}
+                                <img src="{{ asset_url }}" alt="MealSquare logo">
+                                {% endimage %}
+                            </figure>
+                            <div class="container">
+                                <h2>
+                                    {{ app.user.username}}
+                                </h2> 
+                            </div>
+                        </div>
+                        <!--//profile left part-->
+
+                        <div class="three-fourth wow fadeInRight">
+                            <nav class="tabs">
+                                <ul>
+                                    <li class="active"><a href="#about" title="About me">About me</a></li>
+                                    <li><a href="#recipes" title="My recipes">My recipes</a></li>
+                                    <li><a href="#favorites" title="My favorites">My favorites</a></li>
+                                    <li><a href="#posts" title="My posts">My posts</a></li>
+                                </ul>
+                            </nav>
+
+                            <!--about-->
+                            <div class="tab-content" id="about">
+                                <div class="row">
+                                    <dl class="basic two-third">
+                                        <dt>{{ 'common.user.information:username'|trans }}</dt>
+                                        <dd>{{ app.user.username}}</dd>
+                                        <dt>{{ 'common.user.information:lastname'|trans }}</dt>
+                                        <dd>{{ app.user.lastname}}</dd>
+                                        <dt>{{ 'common.user.information:firstname'|trans }}</dt>
+                                        <dd>{{ app.user.firstname}}</dd>
+                                        <dt>{{ 'common.user.information:email'|trans }}</dt>
+                                        <dd>{{ app.user.email}}</dd>
+                                    </dl>
+
+                                    <div class="one-third">
+                                        <ul class="boxed gold">
+                                            <li class="medium"><a href="#" title="Was featured"><i class="ico i-was_featured"></i> <span>Was featured</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//about-->
+
+                            <!--my recipes-->
+                            <div class="tab-content" id="recipes">
+                                <div class="entries row">
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+                                </div>
+                            </div>
+                            <!--//my recipes-->
+
+
+                            <!--my favorites-->
+                            <div class="tab-content" id="favorites">
+                                <div class="entries row">
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+                                </div>
+                            </div>
+                            <!--//my favorites-->
+
+                            <!--my posts-->
+                            <div class="tab-content" id="posts">
+                                <!--entries-->
+                                <div class="entries row">
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="blog_single.html">Barbeque party</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="excerpt">
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="blog_single.html">How to make sushi</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="excerpt">
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+
+                                    <!--item-->
+                                    <div class="entry one-third">
+                                        <figure>
+                                            <img src="images/img.jpg" alt="" />
+                                            <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="blog_single.html">Make your own bread</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="excerpt">
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+                                </div>
+                                <!--//entries-->
+                            </div>
+                            <!--//my posts-->
+                        </div>
+                    </div>
+                    <!--//row-->
+                {% endif %}
+            </section>
+            <!--//content-->
+        </div>
+        <!--//wrap-->
+    </main>
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}
+
+
+
