@@ -1,0 +1,108 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}
+    Ingredients - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+
+        <div class="wrap clearfix">
+            <!--row-->
+            <div class="row">
+                <!--content-->
+                <section class="content three-fourth">
+                    <!--cwrap-->
+                    <div class="cwrap">
+                        <!--breadcrumbs-->
+                        <nav class="breadcrumbs">
+                            <ul>
+                                <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                                <li><a href="{{path('sonata_user_profile_show')}}" title="{{ 'common.menu.myaccount'|trans }}">{{ 'common.menu.myaccount'|trans }}</a></li>
+                            </ul>
+                        </nav>
+                        <!--//breadcrumbs-->
+                        <header class="s-title">
+                            <h2 class="ribbon bright">Les Ingredients</h2>
+                            <b>Trier Par : {{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}  |   
+                                {% if pagination.isSorted('a.libelle') %} {% endif %} 
+                                {{ knp_pagination_sortable(pagination, 'Libelle', 'a.libelle') }}
+                            </b>
+                        </header>       
+       
+                        <!--entries-->
+                        <div class="entries row">
+                            {% for article in pagination %}
+                                <!--item-->
+                                <div class="entry one-third wow fadeInLeft">
+                                    <figure>
+                                        {% thumbnail article.image, 'big' %}
+                                        <figcaption><a href="{{ path('meal_square_recette_ingredient_show',{'libelle':article.libelle}) }}"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                    </figure>
+
+                                    <div class="container">
+                                        <h2><a href="{{ path('meal_square_recette_ingredient_show',{'libelle':article.libelle}) }}">{{article.libelle}}</a></h2>
+                                    </div>
+                                </div>
+                                <!--item-->
+
+                            {% else %}
+                                <p>Pas (encore !) d'annonces</p>
+                            {% endfor %}
+{#                            <div class="quicklinks">#}
+                                <div class="quicklinks">
+                                    {{ knp_pagination_render(pagination) }}
+                                </div>
+{#                            </div>#}
+                        </div>
+                        <!--//entries-->
+                    </div>
+                    <!--//cwrap-->
+                </section>
+                <!--//content-->
+                <!--right sidebar-->
+                <aside class="sidebar one-fourth">
+                    <div class="widget wow fadeInRight">
+                        <h3>Recipe Categories</h3>
+                        <ul class="boxed">
+                            <li class="light"><a href="recipes.html" title="Appetizers"><i class="ico i-appetizers"></i> <span>Apetizers</span></a></li>
+                            <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-cocktails"></i> <span>Cocktails</span></a></li>
+                            <li class="dark"><a href="recipes.html" title="Deserts"><i class="ico i-deserts"></i> <span>Deserts</span></a></li>
+
+                            <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-eggs"></i> <span>Eggs</span></a></li>
+                            <li class="dark"><a href="recipes.html" title="Equipment"><i class="ico i-equipment"></i> <span>Equipment</span></a></li>
+                            <li class="light"><a href="recipes.html" title="Events"><i class="ico i-events"></i> <span>Events</span></a></li>
+
+                            <li class="dark"><a href="recipes.html" title="Fish"><i class="ico i-fish"></i> <span>Fish</span></a></li>
+                            <li class="light"><a href="recipes.html" title="Ftness"><i class="ico i-fitness"></i> <span>Fitness</span></a></li>
+                            <li class="medium"><a href="recipes.html" title="Healthy"><i class="ico i-healthy"></i> <span>Healthy</span></a></li>
+
+                            <li class="light"><a href="recipes.html" title="Asian"><i class="ico i-asian"></i> <span>Asian</span></a></li>
+                            <li class="medium"><a href="recipes.html" title="Mexican"><i class="ico i-mexican"></i> <span>Mexican</span></a></li>
+                            <li class="dark"><a href="recipes.html" title="Pizza"><i class="ico i-pizza"></i> <span>Pizza</span></a></li>
+
+                            <li class="medium"><a href="recipes.html" title="Kids"><i class="ico i-kids"></i> <span>Kids</span></a></li>
+                            <li class="dark"><a href="recipes.html" title="Meat"><i class="ico i-meat"></i> <span>Meat</span></a></li>
+                            <li class="light"><a href="recipes.html" title="Snacks"><i class="ico i-snacks"></i> <span>Snacks</span></a></li>
+
+                            <li class="dark"><a href="recipes.html" title="Salads"><i class="ico i-salads"></i> <span>Salads</span></a></li>
+                            <li class="light"><a href="recipes.html" title="Storage"><i class="ico i-storage"></i> <span>Storage</span></a></li>
+                            <li class="medium"><a href="recipes.html" title="Vegetarian"><i class="ico i-vegetarian"></i> <span>Vegetarian</span></a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+            <!--//right sidebar-->
+        </div>
+        <!--//wrap-->
+    </main>
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}
+
+
+

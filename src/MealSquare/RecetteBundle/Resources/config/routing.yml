@@ -1,3 +1,11 @@
 meal_square_recette_homepage:
     path:     /hello/{name}
     defaults: { _controller: MealSquareRecetteBundle:Default:index }
+    
+meal_square_recette_ingredient_list:
+    path:     /ingredient/list/
+    defaults: { _controller: MealSquareRecetteBundle:Ingredient:list }
+    
+meal_square_recette_ingredient_show:
+    path:     /ingredient/show/{libelle}
+    defaults: { _controller: MealSquareRecetteBundle:Ingredient:show }
