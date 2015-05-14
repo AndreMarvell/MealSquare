@@ -1,7 +1,6 @@
 {# empty Twig template #}
 {% extends "MealSquareCommonBundle::layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
 
 {% block title %}
     Ingredients - {{ parent() }}
@@ -21,7 +20,7 @@
                         <nav class="breadcrumbs">
                             <ul>
                                 <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
-                                <li><a href="{{path('sonata_user_profile_show')}}" title="{{ 'common.menu.myaccount'|trans }}">{{ 'common.menu.myaccount'|trans }}</a></li>
+                                <li>{{ 'common.menu.ingredients'|trans }}</li>
                             </ul>
                         </nav>
                         <!--//breadcrumbs-->
@@ -32,7 +31,7 @@
                                 {{ knp_pagination_sortable(pagination, 'Libelle', 'a.libelle') }}
                             </b>
                         </header>       
-       
+
                         <!--entries-->
                         <div class="entries row">
                             {% for article in pagination %}
@@ -52,11 +51,11 @@
                             {% else %}
                                 <p>Pas (encore !) d'annonces</p>
                             {% endfor %}
-{#                            <div class="quicklinks">#}
-                                <div class="quicklinks">
-                                    {{ knp_pagination_render(pagination) }}
-                                </div>
-{#                            </div>#}
+                            {#                            <div class="quicklinks">#}
+                            <div class="quicklinks">
+                                {{ knp_pagination_render(pagination) }}
+                            </div>
+                            {#                            </div>#}
                         </div>
                         <!--//entries-->
                     </div>

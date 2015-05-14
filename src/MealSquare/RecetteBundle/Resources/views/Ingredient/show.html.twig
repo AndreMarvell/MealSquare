@@ -1,7 +1,6 @@
 {# empty Twig template #}
 {% extends "MealSquareCommonBundle::layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
 
 {% block title %}
     Ingredient détails - {{ parent() }}
@@ -15,8 +14,10 @@
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
-					<li><a href="index.html" title="Home">Home</a></li>
-					<li>Blog</li>
+					<li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                                        <li><a href="{{path('meal_square_recette_ingredient_list')}}" title="{{ 'common.menu.ingredients'|trans }}">{{ 'common.menu.ingredients'|trans }}</a></li>          
+                                        <li>{{ingredient.libelle}}</li>
+                            
 				</ul>
 			</nav>
 			<!--//breadcrumbs-->
