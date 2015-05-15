@@ -53,7 +53,6 @@ sonata_admin:
                 items:
                     - sonata.admin.recette
                     - mealsquare.admin.ingredient
-                    - mealsquare.admin.infosblock
                     
             sonata.admin.group.news:
                 label:           Actualité

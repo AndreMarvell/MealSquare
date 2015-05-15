@@ -13,59 +13,62 @@ class RecetteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Information', array(
-                    'class' => 'col-md-8'
-                ))
-                ->add('auteur', 'sonata_type_model_list')
-                ->add('titre')
-                ->add('source')
-                ->add('nbPersonne')
-                ->add('saison')
-                ->add('pays')
-                ->add('image', 'sonata_type_model_list', array('required' => false), array(
-                    'link_parameters' => array(
-                        'context' => 'recette',
-                        'hide_context' => true
-                    )
-                ))
-                
-                ->add('categorie', 'sonata_type_model_list', array('required' => false), array(
-                    'link_parameters' => array(
-                        'context' => 'recette',
-                        'hide_context' => true
-                    )
-                ))
-                ->add('tags', 'sonata_type_model_autocomplete', array(
-                    'property' => 'name',
-                    'multiple' => 'true'
-                ))
+            ->tab('Informations Générales')
+                ->with('Information', array(
+                        'class' => 'col-md-8'
+                    ))
+                    ->add('auteur', 'sonata_type_model_list')
+                    ->add('titre')
+                    ->add('source')
+                    ->add('nbPersonne')
+                    ->add('saison')
+                    ->add('specialite')
+                    ->add('pays')
+                    ->add('image', 'sonata_type_model_list', array('required' => false), array(
+                        'link_parameters' => array(
+                            'context' => 'recette',
+                            'hide_context' => true
+                        )
+                    ))
+
+                    ->add('categorie', 'sonata_type_model_list', array('required' => false), array(
+                        'link_parameters' => array(
+                            'context' => 'recette',
+                            'hide_context' => true
+                        )
+                    ))
+                    ->add('tags', 'sonata_type_model_autocomplete', array(
+                        'property' => 'name',
+                        'multiple' => 'true'
+                    ))
+                ->end()
+                ->with('Stats', array(
+                        'class' => 'col-md-4'
+                    ))
+                    ->add('visibilite') 
+                    ->add('classique')
+                    ->add('selection')
+                    ->add('archive') 
+                    ->add('difficulte') 
+                    ->add('tempsCuisson') 
+                    ->add('tempsPreparation')
+                ->end()
+                ->with('Autres', array(
+                        'class' => 'col-md-4'
+                    ))
+                    ->add('dateCreation', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
+                    ->add('dateMAJ', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
+                ->end()
             ->end()
-            ->with('Stats', array(
-                    'class' => 'col-md-4'
-                ))
-                ->add('visibilite') 
-                ->add('classique')
-                ->add('selection')
-                ->add('archive') 
-                ->add('difficulte') 
-                ->add('tempsCuisson') 
-                ->add('tempsPreparation')
+            ->tab('Etapes Recette')
+                ->with('Recette')    
+                    ->add('recetteBlocks', 'sonata_type_collection', array(), array(
+                             'edit' => 'inline',
+                             'sortable'  => 'position'
+
+                    ))
+                ->end()
             ->end()
-            ->with('Autres', array(
-                    'class' => 'col-md-4'
-                ))
-                ->add('dateCreation', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
-                ->add('dateMAJ', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
-            ->end()
-            ->with('Recette', array(
-                    'class' => 'col-md-8'
-                ))    
-                ->add('recetteBlocks', 'sonata_type_collection', array(), array(
-	                 'edit' => 'inline',
-	                 'sortable'  => 'position'
-                    
-                ))
-            ->end()       
         ;
     }
 

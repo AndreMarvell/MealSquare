@@ -23,10 +23,10 @@ class IngredientController extends Controller {
         return $this->render('MealSquareRecetteBundle:Ingredient:list.html.twig', array('pagination' => $pagination));
     }
 
-    public function showAction($libelle) {
+    public function showAction($id) {
         $repository = $this->getDoctrine()
                 ->getRepository("MealSquareRecetteBundle:Ingredient");
-        $ingredient = $repository->findOneBy(array('libelle' => $libelle));
+        $ingredient = $repository->findOneById($id);
         
         return $this->render('MealSquareRecetteBundle:Ingredient:show.html.twig', array('ingredient' => $ingredient));
     }

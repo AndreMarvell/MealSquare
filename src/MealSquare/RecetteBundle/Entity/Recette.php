@@ -35,6 +35,13 @@ class Recette
      * @ORM\Column(name="source", type="string", length=255)
      */
     private $source;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="specialite", type="string", length=255)
+     */
+    private $specialite;
 
     /**
      * @var integer
@@ -48,12 +55,12 @@ class Recette
      *
      * @ORM\Column(name="visibilite", type="boolean")
      */
-    private $visibilite;
+    private $visibilite = false;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="difficulte", type="integer")
+     * @ORM\Column(name="difficulte", type="string", length=25)
      */
     private $difficulte;
 
@@ -76,19 +83,19 @@ class Recette
      *
      * @ORM\Column(name="classique", type="boolean")
      */
-    private $classique;
+    private $classique  = false;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="selection", type="boolean")
      */
-    private $selection;
+    private $selection  = false;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=30)
+     * @ORM\Column(name="pays", type="string", length=30, nullable=true)
      */
     private $pays;
 
@@ -97,7 +104,7 @@ class Recette
      *
      * @ORM\Column(name="archive", type="boolean")
      */
-    private $archive;
+    private $archive  = false;
 
     /**
      * @var \DateTime
@@ -116,7 +123,7 @@ class Recette
     /**
      * @var string
      *
-     * @ORM\Column(name="saison", type="string", length=50)
+     * @ORM\Column(name="saison", type="string", length=50, nullable=true)
      */
     private $saison;
     
@@ -135,7 +142,7 @@ class Recette
     
     /**
     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\JoinColumn(nullable=true)
     */
     private $auteur;
     
@@ -147,7 +154,7 @@ class Recette
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\InfosBlock", mappedBy="Recette")
+     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\InfosBlock", mappedBy="recette", cascade={"remove","persist"})
      *      
      */        
     private $recetteBlocks;
@@ -155,10 +162,17 @@ class Recette
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\IngredientRecette", mappedBy="Recette")
+     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\IngredientRecette", mappedBy="recette", cascade={"remove"})
      *      
      */        
     private $ingredients;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="full_ingredients", type="text", nullable=true)
+     */
+    private $full_ingredients;
     
     /** 
      *
@@ -713,5 +727,60 @@ class Recette
     public function getIngredients()
     {
         return $this->ingredients;
+    }
+
+    /**
+     * Set fullIngredients
+     *
+     * @param string $fullIngredients
+     *
+     * @return Recette
+     */
+    public function setFullIngredients($fullIngredients)
+    {
+        $this->full_ingredients = $fullIngredients;
+
+        return $this;
+    }
+
+    /**
+     * Get fullIngredients
+     *
+     * @return string
+     */
+    public function getFullIngredients()
+    {
+        return $this->full_ingredients;
+    }
+    
+    public function isIngredientsFormatted(){
+        if (is_null($this->full_ingredients))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Set specialite
+     *
+     * @param string $specialite
+     *
+     * @return Recette
+     */
+    public function setSpecialite($specialite)
+    {
+        $this->specialite = $specialite;
+
+        return $this;
+    }
+
+    /**
+     * Get specialite
+     *
+     * @return string
+     */
+    public function getSpecialite()
+    {
+        return $this->specialite;
     }
 }

@@ -7,5 +7,5 @@ meal_square_recette_ingredient_list:
     defaults: { _controller: MealSquareRecetteBundle:Ingredient:list }
     
 meal_square_recette_ingredient_show:
-    path:     /ingredient/show/{libelle}
+    path:     /ingredient/{id}
     defaults: { _controller: MealSquareRecetteBundle:Ingredient:show }

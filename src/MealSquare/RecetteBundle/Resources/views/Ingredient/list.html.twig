@@ -3,7 +3,7 @@
 
 
 {% block title %}
-    Ingredients - {{ parent() }}
+    {{ 'common.menu.ingredients'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block main %}
@@ -25,11 +25,15 @@
                         </nav>
                         <!--//breadcrumbs-->
                         <header class="s-title">
-                            <h2 class="ribbon bright">Les Ingredients</h2>
-                            <b>Trier Par : {{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}  |   
-                                {% if pagination.isSorted('a.libelle') %} {% endif %} 
-                                {{ knp_pagination_sortable(pagination, 'Libelle', 'a.libelle') }}
-                            </b>
+                            <h2 class="ribbon bright">{{ 'common.menu.ingredients'|trans }}</h2>
+                            <div class="row tri">
+                                <span>
+                                    {{ 'ingredients.sortby'|trans({},'messages') }} 
+                                    {{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}  |   
+                                    {% if pagination.isSorted('a.libelle') %} {% endif %} 
+                                    {{ knp_pagination_sortable(pagination, 'Libelle', 'a.libelle') }}
+                                </span>
+                            </div>
                         </header>       
 
                         <!--entries-->
@@ -39,17 +43,17 @@
                                 <div class="entry one-third wow fadeInLeft">
                                     <figure>
                                         {% thumbnail article.image, 'big' %}
-                                        <figcaption><a href="{{ path('meal_square_recette_ingredient_show',{'libelle':article.libelle}) }}"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+                                        <figcaption><a href="{{ path('meal_square_recette_ingredient_show',{'id':article.id}) }}"><i class="ico i-view"></i> <span>{{ 'ingredients.detail'|trans({}, 'messages') }}</span></a></figcaption>
                                     </figure>
 
                                     <div class="container">
-                                        <h2><a href="{{ path('meal_square_recette_ingredient_show',{'libelle':article.libelle}) }}">{{article.libelle}}</a></h2>
+                                        <h2><a href="{{ path('meal_square_recette_ingredient_show',{'id':article.id}) }}">{{article.libelle}}</a></h2>
                                     </div>
                                 </div>
                                 <!--item-->
 
                             {% else %}
-                                <p>Pas (encore !) d'annonces</p>
+                                <p>{{ 'ingredients.sortby'|trans({},'messages') }}</p>
                             {% endfor %}
                             {#                            <div class="quicklinks">#}
                             <div class="quicklinks">

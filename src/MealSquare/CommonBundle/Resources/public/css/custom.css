@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 mai 2015, 13:51:28
+    Author     : Marvell
+*/
+
+.pagination{text-align: center;margin: 0;list-style: none;}
+.pagination li {font-size: smaller;  display: inline-block;  margin-right: 2px;}
+.pagination li span{  color: inherit;  padding: 1px 6px;  border: 1px solid #EEE;  background: white;  display: block;    }
+.pagination li.active span{  color: #fff;  background: #F4716A;  border-color: #F4716A;}
+.pagination li.disabled span{  color: gainsboro;  background: whitesmoke;  border-color: whitesmoke;}
+.pagination li a {  color: inherit;  padding: 1px 6px;  border: 1px solid #EEE;  background: white;  display: block;}
+.pagination li a:hover {  color: #F4716A;  border: 1px solid #F4716A;}
+.pagination ul li:before{content:"";} 
+
+.tri{text-align: right;margin: 15px 0 !important;}
+.tri span{background: white;padding: 10px;}
+
+

@@ -1,0 +1,6 @@
+## YAML Template.
+---
+ingredients:
+    detail: Détail sur l'ingrédient
+    sortby: Trier par
+    no: Il n'y a aucun ingrédient disponible

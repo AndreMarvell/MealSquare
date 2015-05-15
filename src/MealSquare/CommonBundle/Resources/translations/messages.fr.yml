@@ -62,6 +62,10 @@ common:
         message: Votre message
         title: Contactez - nous ?
         
+    pagination:
+        previous: Précédent
+        next: Suivant
+        
 
     
 

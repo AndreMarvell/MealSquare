@@ -24,7 +24,7 @@ class InfosBlock
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
      */
     private $titre;
 
@@ -49,7 +49,7 @@ class InfosBlock
     private $lien;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Recette", inversedBy="InfosBlock")
+     * @ORM\ManyToOne(targetEntity="Recette", inversedBy="infosBlock")
      * @ORM\JoinColumn(name="recette_id", referencedColumnName="id")
      */
     protected $recette;
@@ -189,6 +189,9 @@ class InfosBlock
     }
     
     public function __toString() {
-        return $this->titre;
+        if(is_null($this->titre))
+            return substr($this->description, 0, 20);
+        else 
+            return $this->titre;
     }
 }
