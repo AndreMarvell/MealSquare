@@ -18,6 +18,6 @@ and open the template in the editor.
 .pagination ul li:before{content:"";} 
 
 .tri{text-align: right;margin: 15px 0 !important;}
-.tri span{background: white;padding: 10px;}
+.tri span{background: white;padding: 10px;margin-right: 15px;}
 
 

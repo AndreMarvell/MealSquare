@@ -1,0 +1,233 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{recette.titre}}  - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    <li><a href="{{path('meal_square_recette_list')}}" title="{{ 'common.menu.recettes'|trans }}">{{ 'common.menu.recettes'|trans }}</a></li>          
+                    <li> {{recette.titre}}</li>
+                </ul>
+            </nav>
+        </div>
+        <!--//breadcrumbs-->
+        <div class="wrap clearfix">
+            <!--row-->
+            <div class="row">
+                <header class="s-title wow fadeInLeft">
+                    <h1>{{recette.titre}}</h1>
+                </header>
+                <!--content-->
+                <section class="content three-fourth">
+                    <!--recipe-->
+                    <div class="recipe">
+                        <div class="row">
+                            <!--two-third-->
+                            <article class="two-third wow fadeInLeft">
+                                <div class="image">{% thumbnail recette.image,'big' %}</div>
+                                <div class="intro">
+                                    <p><strong>{{ 'recettes.ingredients'|trans({},'messages') }}</strong>
+                                    </p> 
+                                    <p>
+                                    <ul>
+                                        {{recette.getFullIngredients() | raw}}
+                                    </ul>
+                                    </p>
+                                </div>
+                                <div class="instructions">
+                                    <ol>
+                                        {% for block in recette.getRecetteBlocks() %}
+                                            <li>{{ block.description | raw }}</li>
+                                            {% endfor %}    
+                                    </ol>
+                                </div>
+                            </article>
+                            <!--//two-third-->
+
+                            <!--one-third-->
+                            <article class="one-third wow fadeInDown">
+                                <dl class="basic">
+                                    <dt>{{ 'recettes.preparation_time'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getTempsPreparation()}} min</dd>
+                                    <dt>{{ 'recettes.coocking_time'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getTempsCuisson()}} min</dd>
+                                    <dt>{{ 'recettes.difficulty'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getDifficulte()}}</dd>
+                                    <dt>{{ 'recettes.serves'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getNbPersonne()}}</dd>
+                                    <dt>{{ 'recettes.saison'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getSaison()}}</dd>
+                                    <dt>{{ 'recettes.speciality'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getSpecialite()}}</dd>
+                                </dl>
+
+                                <dl class="user">
+                                    <dt>{{ 'recettes.category'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getCategorie()}}</dd>
+                                    <dt>{{ 'recettes.autor'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getAuteur()}}</dd>
+                                    <dt>{{ 'recettes.source'|trans({},'messages') }}</dt>
+                                    <dd>{{recette.getSource()}}</dd>
+                                </dl>
+                            </article>
+                            <!--//one-third-->
+                        </div>
+                    </div>
+                    <!--//recipe-->
+
+                    <!--comments-->
+                    <div class="comments wow fadeInUp" id="comments">
+                        <h2>5 comments </h2>
+                        <ol class="comment-list">
+                            <!--comment-->
+                            <li class="comment depth-1">
+                                <div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /></a></div>
+                                <div class="comment-box">
+                                    <div class="comment-author meta"> 
+                                        <strong>Kimberly C.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                                    </div>
+                                </div> 
+                            </li>
+                            <!--//comment-->
+
+                        </ol>
+                    </div>
+                    <!--//comments-->
+
+                    <!--respond-->
+                    <div class="comment-respond wow fadeInUp" id="respond">
+                        <h2>Leave a reply</h2>
+                        <div class="container">
+                            <p><strong>Note:</strong> Comments on the web site reflect the views of their authors, and not necessarily the views of the socialchef internet portal. Requested to refrain from insults, swearing and vulgar expression. We reserve the right to delete any comment without notice explanations.</p>
+                            <p>Your email address will not be published. Required fields are signed with <span class="req">*</span></p>
+                            <form>
+                                <div class="f-row">
+                                    <div class="third">
+                                        <input type="text" placeholder="Your name" />
+                                        <span class="req">*</span>
+                                    </div>
+
+                                    <div class="third">
+                                        <input type="email" placeholder="Your email" />
+                                        <span class="req">*</span>
+                                    </div>
+
+                                    <div class="third">
+                                        <input type="text" placeholder="Your website" />
+                                    </div>
+
+                                </div>
+                                <div class="f-row">
+                                    <textarea></textarea>
+                                </div>
+
+                                <div class="f-row">
+                                    <div class="third bwrap">
+                                        <input type="submit" value="Submit comment" />
+                                    </div>
+                                </div>
+
+                                <div class="bottom">
+                                    <div class="f-row checkbox">
+                                        <input type="checkbox" id="ch1" />
+                                        <label for="ch1">Notify me of replies to my comment via e-mail</label>
+                                    </div>
+                                    <div class="f-row checkbox">
+                                        <input type="checkbox" id="ch2" />
+                                        <label for="ch2">Notify me of new articles by email.</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--//respond-->
+                </section>
+                <!--//content-->
+
+                <!--right sidebar-->
+                <aside class="sidebar one-fourth wow fadeInRight">
+                    <div class="widget nutrition">
+                        <h3>Nutrition facts <span>(per serving)</span></h3>
+                        <table>
+                            <tr>
+                                <td>Calories </td>
+                                <td>505</td>
+                            </tr>
+                            <tr>
+                                <td>Protein</td>
+                                <td>59g</td>
+                            </tr>
+                            <tr>
+                                <td>Carbs</td>
+                                <td>59g</td>
+                            </tr>
+                            <tr>
+                                <td>Fat</td>
+                                <td>29g</td>
+                            </tr>
+                            <tr>
+                                <td>Saturates</td>
+                                <td>17g</td>
+                            </tr>
+                            <tr>
+                                <td>Fibre</td>
+                                <td>2g</td>
+                            </tr>
+                            <tr>
+                                <td>Sugar</td>
+                                <td>44g</td>
+                            </tr>
+                            <tr>
+                                <td>Salt</td>
+                                <td>0.51g</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="widget share">
+                        <ul class="boxed">
+                            <li class="light"><a href="#" title="Facebook"><i class="ico i-facebook"></i> <span>Share on Facebook</span></a></li>
+                            <li class="medium"><a href="#" title="Twitter"><i class="ico i-twitter"></i> <span>Share on Twitter</span></a></li>
+                            <li class="dark"><a href="#" title="Favourites"><i class="ico i-favourites"></i> <span>Add to Favourites</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="widget members">
+                        <h3>Members who liked this recipe</h3>
+                        <ul class="boxed">
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Kimberly C.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Alex J.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Denise M.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Jason H.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Jennifer W.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Anabelle Q.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Thomas M.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Michelle S.</span></a></div></li>
+                            <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Bryan A.</span></a></div></li>
+                        </ul>
+                    </div>
+                </aside>
+                <!--//right sidebar-->
+            </div>
+            <!--//row-->
+        </div>
+        <!--//wrap-->
+    </main>
+    <!--//main-->
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}

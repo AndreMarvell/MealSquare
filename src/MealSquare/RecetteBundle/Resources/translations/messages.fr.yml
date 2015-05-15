@@ -4,3 +4,18 @@ ingredients:
     detail: Détail sur l'ingrédient
     sortby: Trier par
     no: Il n'y a aucun ingrédient disponible
+
+recettes:
+    ingredients : Liste des ingrédients de la recette
+    detail: Détail sur la recette
+    sortby: Trier par
+    no: Il n'y a aucune recette disponible
+    preparation_time: Temps de préparation
+    coocking_time: Temps de cuisson
+    difficulty: Difficulté
+    serves: Nombre de personnes
+    category: Catégorie
+    saison: Saison
+    speciality: Spécialité
+    autor: Auteur
+    source: Source

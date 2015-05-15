@@ -1,0 +1,113 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ 'common.menu.recettes'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <!--main-->
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    <li>{{ 'common.menu.recettes'|trans }}</li>
+                </ul>
+            </nav>
+            <!--//breadcrumbs-->
+
+            <!--row-->
+            <div class="row">
+
+                <aside class="above-sidebar full-width  wow fadeInDown">
+                    <ul class="boxed">
+                        <li class="light"><a href="recipes.html" title="Appetizers"><i class="ico i-appetizers"></i> <span>Apetizers</span></a></li>
+                        <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-cocktails"></i> <span>Cocktails</span></a></li>
+                        <li class="dark"><a href="recipes.html" title="Deserts"><i class="ico i-deserts"></i> <span>Deserts</span></a></li>
+
+                        <li class="light"><a href="recipes.html" title="Cocktails"><i class="ico i-eggs"></i> <span>Eggs</span></a></li>
+                        <li class="medium"><a href="recipes.html" title="Equipment"><i class="ico i-equipment"></i> <span>Equipment</span></a></li>
+                        <li class="dark"><a href="recipes.html" title="Events"><i class="ico i-events"></i> <span>Events</span></a></li>
+
+                        <li class="light"><a href="recipes.html" title="Fish"><i class="ico i-fish"></i> <span>Fish</span></a></li>
+                        <li class="medium"><a href="recipes.html" title="Ftness"><i class="ico i-fitness"></i> <span>Fitness</span></a></li>
+                        <li class="dark"><a href="recipes.html" title="Healthy"><i class="ico i-healthy"></i> <span>Healthy</span></a></li>
+
+                        <li class="medium"><a href="recipes.html" title="Asian"><i class="ico i-asian"></i> <span>Asian</span></a></li>
+                        <li class="dark"><a href="recipes.html" title="Mexican"><i class="ico i-mexican"></i> <span>Mexican</span></a></li>
+                        <li class="light"><a href="recipes.html" title="Pizza"><i class="ico i-pizza"></i> <span>Pizza</span></a></li>
+
+                        <li class="medium"><a href="recipes.html" title="Kids"><i class="ico i-kids"></i> <span>Kids</span></a></li>
+                        <li class="dark"><a href="recipes.html" title="Meat"><i class="ico i-meat"></i> <span>Meat</span></a></li>
+                        <li class="light"><a href="recipes.html" title="Snacks"><i class="ico i-snacks"></i> <span>Snacks</span></a></li>
+
+                        <li class="medium"><a href="recipes.html" title="Salads"><i class="ico i-salads"></i> <span>Salads</span></a></li>
+                        <li class="dark"><a href="recipes.html" title="Storage"><i class="ico i-storage"></i> <span>Storage</span></a></li>
+                        <li class="light"><a href="recipes.html" title="Vegetarian"><i class="ico i-vegetarian"></i> <span>Vegetarian</span></a></li>
+                    </ul>
+                </aside>
+
+                <header class="s-title">
+                    <h2 class="ribbon bright">{{ 'common.menu.recettes'|trans }}</h2>
+                    <div class="row tri">
+                        <span>
+                            {{ 'recettes.sortby'|trans({},'messages') }} 
+                            {{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}  |   
+                            {% if pagination.isSorted('a.Titre') %} {% endif %} 
+                            {{ knp_pagination_sortable(pagination, 'Titre', 'a.titre') }}
+                        </span>
+                    </div>
+                </header>  
+
+                <!--content-->
+                <section class="content full-width wow fadeInUp">
+                    <!--entries-->
+                    <div class="entries row">
+                        {% for article in pagination %}
+                            <!--item-->
+                            <div class="entry one-fourth wow fadeInLeft">
+                                <figure>
+                                    {% thumbnail article.image, 'big' %}
+                                    <figcaption><a href="{{ path('meal_square_recette_show',{'id':article.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+                                </figure>
+                                <div class="container">
+                                    <h2><a href="{{ path('meal_square_recette_show',{'id':article.id}) }}">{{article.Titre | slice (0, 25)}}</a></h2> 
+                                    <div class="actions">
+                                        <div>
+                                            <div class="difficulty"><i class="ico i-medium"></i><a href="#">{{article.Difficulte}}</a></div>
+                                            <div class="likes"><i class="ico i-likes"></i><a href="#">#</a></div>
+                                            <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">#</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--item-->
+                        {% else %}
+                            <p>{{ 'ingredients.sortby'|trans({},'messages') }}</p>
+                        {% endfor %}
+                        <div class="quicklinks">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+{#                            <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>#}
+
+                    </div>
+                    <!--//entries-->
+                </section>
+                <!--//content-->
+            </div>
+            <!--//row-->
+        </div>
+        <!--//wrap-->
+    </main>
+    <!--//main-->
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}
+
+
+

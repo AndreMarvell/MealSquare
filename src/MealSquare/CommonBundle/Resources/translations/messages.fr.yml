@@ -12,6 +12,7 @@ common:
         more: Plus
         connexion: Connexion
         ingredients: Les ingrédients
+        recettes: Les recettes
         contacts: Contactez nous
         submit_recipes: Ajouter une recette
         account: Mon compte

@@ -9,3 +9,11 @@ meal_square_recette_ingredient_list:
 meal_square_recette_ingredient_show:
     path:     /ingredient/{id}
     defaults: { _controller: MealSquareRecetteBundle:Ingredient:show }
+
+meal_square_recette_list:
+    path:     /recette/list/
+    defaults: { _controller: MealSquareRecetteBundle:Recette:list }
+    
+meal_square_recette_show:
+    path:     /recette/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:show }

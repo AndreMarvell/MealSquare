@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "21a98e3923832f2cd796f90bed34d2b3",
+    "hash": "522cec1f7a7b06a0af6e8134fa666dae",
     "packages": [
         {
             "name": "bmatzner/fontawesome-bundle",
@@ -2818,12 +2818,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "1a4c53d0da0aab9a945a53b7c7f415c4cec41b7b"
+                "reference": "16474a3f6debe6a4a339238470d96b941904853a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1a4c53d0da0aab9a945a53b7c7f415c4cec41b7b",
-                "reference": "1a4c53d0da0aab9a945a53b7c7f415c4cec41b7b",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/16474a3f6debe6a4a339238470d96b941904853a",
+                "reference": "16474a3f6debe6a4a339238470d96b941904853a",
                 "shasum": ""
             },
             "require": {
@@ -2894,7 +2894,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-05-06 09:17:40"
+            "time": "2015-05-11 13:32:06"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4576,7 +4576,7 @@
             "time": "2014-10-02 07:26:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": null,
     "aliases": [
         {
             "alias": "dev-master",
