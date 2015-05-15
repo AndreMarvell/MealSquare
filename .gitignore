@@ -4,6 +4,7 @@
 /app/cache/
 /web/bundles/
 /web/uploads/
+/web/css/6f9f08b_css?family=Raleway:400,300,500,600,700,800_3.css
 
 # Fichier de Configuration
 /app/config/parameters.yml
