@@ -1,0 +1,327 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+{% form_theme form _self %}
+
+{% block title %}
+    {% if edit is defined %}
+        {{ 'form.edit.title'|trans({},'messages') }} - {{ parent() }}
+    {% else %}
+        {{ 'recettes.add'|trans({},'messages') }} - {{ parent() }}
+    {% endif %}
+    
+{% endblock %}
+
+{% block main %}
+    	<!--main-->
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    {% if edit is defined %}
+                        <li>{{ 'form.edit.title'|trans({},'messages') }}</li>
+                    {% else %}
+                        <li>{{ 'recettes.add'|trans({},'messages') }}</li>
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+            <!--//breadcrumbs-->
+
+                <!--row-->
+            <div class="row">
+                <header class="s-title">
+                    {% if edit is defined %}
+                        <h1>{{ 'form.edit.title'|trans({},'messages') }}</h1>
+                    {% else %}
+                        <h1>{{ 'recettes.add'|trans({},'messages') }}</h1>
+                    {% endif %}
+                </header>
+
+                    <!--content-->
+                    <section class="content full-width wow fadeInUp">
+                        <div class="submit_recipe container">
+                            {{ form_start(form) }}
+                                {{ form_errors(form) }}
+                                
+                                <section>
+                                    <h2>{{ 'form.add.basics'|trans({},'messages') }}</h2>
+                                    <p>{{ 'form.add.required'|trans({},'messages') }}</p>
+                                    <div class="f-row">
+                                        <div class="full">{{ form_widget(form.titre, { 'attr': {'placeholder': 'form.add.title'|trans({},'messages')} }) }}</div>
+                                    </div>
+                                    <div class="f-row">
+                                            <div class="third">{{ form_widget(form.tempsPreparation, { 'attr': {'placeholder': 'form.add.preparation'|trans({},'messages')} }) }}</div>
+                                            <div class="third">{{ form_widget(form.tempsCuisson, { 'attr': {'placeholder': 'form.add.cooking'|trans({},'messages')} }) }}</div>
+                                            <div class="third">{{ form_widget(form.nbPersonne, { 'attr': {'placeholder': 'form.add.nbpeople'|trans({},'messages')} }) }}</div>
+                                    </div>
+                                    <div class="f-row">
+                                            <div class="third">{{ form_widget(form.specialite, { 'attr': {'placeholder': 'form.add.speciality'|trans({},'messages')} }) }}</div>
+                                            <div class="third">{{ form_widget(form.source, { 'attr': {'placeholder': 'form.add.source'|trans({},'messages')} }) }}</div>
+                                            <div class="third">{{ form_widget(form.saison, { 'attr': {'placeholder': 'form.add.season'|trans({},'messages')} }) }}</div>
+                                    </div>
+                                    <div class="f-row">
+                                            <div class="third">{{ form_widget(form.difficulte, { 'attr': {'placeholder': 'form.add.difficulty'|trans({},'messages')} }) }}</div>
+                                            <div class="third">{{ form_widget(form.pays, { 'attr': {'placeholder': 'form.add.country'|trans({},'messages')} }) }}</div>
+                                            <div class="third">{{ form_widget(form.categorie)}}</div>
+                                    </div>
+                                    {#<div class="f-row">
+                                        <div class="full">{{ form_widget(form.tags, { 'attr': {'placeholder': 'form.add.tags'|trans({},'messages')} }) }}</div>
+                                    </div>#}
+                                </section>
+
+                                <section>
+                                    <h2>{{ 'form.add.description'|trans({},'messages') }}</h2>
+                                    <div class="f-row">
+                                            <div class="full">{{ form_widget(form.description, { 'attr': {'placeholder': 'form.add.description_text'|trans({},'messages')} }) }}</div>
+                                    </div>
+                                </section>	
+
+                                <section>
+                                    <h2>{{ 'form.add.ingredients'|trans({},'messages') }}</h2>
+                                    <div>
+                                        {{ form_errors(form.ingredients) }}
+                                        <div id="ingredient-field-list" data-prototype="{{ _self.widget_prototype(form.ingredients, 'ingredient')|escape }}">
+                                        {% for widget in form.ingredients.children %}
+                                                {{ _self.widget_prototype(widget, 'ingredient') }}
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="f-row full">
+                                        <button id="add-ingredient" data-target="ingredient-field-list" class="add">{{ 'form.add.add_ingredient'|trans({},'messages') }}</button>
+                                    </div>
+                                </section>	
+
+                                <section>
+                                    <h2>{{ 'form.add.step'|trans({},'messages') }} <span>({{ 'form.add.step_text'|trans({},'messages') }})</span></h2>
+                                    <div id="step-field-list" data-prototype="{{ _self.widget_prototype(form.recetteBlocks, 'step')|escape }}">
+                                    {% for widget in form.recetteBlocks.children %}
+                                            {{ _self.widget_prototype(widget, 'step') }}
+                                    {% endfor %}
+                                    </div>
+                                    <div class="f-row full">
+                                        <button  id="add-step" data-target="step-field-list" class="add">{{ 'form.add.add_step'|trans({},'messages') }}</button>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <h2>{{ 'form.add.photo'|trans({},'messages') }}</h2>
+                                    {% if edit is defined %}
+                                        <div class="f-row" style="text-align: center">
+                                            {% thumbnail form.vars.value.image, 'admin' with {'style':'border:3px solid rgb(181, 181, 181)'} %}
+                                        </div>
+                                    {% endif %}
+                                    
+                                    <div class="f-row full">
+                                        {{ form_widget(form.image) }}
+                                    </div>
+                                </section>	
+
+                                <section>
+                                    <h2>{{ 'form.add.publication'|trans({},'messages') }} <span>({{ 'form.add.publication_text'|trans({},'messages') }})</span></h2>
+                                    <div class="f-row full">
+                                            {{ form_widget(form.visibilite) }}
+                                            <label>{{ 'form.add.public'|trans({},'messages') }}</label>
+                                    </div>
+                                </section>
+
+                                 
+                                <div class="f-row full">
+                                        <input type="submit" class="button" id="submitRecipe" value="{{ 'form.add.publish'|trans({},'messages') }}" />
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </section>
+                    <!--//content-->
+            </div>
+                <!--//row-->
+        </div>
+        <!--//wrap-->
+    </main>
+	<!--//main-->       
+
+{% endblock %}
+
+{% macro widget_prototype(widget, field) %}
+    {% if widget.vars.prototype is defined %}
+        {% set row = widget.vars.prototype %}
+        {% set name = field ~ widget.vars.prototype.vars.name %}
+    {% else %}
+        {% set row = widget %}
+        {% set name = field ~ widget.vars.full_name %}
+    {% endif %}
+    
+    {% if field == 'ingredient' %}
+        <div class="f-row ingredient"  data-content="{{ name }}">
+            <div class="large">{{ form_widget(row.ingredient, { 'attr': {'placeholder': 'form.add.ingredient'|trans({},'messages')} }) }}</div>
+            <div class="third">{{ form_widget(row.quantite, { 'attr': {'placeholder': 'form.add.quantity'|trans({},'messages')} }) }}</div>
+            <button  data-related="{{ name }}"  id="remove-ingredient" class="remove">-</button>
+        </div>
+    {% else %}
+        <div class="f-row instruction"  data-content="{{ name }}">
+            <div class="full">{{ form_widget(row.titre, { 'attr': {'placeholder': 'form.add.step_title'|trans({},'messages')} }) }}</div>
+            <button  data-related="{{ name }}" id="remove-step" class="remove">-</button>
+            <div class="full">{{ form_widget(row.description, { 'attr': {'placeholder': 'form.add.step_description'|trans({},'messages')} }) }}</div>
+        </div>
+        
+    {% endif %}
+    
+    
+    
+{% endmacro %}
+
+{% block script %}
+    
+    {#{% javascripts '@MealSquareCommonBundle/Resources/public/js/scripts.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}#}
+    
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+     
+    <script> new WOW().init();</script>
+    
+    <script type="text/javascript">
+        
+        var addSelector = $('#add-ingredient, #add-step');
+        var removeSelector = '#remove-ingredient, #remove-step';
+        
+        
+        $(document).ready(function(){
+            
+            addFormField($('#add-ingredient'));
+            addFormField($('#add-step'));
+            
+            addSelector.click(function(event) {
+                addFormField($(this));
+                return false;
+            });
+            $('body').on('click', removeSelector ,function(event) {
+                removeFormField($(this));
+                return false;
+            });
+            
+            
+        });
+        
+        $(function () {
+            $( "input:file" ).uniform({
+                fileDefaultText: 'Aucun fichier selectionné',
+                fileBtnText: 'Choisir une image',
+              });
+        });
+        
+        function addFormField(selector) {
+            var collectionHolder = $('#' + selector.attr('data-target'));
+            var prototype = collectionHolder.attr('data-prototype');
+            var form = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+            collectionHolder.append(form);
+        }
+        
+        function removeFormField(selector) {
+            var name = selector.attr('data-related');
+            $('*[data-content="'+name+'"]').remove();
+        }
+        
+        
+        
+    </script>
+    
+    <script  type="text/javascript">
+        
+        var cache = {};
+ 
+        $(document).ready(function(){
+            $("input[data-id=libelle]").autocomplete({
+                source: function (request, response)
+                {
+                    //Si la réponse est dans le cache
+                    if (request.term in cache)
+                    {
+                        response($.map(cache[request.term], function (item)
+                        {
+                            return {
+                                label:  item.libelle,
+                                value: function ()
+                                {
+                                    if ($(this).attr('data-id') === 'id')
+                                    {
+                                        $('input[data-id=libelle]').val(item.libelle);
+                                        return item.id;
+                                    }
+                                    else
+                                    {
+                                        $('input[data-id=id]').val(item.id);
+                                        return item.libelle;
+                                    }
+                                }
+                            };
+                        }));
+                    }
+                    //Sinon -> Requete Ajax
+                    else
+                    {
+
+                        var objData = {};
+                        var url = "{{ path('meal_square_ajax_ingredient') }}";
+                        if ($(this.element).attr('data-id') === 'id')
+                        {
+                            objData = { id: request.term };
+                        }
+                        else
+                        {
+                            objData = { libelle: request.term };
+                        }
+
+                        $.ajax({
+                            url: url,
+                            dataType: "json",
+                            data : objData,
+                            type: 'POST',
+                            success: function (data)
+                            {
+                                //Ajout de reponse dans le cache
+                                cache[request.term] = data;
+
+                                response($.map(data, function (item)
+                                {
+                                    return {
+                                        label: item.libelle,
+                                        value: function ()
+                                        {
+                                            if ($(this).attr('data-id') === 'id')
+                                            {
+                                                $('input[data-id=libelle]').val(item.libelle);
+                                                return item.id;
+                                            }
+                                            else
+                                            {
+                                                $('input[data-id=id]').val(item.id);
+                                                return item.libelle;
+                                            }
+                                        }
+                                    };
+                                }));
+                            },
+                            error: function (jqXHR, textStatus, errorThrown)
+                            {
+                                console.log(textStatus, errorThrown);
+                            }
+                        });
+                    }
+                },
+                minLength: 3,
+                delay: 300
+            });
+        });
+        
+    </script>
+    
+{% endblock %}
+
+
+

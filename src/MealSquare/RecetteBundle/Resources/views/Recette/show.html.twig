@@ -36,12 +36,13 @@
                             <article class="two-third wow fadeInLeft">
                                 <div class="image">{% thumbnail recette.image,'big' %}</div>
                                 <div class="intro">
-                                    <p><strong>{{ 'recettes.ingredients'|trans({},'messages') }}</strong>
-                                    </p> 
+                                    <p><strong>{{ 'form.add.description_text'|trans({},'messages') }}</strong></p> 
                                     <p>
-                                    <ul>
-                                        {{recette.getFullIngredients() | raw}}
-                                    </ul>
+                                        {% if recette.description is not null %}
+                                            {{ recette.description }}
+                                        {% else %}
+                                            {{ 'recettes.no_description'|trans({},'messages') }}
+                                        {% endif %}
                                     </p>
                                 </div>
                                 <div class="instructions">
@@ -79,6 +80,23 @@
                                     <dt>{{ 'recettes.source'|trans({},'messages') }}</dt>
                                     <dd>{{recette.getSource()}}</dd>
                                 </dl>
+                                
+                                {% if recette.isIngredientsFormatted %}
+                                    <dl class="ingredients">
+                                        {% for ingr in recette.ingredients %}
+                                            <dt>{{ingr.quantite}}</dt>
+                                            <dd>{{ingr.ingredient.libelle}}</dd>
+                                        {% endfor %}
+                                    </dl>
+                                {% else %}
+                                    <div class="widget">
+                                        <h3>{{ 'recettes.ingredient_small_title'|trans({},'messages') }}</h3>
+                                        <ul class=" ingredient-non-formatted">
+                                            {{ recette.fullIngredients | raw }}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                
                             </article>
                             <!--//one-third-->
                         </div>
@@ -87,73 +105,10 @@
 
                     <!--comments-->
                     <div class="comments wow fadeInUp" id="comments">
-                        <h2>5 comments </h2>
-                        <ol class="comment-list">
-                            <!--comment-->
-                            <li class="comment depth-1">
-                                <div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /></a></div>
-                                <div class="comment-box">
-                                    <div class="comment-author meta"> 
-                                        <strong>Kimberly C.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
-                                    </div>
-                                    <div class="comment-text">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-                                    </div>
-                                </div> 
-                            </li>
-                            <!--//comment-->
-
-                        </ol>
+                        <h2 style="text-align: center">Vous avez ou comptez tester cette recette ? Dites ce que vous en pensez.</h2>
+                        {{ include( 'MealSquareRecetteBundle:Disqus:comment.html.twig', { 'recette': recette } ) }}
                     </div>
                     <!--//comments-->
-
-                    <!--respond-->
-                    <div class="comment-respond wow fadeInUp" id="respond">
-                        <h2>Leave a reply</h2>
-                        <div class="container">
-                            <p><strong>Note:</strong> Comments on the web site reflect the views of their authors, and not necessarily the views of the socialchef internet portal. Requested to refrain from insults, swearing and vulgar expression. We reserve the right to delete any comment without notice explanations.</p>
-                            <p>Your email address will not be published. Required fields are signed with <span class="req">*</span></p>
-                            <form>
-                                <div class="f-row">
-                                    <div class="third">
-                                        <input type="text" placeholder="Your name" />
-                                        <span class="req">*</span>
-                                    </div>
-
-                                    <div class="third">
-                                        <input type="email" placeholder="Your email" />
-                                        <span class="req">*</span>
-                                    </div>
-
-                                    <div class="third">
-                                        <input type="text" placeholder="Your website" />
-                                    </div>
-
-                                </div>
-                                <div class="f-row">
-                                    <textarea></textarea>
-                                </div>
-
-                                <div class="f-row">
-                                    <div class="third bwrap">
-                                        <input type="submit" value="Submit comment" />
-                                    </div>
-                                </div>
-
-                                <div class="bottom">
-                                    <div class="f-row checkbox">
-                                        <input type="checkbox" id="ch1" />
-                                        <label for="ch1">Notify me of replies to my comment via e-mail</label>
-                                    </div>
-                                    <div class="f-row checkbox">
-                                        <input type="checkbox" id="ch2" />
-                                        <label for="ch2">Notify me of new articles by email.</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!--//respond-->
                 </section>
                 <!--//content-->
 
@@ -198,15 +153,31 @@
                     </div>
 
                     <div class="widget share">
+                        <h3>{{ 'recettes.share'|trans({},'messages') }}</h3>
                         <ul class="boxed">
-                            <li class="light"><a href="#" title="Facebook"><i class="ico i-facebook"></i> <span>Share on Facebook</span></a></li>
-                            <li class="medium"><a href="#" title="Twitter"><i class="ico i-twitter"></i> <span>Share on Twitter</span></a></li>
-                            <li class="dark"><a href="#" title="Favourites"><i class="ico i-favourites"></i> <span>Add to Favourites</span></a></li>
+                            <li class="light"><a href="#"title="{{ 'recettes.share_facebook'|trans({},'messages') }}"><i class="ico i-facebook"></i> <span>{{ 'recettes.share_facebook'|trans({},'messages') }}</span></a></li>
+                            <li class="medium"><a href="#" title="{{ 'recettes.share_twitter'|trans({},'messages') }}"><i class="ico i-twitter"></i> <span>{{ 'recettes.share_twitter'|trans({},'messages') }}</span></a></li>
+                            <li class="dark"><a href="#" title="{{ 'recettes.like'|trans({},'messages') }}"><i class="ico i-favourites"></i> <span>{{ 'recettes.like'|trans({},'messages') }}</span></a></li>
                         </ul>
                     </div>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="widget share">
+                        <h3>{{ 'recettes.edition'|trans({},'messages') }}</h3>
+                        <ul class="boxed">
+                            {% if recette.auteur is not null and app.user is not null and app.user.id == recette.auteur.id %}
+                                <li class="light"><a href="{{ path('meal_square_recette_edit',{ 'id':recette.id }) }}"  title="{{ 'recettes.edit'|trans({},'messages') }}"><i class="fa fa-3x fa-edit" ></i> <span>{{ 'recettes.edit'|trans({},'messages') }}</span></a></li>
+                                <li class="medium"><a href="{{ path('meal_square_recette_delete',{ 'id':recette.id }) }}"  title="{{ 'recettes.remove'|trans({},'messages') }}"><i class="fa fa-3x fa-trash"></i> <span>{{ 'recettes.remove'|trans({},'messages') }}</span></a></li>
+                            {% else %}
+                                <li class="light link-not-activated"><a href="#"  title="{{ 'recettes.edit'|trans({},'messages') }}"><i class="fa fa-3x fa-edit" ></i> <span>{{ 'recettes.edit'|trans({},'messages') }}</span></a></li>
+                                <li class="medium link-not-activated"><a href="#"  title="{{ 'recettes.remove'|trans({},'messages') }}"><i class="fa fa-3x fa-trash"></i> <span>{{ 'recettes.remove'|trans({},'messages') }}</span></a></li>
+                            {% endif %}
+                            <li class="dark"><a href="{{ path('meal_square_recette_favoris_add',{ 'id':recette.id }) }}" title="{{ 'recettes.add_favourite'|trans({},'messages') }}"><i class="fa fa-3x fa-star"></i> <span>{{ 'recettes.add_favourite'|trans({},'messages') }}</span></a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
 
                     <div class="widget members">
-                        <h3>Members who liked this recipe</h3>
+                        <h3>{{ 'recettes.who_liked'|trans({},'messages') }}</h3>
                         <ul class="boxed">
                             <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Kimberly C.</span></a></div></li>
                             <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Alex J.</span></a></div></li>

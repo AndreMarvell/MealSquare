@@ -86,6 +86,7 @@ swiftmailer:
 genemu_form:
     autocomplete: ~
     date: ~
+    select2: ~
     
 knp_paginator:
     page_range: 5                      # default page range used in pagination control

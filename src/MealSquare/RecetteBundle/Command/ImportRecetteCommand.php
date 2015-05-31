@@ -38,7 +38,7 @@ class ImportRecetteCommand extends ContainerAwareCommand{
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         
-        $lettres = array('a','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+        $lettres = array('h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
         
         $this->em = $this->getContainer()->get('doctrine')->getManager();
         $this->ingredient_repository = $this->em->getRepository('MealSquareRecetteBundle:Ingredient');

@@ -61,4 +61,10 @@ security:
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+        
+        # MealSquare
+        - { path: ^/recette/add/, role: ROLE_USER }
+        - { path: ^/recette/edit/, role: ROLE_USER }
+        - { path: ^/recette/favoris/, role: ROLE_USER }

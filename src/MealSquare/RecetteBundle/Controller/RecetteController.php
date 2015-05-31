@@ -6,6 +6,10 @@ use MealSquare\RecetteBundle\Entity\Recette;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use MealSquare\RecetteBundle\Form\RecetteType;
+use MealSquare\RecetteBundle\Form\RecetteEditType;
+use Doctrine\Common\Util\Debug;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RecetteController extends Controller {
 
@@ -28,7 +32,185 @@ class RecetteController extends Controller {
                 ->getRepository("MealSquareRecetteBundle:Recette");
         $recette = $repository->findOneById($id);
         
-        return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array('recette' => $recette));
+        if(is_null($recette)){
+                throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
+        }else{
+            return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array('recette' => $recette));
+        }
+        
+    }
+    
+    public function deleteFavorisAction($id) {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
+        $recette = $repository->findOneById($id);
+        
+        $user= $this->get('security.context')->getToken()->getUser();
+        $user->removeRecettesFavori($recette);
+        
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect( $this->generateUrl('fos_user_profile_show') );
+    }
+    
+    public function addFavorisAction($id) {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
+        $recette = $repository->findOneById($id);
+        
+        $user= $this->get('security.context')->getToken()->getUser();
+        $user->addRecettesFavori($recette);
+        
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect( $this->generateUrl( 'meal_square_recette_show', array('id' => $recette->getId()) ));
+    }
+    
+    public function deleteAction($id) {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
+        $recette = $repository->findOneById($id);
+        
+        $user= $this->get('security.context')->getToken()->getUser();
+        
+        if(is_null($recette) || $user->getId()!==$recette->getId()){
+                throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
+        }else{
+            
+            $em->remove($recette);
+            $em->flush();
+
+            return $this->redirect( $this->generateUrl('meal_square_recette_list') );
+        }
+        
+        
+        
+    }
+    
+    public function editAction($id) {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $usr= $this->get('security.context')->getToken()->getUser();
+
+        $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
+        $recette = $repository->findOneById($id);
+        
+        if(is_null($recette) || $usr->getId() !== $recette->getAuteur()->getId()){
+                throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
+        }else{
+            
+            $form = $this->createForm(new RecetteEditType(), $recette);
+
+            $form->handleRequest($this->getRequest());
+
+            $difficulte = array(
+                                    '0' => 'Très facile',
+                                    '1' => 'Facile',
+                                    '2' => 'Moyen',
+                                    '3' => 'Difficile',
+                                    '4' => 'Délicat'
+
+                            );
+            $saison = array(
+                                '0' => 'Été',
+                                '1' => 'Printemps',
+                                '2' => 'Automne',
+                                '3' => 'Hiver'
+
+                            );
+
+            $specialite = array('0' => 'Saint-Valentin' , '1' => 'Enfants et ados' , '2' => 'Recettes anglo-saxonne' , '3' => 'Française' , '4' => 'Chic et facile' , '5' => 'Recettes méditerranéennes' , '6' => 'Cuisine brésilienne' , '7' => 'Spécialités antillaises' , '8' => 'Recettes italiennes' , '9' => 'Exotique' , '10' => 'Suisse' , '11' => 'Recettes de Chef' , '12' => 'Inde' , '13' => 'Pâques' , '14' => 'Provence' , '15' => 'Cuisine marocaine' , '16' => 'Orientale' , '17' => 'Repas de fête' , '18' => 'Cuisine légère' , '19' => 'Cuisine rapide' , '20' => 'Mardi Gras' , '21' => 'Asie' , '22' => 'Nordique' , '23' => 'Bretagne' , '24' => 'Recettes végétariennes' , '25' => 'Recettes japonaises' , '26' => 'Sud-ouest' , '27' => 'Spécialités ibériques' , '28' => 'Normandie' , '29' => 'Recettes chinoises' , '30' => 'Thanksgiving' , '31' => 'Auvergne' , '32' => 'Halloween' , '33' => 'Recettes américaines' , '24' => 'Pentecôte');
+
+            if ($form->isValid()) {
+                $recette = $form->getData();
+
+                // On recupere la saison, la difficulté et la specialité
+                $recette->setDifficulte((isset($difficulte[$recette->getDifficulte()]))? $difficulte[$recette->getDifficulte()]: $recette->getDifficulte());
+                $recette->setSaison((isset($saison[$recette->getSaison()]))? $saison[$recette->getSaison()]: $recette->getSaison());
+                $recette->setSpecialite((isset($specialite[$recette->getSpecialite()]))? $specialite[$recette->getSpecialite()]: $recette->getSpecialite());                
+
+                $em->persist($recette);
+                $em->flush();  
+
+                return $this->redirect( $this->generateUrl( 'meal_square_recette_show', array('id' => $recette->getId()) ));
+            }
+            
+            
+
+
+
+            return $this->render('MealSquareRecetteBundle:Recette:add.html.twig', array('form' => $form->createView(), 'edit' => true));
+
+            
+        }
+
+
+        
+    }
+    
+    public function addAction() {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $form = $this->createForm(new RecetteType(), new Recette());
+
+        $form->handleRequest($this->getRequest());
+        
+        $difficulte = array(
+                                '0' => 'Très facile',
+                                '1' => 'Facile',
+                                '2' => 'Moyen',
+                                '3' => 'Difficile',
+                                '4' => 'Délicat'
+                    
+                        );
+        $saison = array(
+                            '0' => 'Été',
+                            '1' => 'Printemps',
+                            '2' => 'Automne',
+                            '3' => 'Hiver'
+
+                        );
+        
+        $specialite = array('0' => 'Saint-Valentin' , '1' => 'Enfants et ados' , '2' => 'Recettes anglo-saxonne' , '3' => 'Française' , '4' => 'Chic et facile' , '5' => 'Recettes méditerranéennes' , '6' => 'Cuisine brésilienne' , '7' => 'Spécialités antillaises' , '8' => 'Recettes italiennes' , '9' => 'Exotique' , '10' => 'Suisse' , '11' => 'Recettes de Chef' , '12' => 'Inde' , '13' => 'Pâques' , '14' => 'Provence' , '15' => 'Cuisine marocaine' , '16' => 'Orientale' , '17' => 'Repas de fête' , '18' => 'Cuisine légère' , '19' => 'Cuisine rapide' , '20' => 'Mardi Gras' , '21' => 'Asie' , '22' => 'Nordique' , '23' => 'Bretagne' , '24' => 'Recettes végétariennes' , '25' => 'Recettes japonaises' , '26' => 'Sud-ouest' , '27' => 'Spécialités ibériques' , '28' => 'Normandie' , '29' => 'Recettes chinoises' , '30' => 'Thanksgiving' , '31' => 'Auvergne' , '32' => 'Halloween' , '33' => 'Recettes américaines' , '24' => 'Pentecôte');
+
+        if ($form->isValid()) {
+            $recette = $form->getData();
+            
+            // On recupere la saison, la difficulté et la specialité
+            $recette->setDifficulte((isset($difficulte[$recette->getDifficulte()]))? $difficulte[$recette->getDifficulte()]: $recette->getDifficulte());
+            $recette->setSaison((isset($saison[$recette->getSaison()]))? $saison[$recette->getSaison()]: $recette->getSaison());
+            $recette->setSpecialite((isset($specialite[$recette->getSpecialite()]))? $specialite[$recette->getSpecialite()]: $recette->getSpecialite());
+
+            // On recupere le current user
+            $usr= $this->get('security.context')->getToken()->getUser();
+            
+            $recette->setAuteur($usr);
+            
+            $em->persist($recette);
+            $em->flush();  
+            
+            $recette->createThread();
+            
+            $em->persist($recette);
+            $em->flush();
+            
+
+            return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array('recette' => $recette));
+        }
+
+
+        
+        return $this->render('MealSquareRecetteBundle:Recette:add.html.twig', array('form' => $form->createView()));
     }
 
 }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MealSquare\RecetteBundle\Entity\Repository\IngredientRepository")
  */
 class Ingredient
 {

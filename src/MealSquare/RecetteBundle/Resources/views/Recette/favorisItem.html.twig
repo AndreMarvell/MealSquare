@@ -1,0 +1,13 @@
+
+<figure>
+    {% thumbnail recette.image, 'square' with {'width':'100%','height':'auto'} %}
+    <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+</figure>
+<div class="container" style="padding: 0px;text-align: center;">
+    <h4 style="font-size: 12px; font-weight: 500; padding: 8px 0;"><a style="color: #666;" href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{recette.Titre | slice (0, 25)}}</a></h4> 
+    <div style="background-color:whitesmoke;padding: 8px 5px;">
+        <a href="{{ path('meal_square_recette_favoris_delete',{ 'id':recette.id }) }}" style="font-size: 11px;">
+            <i class="fa fa-trash-o"></i>&nbsp;Supprimer des favoris
+        </a>
+    </div>
+</div>

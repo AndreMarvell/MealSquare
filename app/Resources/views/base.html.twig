@@ -33,7 +33,7 @@
 
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-        
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
         {% image '@MealSquareCommonBundle/Resources/public/images/favicon/android-icon-192x192.png'  output="images/favicon/favicon192.png" %}        
         <link rel="icon" type="image/x-icon" sizes="192x192" href="{{ asset_url }}" />
         {% endimage %}
@@ -65,7 +65,7 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         
-{#      block pour l' Ajout de javascript dans les bocks fille  #}
+{#      block pour l' Ajout de javascript dans les bocks fils  #}
         
         {% block script %}
         {% endblock %}

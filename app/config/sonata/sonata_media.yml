@@ -39,8 +39,9 @@ sonata_media:
 
             formats:
                 small: { width: 150 , quality: 95}
-                big:   { width: 480 , quality: 95}
-                square: { width: 100, height: 100, quality: 90}
+                big:   { width: 600 , quality: 95}
+                square: { width: 270, height: 270, quality: 90}
+                squareFav: { width: 100, height: 100, quality: 90}
                 
         ingredient:
             providers:

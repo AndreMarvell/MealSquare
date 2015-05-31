@@ -7,6 +7,7 @@ ingredients:
 
 recettes:
     ingredients : Liste des ingrédients de la recette
+    ingredient_small_title : Ingrédients de la recette
     detail: Détail sur la recette
     sortby: Trier par
     no: Il n'y a aucune recette disponible
@@ -19,3 +20,56 @@ recettes:
     speciality: Spécialité
     autor: Auteur
     source: Source
+    add: Ajouter une recette
+    add_title: Ajouter une nouvelle recette
+    add_favourite: Ajouter à mes favoris
+    remove_favourite: Retirer de mes favoris
+    edit: Editer la recette
+    remove: Supprimer la recette
+    share_facebook: Sur Facebook
+    share_twitter: Sur Twitter
+    like: J'aime cette recette
+    no_description: Aucune description disponible pour cette recette
+    share: Espace partage
+    edition: Gestion de la recette
+    who_liked: Les membres qui ont aimé cette recette
+    
+form:
+    add:
+        basics: Informations Générales
+        required: Tous les champs sont obligatoires
+        title: Titre de la recette
+        preparation: Temps de préparation (en minute)
+        cooking: Temps de Cuisson (en minute)
+        nbpeople: Pour combien de personne ?
+        difficulty: Difficulté
+        category: Choisir une catégorie
+        description: Description
+        description_text: Description de la recette
+        ingredients: Ingrédients
+        ingredient: Ingrédient
+        quantity: Quantité
+        add_ingredient: Ajouter un ingrédient
+        step: Etapes
+        step_text: Entrer les instructions de la recette, pas à pas
+        step_title: Un bref titre pour cette étape
+        step_description: Tâches à réaliser
+        add_step: Ajouter une étape
+        photo: Photo
+        choose_file: Choisir une photo
+        other: Autres Informations
+        country: Pays
+        season: Saison
+        speciality: Spécialité
+        publication: Publication
+        publication_text: Voulez-vous publier cette recette ou envisagez-vous encore de la modifier plus tard?
+        public: Rendre publique cette recette
+        publish: Enregistrer cette recette
+        source: Orgine de la recette
+        tags: Ajouter des tags à votre recette
+        
+    edit:
+        title: Editer une recette
+        
+        
+        

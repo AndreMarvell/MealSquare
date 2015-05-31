@@ -1,0 +1,21 @@
+
+<figure style="min-height: 270px;">
+    {% thumbnail recette.image, 'square' with {'width':'100%','height':'auto'} %}
+    <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+</figure>
+<div class="container">
+    <h2><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{recette.Titre | slice (0, 20)}}</a></h2> 
+    <div class="actions">
+        <div>
+            <div class="difficulty"><i class="ico i-medium"></i><a href="#" style="font-size: 11px">{{recette.Difficulte}}</a></div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div class="edit"><a href="{{ path('meal_square_recette_edit',{'id':recette.id}) }}"><i class="fa fa-edit"></i></a></div>   
+            {% endif %}
+            <div class="likes"><i class="ico i-likes"></i><a href="#">{{ recette.note.average }}</a></div>
+            <div class="comments">
+                <i class="ico i-comments"></i>
+                <a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}#comments">0</a>
+            </div>
+        </div>
+    </div>
+</div>

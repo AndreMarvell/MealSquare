@@ -1,4 +1,8 @@
 services:
-#    meal_square_recette.example:
-#        class: MealSquare\RecetteBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    mealsquare.type.ingredient:
+        class: MealSquare\RecetteBundle\Form\IngredientRecetteType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: ingredient_recette_type }
+
+

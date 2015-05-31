@@ -17,3 +17,28 @@ meal_square_recette_list:
 meal_square_recette_show:
     path:     /recette/{id}
     defaults: { _controller: MealSquareRecetteBundle:Recette:show }
+
+meal_square_recette_delete:
+    path:     /recette/delete/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:delete }
+    
+meal_square_recette_favoris_delete:
+    path:     /recette/favoris/delete/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:deleteFavoris }
+    
+meal_square_recette_favoris_add:
+    path:     /recette/favoris/add/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:addFavoris }
+    
+meal_square_recette_edit:
+    path:     /recette/edit/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:edit }
+    
+meal_square_recette_add:
+    path:     /recette/add/
+    defaults: { _controller: MealSquareRecetteBundle:Recette:add }
+    
+meal_square_ajax_ingredient:
+    path:     /asynchrone/ingredient
+    defaults: { _controller: MealSquareRecetteBundle:Asynchrone:ingredient }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"

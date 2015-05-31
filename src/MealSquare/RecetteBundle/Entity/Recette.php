@@ -10,6 +10,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MealSquare\RecetteBundle\Entity\Repository\RecetteRepository")
  */
 class Recette
 {
@@ -128,6 +129,13 @@ class Recette
     private $saison;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+    
+    /**
      * @var \Application\Sonata\MediaBundle\Entity\Media
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
      */
@@ -162,7 +170,7 @@ class Recette
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\IngredientRecette", mappedBy="recette", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="MealSquare\RecetteBundle\Entity\IngredientRecette", mappedBy="recette", cascade={"remove","persist"})
      *      
      */        
     private $ingredients;
@@ -198,6 +206,8 @@ class Recette
         $this->note = new \MealSquare\RecetteBundle\Entity\Note\RateThread("recette".$this->id);
     
     }
+    
+    
 
     /**
      * @param MediaInterface $image
@@ -666,6 +676,7 @@ class Recette
     public function addRecetteBlock(\MealSquare\RecetteBundle\Entity\InfosBlock $recetteBlock)
     {
         $this->recetteBlocks[] = $recetteBlock;
+        $recetteBlock->setRecette($this);
 
         return $this;
     }
@@ -705,6 +716,7 @@ class Recette
     public function addIngredient(\MealSquare\RecetteBundle\Entity\IngredientRecette $ingredient)
     {
         $this->ingredients[] = $ingredient;
+        $ingredient->setRecette($this);
 
         return $this;
     }
@@ -782,5 +794,29 @@ class Recette
     public function getSpecialite()
     {
         return $this->specialite;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Recette
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

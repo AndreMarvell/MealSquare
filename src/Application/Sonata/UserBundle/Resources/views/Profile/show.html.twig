@@ -21,7 +21,7 @@
 
 
             <!--content-->
-            <section class="content">
+            <section class="content" style="float:none">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <!--row-->
                     <div class="row">
@@ -86,126 +86,30 @@
                             <!--my recipes-->
                             <div class="tab-content" id="recipes">
                                 <div class="entries row">
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                </div>
-                                            </div>
+                                    {% for article in recettes %}
+                                        <!--item-->
+                                        <div class="entry one-third">
+                                            {{ include( 'MealSquareRecetteBundle:Recette:listItem.html.twig', { 'recette': article } ) }}
                                         </div>
-                                    </div>
-                                    <!--item-->
-
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--item-->
-
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--item-->
+                                        <!--item-->
+                                    {% else %}
+                                        <div class="container">Vous n'avez pas encore ajouté de recette</div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <!--//my recipes-->
-
-
                             <!--my favorites-->
                             <div class="tab-content" id="favorites">
                                 <div class="entries row">
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                </div>
-                                            </div>
+                                    {% for article in app.user.recettesFavoris %}
+                                        <!--item-->
+                                        <div class="entry one-fourth" style="min-height: 200px;">
+                                            {{ include( 'MealSquareRecetteBundle:Recette:favorisItem.html.twig', { 'recette': article } ) }}
                                         </div>
-                                    </div>
-                                    <!--item-->
-
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--item-->
-
-                                    <!--item-->
-                                    <div class="entry one-third">
-                                        <figure>
-                                            <img src="images/img.jpg" alt="" />
-                                            <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                        </figure>
-                                        <div class="container">
-                                            <h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-                                            <div class="actions">
-                                                <div>
-                                                    <div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-                                                    <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--item-->
+                                        <!--item-->
+                                    {% else %}
+                                        <div class="container">Vous n'avez aucune recette en favoris</div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <!--//my favorites-->
@@ -216,7 +120,6 @@
                                 <div class="row">
                                     <!--item-->
                                     {% for badge in app.user.badges %}
-                                    
                                         <div class="full-width">
                                             <div class="avatar gold one-fourth" style="border-radius:50%">
                                                 <i class="ico {{ badge.icone }}" style="position: relative; top: 50%; transform: translateY(-50%);"></i>
@@ -232,8 +135,6 @@
                                         <div class="container">Vous n'avez pas encore obtenu de Badge</div>
                                     {% endfor %}
                                     <!--item-->
-
-
                                 </div>
                                 <!--//entries-->
                             </div>
@@ -243,6 +144,7 @@
                     <!--//row-->
                 {% endif %}
             </section>
+            
             <!--//content-->
         </div>
         <!--//wrap-->

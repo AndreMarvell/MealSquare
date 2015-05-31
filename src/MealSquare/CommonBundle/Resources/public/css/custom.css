@@ -20,4 +20,9 @@ and open the template in the editor.
 .tri{text-align: right;margin: 15px 0 !important;}
 .tri span{background: white;padding: 10px;margin-right: 15px;}
 
+.ingredient-non-formatted{  width: 100%;margin: 0 0 30px;background: #fff;}
+.ingredient-non-formatted li{border-bottom: 1px solid whitesmoke; padding: 9px 20px;font-size: 13px;}
 
+.widget.share i.fa{  margin: 16px 0 9px;}
+
+li.link-not-activated a{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
