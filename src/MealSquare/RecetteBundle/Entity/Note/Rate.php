@@ -22,7 +22,7 @@ class Rate
      * Thread of this rate
      *
      * @var Thread
-     * @ORM\ManyToOne(targetEntity="MealSquare\RecetteBundle\Entity\Note\RateThread")
+     * @ORM\ManyToOne(targetEntity="MealSquare\RecetteBundle\Entity\Note\RateThread", cascade={"persist"})
      */
     protected $thread;
     

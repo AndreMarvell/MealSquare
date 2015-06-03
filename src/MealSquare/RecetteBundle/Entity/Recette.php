@@ -189,12 +189,45 @@ class Recette
      */
     private $note;
     
+    /** 
+     *
+     * @ORM\OneToOne(targetEntity="MealSquare\RecetteBundle\Entity\Like\LikeThread", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $like;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Recette")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $recetteMere;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Recette", inversedBy="recetteMere")
+     * @ORM\JoinTable(name="variantes",
+     *      joinColumns={@ORM\JoinColumn(name="recette_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="variante_recette_id", referencedColumnName="id")}
+     *      )
+     */
+    private $variantes;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Recette", inversedBy="recetteMere")
+     * @ORM\JoinTable(name="versions",
+     *      joinColumns={@ORM\JoinColumn(name="recette_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="version_recette_id", referencedColumnName="id")}
+     *      )
+     */
+    private $versions;
+    
     function __construct() {
         $this->dateCreation = new \DateTime();
         $this->dateMAJ = new \DateTime();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->recetteBlocks = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->variantes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->versions = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -204,6 +237,7 @@ class Recette
      */
     public function createThread(){
         $this->note = new \MealSquare\RecetteBundle\Entity\Note\RateThread("recette".$this->id);
+        $this->like = new \MealSquare\RecetteBundle\Entity\Like\LikeThread("recette".$this->id);
     
     }
     
@@ -818,5 +852,135 @@ class Recette
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set recetteMere
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $recetteMere
+     *
+     * @return Recette
+     */
+    public function setRecetteMere(\MealSquare\RecetteBundle\Entity\Recette $recetteMere = null)
+    {
+        $this->recetteMere = $recetteMere;
+
+        return $this;
+    }
+
+    /**
+     * Get recetteMere
+     *
+     * @return \MealSquare\RecetteBundle\Entity\Recette
+     */
+    public function getRecetteMere()
+    {
+        return $this->recetteMere;
+    }
+
+    /**
+     * Add variante
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $variante
+     *
+     * @return Recette
+     */
+    public function addVariante(\MealSquare\RecetteBundle\Entity\Recette $variante)
+    {
+        if (!$this->variantes->contains($variante)) {
+            $variante->setRecetteMere($this);
+            $this->variantes[] = $variante;
+        }
+        
+
+        return $this;
+    }
+
+    /**
+     * Remove variante
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $variante
+     */
+    public function removeVariante(\MealSquare\RecetteBundle\Entity\Recette $variante)
+    {
+        if ($this->variantes->contains($variante)) {
+            $variante->setRecetteMere(null);
+            $this->variantes->removeElement($variante);
+        }
+        
+    }
+
+    /**
+     * Get variantes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVariantes()
+    {
+        return $this->variantes;
+    }
+
+    /**
+     * Add version
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $version
+     *
+     * @return Recette
+     */
+    public function addVersion(\MealSquare\RecetteBundle\Entity\Recette $version)
+    {
+        if (!$this->versions->contains($version)) {
+            $version->setRecetteMere($this);
+            $this->versions[] = $version;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove version
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Recette $version
+     */
+    public function removeVersion(\MealSquare\RecetteBundle\Entity\Recette $version)
+    {
+        if ($this->versions->contains($version)) {
+            $version->setRecetteMere(null);
+            $this->versions->removeElement($version);
+        }
+    }
+
+    /**
+     * Get versions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVersions()
+    {
+        return $this->versions;
+    }
+
+    /**
+     * Set like
+     *
+     * @param \MealSquare\RecetteBundle\Entity\Like\LikeThread $like
+     *
+     * @return Recette
+     */
+    public function setLike(\MealSquare\RecetteBundle\Entity\Like\LikeThread $like = null)
+    {
+        $this->like = $like;
+
+        return $this;
+    }
+
+    /**
+     * Get like
+     *
+     * @return \MealSquare\RecetteBundle\Entity\Like\LikeThread
+     */
+    public function getLike()
+    {
+        return $this->like;
     }
 }

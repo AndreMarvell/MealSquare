@@ -22,17 +22,25 @@ recettes:
     source: Source
     add: Ajouter une recette
     add_title: Ajouter une nouvelle recette
-    add_favourite: Ajouter à mes favoris
-    remove_favourite: Retirer de mes favoris
+    #add_favourite: Ajouter à mes favoris
+    add_favourite: Absent de mes favoris
+    remove_favourite: Dans mes favoris
     edit: Editer la recette
     remove: Supprimer la recette
     share_facebook: Sur Facebook
     share_twitter: Sur Twitter
-    like: J'aime cette recette
+    dislike: J'aime cette recette
+    like: Je n'aime pas
+    connect_to_like: Vous devez être connecté pour aimer cette recette
+    connect_to_favourise: Vous devez être connecté pour ajouter cette recette à vos favoris
+    loading: ...
     no_description: Aucune description disponible pour cette recette
     share: Espace partage
     edition: Gestion de la recette
     who_liked: Les membres qui ont aimé cette recette
+    variantes: Variantes de la recette
+    versions: Versions de la recette
+    mother: Recette Mère
     
 form:
     add:

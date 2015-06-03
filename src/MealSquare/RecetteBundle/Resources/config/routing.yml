@@ -42,3 +42,13 @@ meal_square_ajax_ingredient:
     path:     /asynchrone/ingredient
     defaults: { _controller: MealSquareRecetteBundle:Asynchrone:ingredient }
     condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+meal_square_ajax_like_recette:
+    path:     /asynchrone/recette/like/
+    defaults: { _controller: MealSquareRecetteBundle:Asynchrone:like }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+meal_square_ajax_favoris_recette:
+    path:     /asynchrone/recette/favoris/
+    defaults: { _controller: MealSquareRecetteBundle:Asynchrone:favoris }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"

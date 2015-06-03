@@ -28,14 +28,32 @@ class RecetteController extends Controller {
     }
 
     public function showAction($id) {
-        $repository = $this->getDoctrine()
-                ->getRepository("MealSquareRecetteBundle:Recette");
-        $recette = $repository->findOneById($id);
+        $repository     = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Recette");
+        $likeRepository = $this->getDoctrine()->getRepository('MealSquareRecetteBundle:Like\Like');
+        $recette        = $repository->findOneById($id);
+        $user           = $this->get('security.context')->getToken()->getUser();
         
         if(is_null($recette)){
                 throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
         }else{
-            return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array('recette' => $recette));
+            
+            $likers     = $likeRepository->findBy(
+                                                array('thread' => $recette->getLike()),
+                                                array('id' => 'desc'),
+                                                9,
+                                                0
+                        );
+            // On vérifie si le user a déjà liker la recette
+            $isLiker    = (!is_null($likeRepository->findOneBy(array('thread' => $recette->getLike(), 'liker'=>  $user))))?true:false;
+            // On vérifie si le user a déjà cette recette en favoris
+            $isFavoris    = ($user instanceof \Application\Sonata\UserBundle\Entity\User && $user->getRecettesFavoris()->contains($recette));
+            
+            return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array(
+                'recette' => $recette,
+                'isLiker'=>$isLiker,
+                'likers'=>$likers,
+                'isFavoris'=>$isFavoris
+            ));
         }
         
     }
@@ -205,7 +223,7 @@ class RecetteController extends Controller {
             $em->flush();
             
 
-            return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array('recette' => $recette));
+            return $this->redirect( $this->generateUrl( 'meal_square_recette_show', array('id' => $recette->getId()) ));
         }
 
 

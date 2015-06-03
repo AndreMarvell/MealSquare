@@ -69,6 +69,17 @@ class RecetteAdmin extends Admin
                     ))
                 ->end()
             ->end()
+            ->tab('Versionning')
+                ->with('Variante')    
+                    ->add('recetteMere')
+                ->end()
+                ->with('Variante')    
+                    ->add('variantes')
+                ->end()
+                ->with('Versions')    
+                    ->add('versions')
+                ->end()
+            ->end()
         ;
     }
 

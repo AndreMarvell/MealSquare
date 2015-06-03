@@ -20,9 +20,21 @@ and open the template in the editor.
 .tri{text-align: right;margin: 15px 0 !important;}
 .tri span{background: white;padding: 10px;margin-right: 15px;}
 
+.variantes-versions{  width: 100%;margin: 0 0 30px;background: #fff;}
+.variantes-versions li{ padding: 7px 15px !important;font-size: 12px;}
+.variantes-versions li a{color: black;}
+.variantes-versions li a:hover{color: #F4716A;}
+.variantes-versions li a span{vertical-align: -webkit-baseline-middle}
+.variantes-versions img{display: inline-block;vertical-align: middle;float: left;margin-right: 5px;}
+
 .ingredient-non-formatted{  width: 100%;margin: 0 0 30px;background: #fff;}
 .ingredient-non-formatted li{border-bottom: 1px solid whitesmoke; padding: 9px 20px;font-size: 13px;}
+
 
 .widget.share i.fa{  margin: 16px 0 9px;}
 
 li.link-not-activated a{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
+
+a.isLiker, a.isFavoris{
+    background: rgb(40, 173, 97) !important;
+}
