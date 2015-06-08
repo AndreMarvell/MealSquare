@@ -19,7 +19,6 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         
-        "twitter/bootstrap-bundle": "dev-master",
         "bmatzner/fontawesome-bundle": "~4.0",
         "bmatzner/modernizr-bundle": "~2.7","genemu/form-bundle": "2.2.*",
         "components/jqueryui": "dev-master",
