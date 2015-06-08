@@ -40,6 +40,12 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
             $query->setParameter('specialite',$specialite);
         }              
         
+        if ($data['categorie'] != null) {
+            $categorie = $data['categorie'];
+            $query->andWhere('a.categorie = :categorie');
+            $query->setParameter('categorie',$categorie);
+        } 
+        
         return $query->getQuery()->getResult();
     }
 

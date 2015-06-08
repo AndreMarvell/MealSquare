@@ -13,6 +13,9 @@ common:
         connexion: Connexion
         ingredients: Les ingrédients
         recettes: Les recettes
+        rechercherecette: Recherche de recettes
+        paramrecherche: Paramètre de la recherche
+        recherchebyingredients : Recherché par ingrédients
         contacts: Contactez nous
         submit_recipes: Ajouter une recette
         account: Mon compte

@@ -8,93 +8,110 @@
 
 {% block main %}
     <!--main-->
-   <main class="main" role="main">
-		<!--wrap-->
-		<div class="wrap clearfix">
-			<!--breadcrumbs-->
-			<nav class="breadcrumbs">
-				<ul>
-					<li><a href="index.html" title="Home">Home</a></li>
-					<li>Search for Recipes</li>
-				</ul>
-			</nav>
-			<!--//breadcrumbs-->
-			
-			<!--row-->
-			<div class="row">
-				<header class="s-title wow fadeInLeft">
-					<h1>Search for Recipes</h1>
-				</header>
-				
-				<!--content-->
-				<section class="content full-width wow fadeInUp">
-					<!--recipefinder-->
-					<div class="container recipefinder">
-							<h3>Or you might want to search directly</h3>
-							<div class="row">
-								{#<div class="search one-half">
-									<input type="search" placeholder="Find recipe by name" />
-									<input type="submit" value="Search" />
-								</div>
-								
-								<div class="one-half">
-									<select>
-										<option>or select a category</option>
-										<option>Apetizers</option>
-										<option>Cocktails</option>
-										<option>Deserts</option>
-										<option>Main courses</option>
-										<option>Snacks</option>
-										<option>Soups</option>
-									</select>
-								</div>#}
-                                                                
-                                                                <form method="post" {{form_enctype(form) }}>
-                                                                   <div class="one-half">
-                                                                       {{form_widget(form) }}
-                                                                       <input type="submit" value="Search" />
-                                                                   </div>
-                                                                    
-                                                                </form>    
-							</div>
-					</div>
-					<!--//recipefinder-->
-				
-					<!--results-->
-					<div class="entries row">
-						
-						<!--item-->
-						<div class="entry one-fourth wow fadeInLeft" data-wow-delay="2.2s">
-							<figure>
-								<img src="images/img.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Exquisite plum and cherry pie</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-										<div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-										<div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<div class="quicklinks">
-							<a href="#" class="button">More recipes</a>
-							<a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
-						</div>
-					</div>
-					<!--//results-->
-				</section>
-				<!--//content-->
-			</div>
-			<!--//row-->
-		</div>
-		<!--//wrap-->
-	</main>
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    <li>{{ 'common.menu.rechercherecette'|trans }}</li>
+                </ul>
+            </nav>
+            <!--//breadcrumbs-->
+
+            <!--row-->
+            <div class="row">
+                <header class="s-title wow fadeInLeft">
+                    <h1>{{ 'common.menu.rechercherecette'|trans }}</h1>
+                </header>
+
+                <!--content-->
+                <section class="content full-width wow fadeInUp">
+                    <!--recipefinder-->
+                    <div class="container recipefinder">
+                        <div class="left">
+                            {#<h3>{{ 'common.menu.recherchebyingredients'|trans }}</h3>
+                            <p>Click the ‘-’ to remove an ingredient, or click the ingredient itself to emphasize</p>
+                            <div class="f-row">
+                                <input type="text" placeholder="Add ingredients (one at a time)" />
+                                <button class="add">+</button>
+                            </div>
+                            <div class="f-row">
+                                <input type="text" value="garlic" />
+                                <button class="remove">-</button>
+                            </div>
+                            <div class="f-row">
+                                <input type="submit" value="Search" />
+                            </div>#}
+                        </div>
+                        <div class="right">
+
+                            <h3>{{ 'common.menu.paramrecherche'|trans }}</h3>
+                            <div class="row">
+                                {{ form_start(form) }}
+                                {{ form_errors(form) }}
+
+                                <div class="one-half">
+                                    {{form_widget(form.difficulte) }}
+                                </div> 
+                                <div class="one-half">
+                                    {{form_widget(form.specialite) }}
+                                </div> 
+                                <div class="one-half">
+                                    {{form_widget(form.categorie) }}
+                                </div> 
+                                <div class="one-half">
+                                    {{ form_widget(form.titre, { 'attr': {'placeholder': 'form.add.title'|trans({},'messages'), 'type': 'search'} }) }}
+                                </div>
+                                <div class="one-half">
+                                    <input type="submit" value="{{ 'common.menu.search'|trans }}" />
+                                </div>
+                                {{ form_end(form) }}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <header class="s-title">
+                        <h2 class="ribbon bright">{{ 'common.menu.recettes'|trans }}</h2>
+                        <div class="row tri">
+                            {% if pagination is  defined %}
+                            <span>
+                                {{ 'recettes.sortby'|trans({},'messages') }} 
+                                {{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}  |   
+                                {% if pagination.isSorted('a.Titre') %} {% endif %} 
+                                {{ knp_pagination_sortable(pagination, 'Titre', 'a.titre') }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </header>
+                    <!--results-->
+                    <div class="entries row">
+                        {% if pagination is  defined %}
+                        {% for article in pagination %}
+                            <!--item-->
+                            <div class="entry one-fourth wow fadeInLeft">
+                                {{ include( 'MealSquareRecetteBundle:Recette:listItem.html.twig', { 'recette': article } ) }}
+                            </div>
+                            <!--item-->
+                        {% else %}
+                            <p>{{ 'ingredients.sortby'|trans({},'messages') }}</p>
+                        {% endfor %}
+                        
+                        <div class="quicklinks">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!--//results-->
+                </section>
+                <!--//content-->
+            </div>
+            <!--//row-->
+        </div>
+        <!--//wrap-->
+    </main>
     <!--//main-->
 {% endblock %}
 {% block script %}

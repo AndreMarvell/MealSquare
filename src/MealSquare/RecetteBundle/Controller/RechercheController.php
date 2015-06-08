@@ -31,9 +31,12 @@ class RechercheController extends Controller {
                  $pagination = $paginator->paginate(
                  $liste_recettes, $request->query->get('page', 1)/* page number */, 20/* limit per page */
         );
-                return $this->render('MealSquareRecetteBundle:Recette:list.html.twig', array('pagination' => $pagination));
+                return $this->render('MealSquareRecetteBundle:Recherche:recherche.html.twig', array('pagination' => $pagination, 'form' => $form->createView()));
             }
         }
+        
+        
+        
         return $this->render('MealSquareRecetteBundle:Recherche:recherche.html.twig', array('form'
                     => $form->createView()));
     }
