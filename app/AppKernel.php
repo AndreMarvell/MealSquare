@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new Bmatzner\ModernizrBundle\BmatznerModernizrBundle(),
-            new Twitter\BootstrapBundle\TwitterBootstrapBundle(),
+            //new Twitter\BootstrapBundle\TwitterBootstrapBundle(),
             
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             
