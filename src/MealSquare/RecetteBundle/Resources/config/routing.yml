@@ -38,6 +38,10 @@ meal_square_recette_add:
     path:     /recette/add/
     defaults: { _controller: MealSquareRecetteBundle:Recette:add }
     
+meal_square_recette_search:
+    path:     /search/
+    defaults: { _controller: MealSquareRecetteBundle:Recherche:find }    
+    
 meal_square_ajax_ingredient:
     path:     /asynchrone/ingredient
     defaults: { _controller: MealSquareRecetteBundle:Asynchrone:ingredient }

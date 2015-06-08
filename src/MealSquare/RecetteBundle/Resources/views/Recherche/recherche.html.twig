@@ -1,0 +1,105 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ 'common.menu.recettes'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <!--main-->
+   <main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.html" title="Home">Home</a></li>
+					<li>Search for Recipes</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<div class="row">
+				<header class="s-title wow fadeInLeft">
+					<h1>Search for Recipes</h1>
+				</header>
+				
+				<!--content-->
+				<section class="content full-width wow fadeInUp">
+					<!--recipefinder-->
+					<div class="container recipefinder">
+							<h3>Or you might want to search directly</h3>
+							<div class="row">
+								{#<div class="search one-half">
+									<input type="search" placeholder="Find recipe by name" />
+									<input type="submit" value="Search" />
+								</div>
+								
+								<div class="one-half">
+									<select>
+										<option>or select a category</option>
+										<option>Apetizers</option>
+										<option>Cocktails</option>
+										<option>Deserts</option>
+										<option>Main courses</option>
+										<option>Snacks</option>
+										<option>Soups</option>
+									</select>
+								</div>#}
+                                                                
+                                                                <form method="post" {{form_enctype(form) }}>
+                                                                   <div class="one-half">
+                                                                       {{form_widget(form) }}
+                                                                       <input type="submit" value="Search" />
+                                                                   </div>
+                                                                    
+                                                                </form>    
+							</div>
+					</div>
+					<!--//recipefinder-->
+				
+					<!--results-->
+					<div class="entries row">
+						
+						<!--item-->
+						<div class="entry one-fourth wow fadeInLeft" data-wow-delay="2.2s">
+							<figure>
+								<img src="images/img.jpg" alt="" />
+								<figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
+							</figure>
+							<div class="container">
+								<h2><a href="recipe.html">Exquisite plum and cherry pie</a></h2> 
+								<div class="actions">
+									<div>
+										<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
+										<div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
+										<div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--item-->
+						
+						<div class="quicklinks">
+							<a href="#" class="button">More recipes</a>
+							<a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
+						</div>
+					</div>
+					<!--//results-->
+				</section>
+				<!--//content-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+    <!--//main-->
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}
+
+
+
