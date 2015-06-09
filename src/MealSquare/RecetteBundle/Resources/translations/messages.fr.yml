@@ -48,7 +48,13 @@ recettes:
     like_display: personne aime cette recette
     no_like: Personne n'a encore aimé cette recette. Soyez le premier
     no_rate: Personne n'a encore évalué cette recette. Soyez le premier
-    
+    no_result: Aucun résultat trouvé
+    rechercherecette: Recherche de recettes
+    paramrecherche: Paramètres de la recherche
+    recherchebyingredients : Rechercher par ingrédients
+    search_ingredients_instruction: Cliquez sur ‘-’ pour retirer ingredient, ou ajoutez en grâce au bouton en dessous
+    search:
+        nbResults: résultat(s) trouvé(s)
     
 form:
     add:

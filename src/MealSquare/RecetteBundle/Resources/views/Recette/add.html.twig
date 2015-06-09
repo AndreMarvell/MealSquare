@@ -131,7 +131,7 @@
                                 <div class="f-row full">
                                         <input type="submit" class="button" id="submitRecipe" value="{{ 'form.add.publish'|trans({},'messages') }}" />
                                 </div>
-                            {{ form_end(form) }}
+                            </form>{#{{ form_end(form) }}#}
                         </div>
                     </section>
                     <!--//content-->
@@ -183,7 +183,9 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
      
     <script> new WOW().init();</script>
-    
+    {% javascripts '@MealSquareRecetteBundle/Resources/public/js/script.js'%}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
         
         var addSelector = $('#add-ingredient, #add-step');
@@ -197,127 +199,17 @@
             
             addSelector.click(function(event) {
                 addFormField($(this));
+                autocompleteIngredient($('input[data-id=libelle]'),$('input[data-id=id]'),"{{ path('meal_square_ajax_ingredient') }}");
                 return false;
             });
             $('body').on('click', removeSelector ,function(event) {
                 removeFormField($(this));
                 return false;
             });
-            
-            
+            autocompleteIngredient($('input[data-id=libelle]'),$('input[data-id=id]'),"{{ path('meal_square_ajax_ingredient') }}");
+
         });
         
-        $(function () {
-            $( "input:file" ).uniform({
-                fileDefaultText: 'Aucun fichier selectionné',
-                fileBtnText: 'Choisir une image',
-              });
-        });
-        
-        function addFormField(selector) {
-            var collectionHolder = $('#' + selector.attr('data-target'));
-            var prototype = collectionHolder.attr('data-prototype');
-            var form = prototype.replace(/__name__/g, collectionHolder.children().length);
-
-            collectionHolder.append(form);
-        }
-        
-        function removeFormField(selector) {
-            var name = selector.attr('data-related');
-            $('*[data-content="'+name+'"]').remove();
-        }
-        
-        
-        
-    </script>
-    
-    <script  type="text/javascript">
-        
-        var cache = {};
- 
-        $(document).ready(function(){
-            $("input[data-id=libelle]").autocomplete({
-                source: function (request, response)
-                {
-                    //Si la réponse est dans le cache
-                    if (request.term in cache)
-                    {
-                        response($.map(cache[request.term], function (item)
-                        {
-                            return {
-                                label:  item.libelle,
-                                value: function ()
-                                {
-                                    if ($(this).attr('data-id') === 'id')
-                                    {
-                                        $('input[data-id=libelle]').val(item.libelle);
-                                        return item.id;
-                                    }
-                                    else
-                                    {
-                                        $('input[data-id=id]').val(item.id);
-                                        return item.libelle;
-                                    }
-                                }
-                            };
-                        }));
-                    }
-                    //Sinon -> Requete Ajax
-                    else
-                    {
-
-                        var objData = {};
-                        var url = "{{ path('meal_square_ajax_ingredient') }}";
-                        if ($(this.element).attr('data-id') === 'id')
-                        {
-                            objData = { id: request.term };
-                        }
-                        else
-                        {
-                            objData = { libelle: request.term };
-                        }
-
-                        $.ajax({
-                            url: url,
-                            dataType: "json",
-                            data : objData,
-                            type: 'POST',
-                            success: function (data)
-                            {
-                                //Ajout de reponse dans le cache
-                                cache[request.term] = data;
-
-                                response($.map(data, function (item)
-                                {
-                                    return {
-                                        label: item.libelle,
-                                        value: function ()
-                                        {
-                                            if ($(this).attr('data-id') === 'id')
-                                            {
-                                                $('input[data-id=libelle]').val(item.libelle);
-                                                return item.id;
-                                            }
-                                            else
-                                            {
-                                                $('input[data-id=id]').val(item.id);
-                                                return item.libelle;
-                                            }
-                                        }
-                                    };
-                                }));
-                            },
-                            error: function (jqXHR, textStatus, errorThrown)
-                            {
-                                console.log(textStatus, errorThrown);
-                            }
-                        });
-                    }
-                },
-                minLength: 3,
-                delay: 300
-            });
-        });
         
     </script>
     

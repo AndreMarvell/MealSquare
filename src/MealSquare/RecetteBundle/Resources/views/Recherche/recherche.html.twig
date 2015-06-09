@@ -3,7 +3,7 @@
 
 
 {% block title %}
-    {{ 'common.menu.recettes'|trans }} - {{ parent() }}
+    {{ 'recettes.rechercherecette'|trans({},'messages') }} - {{ parent() }}
 {% endblock %}
 
 {% block main %}
@@ -15,7 +15,7 @@
             <nav class="breadcrumbs">
                 <ul>
                     <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
-                    <li>{{ 'common.menu.rechercherecette'|trans }}</li>
+                    <li>{{ 'recettes.rechercherecette'|trans({},'messages') }}</li>
                 </ul>
             </nav>
             <!--//breadcrumbs-->
@@ -23,69 +23,60 @@
             <!--row-->
             <div class="row">
                 <header class="s-title wow fadeInLeft">
-                    <h1>{{ 'common.menu.rechercherecette'|trans }}</h1>
+                    <h1>{{ 'recettes.rechercherecette'|trans({},'messages') }}</h1>
                 </header>
 
                 <!--content-->
                 <section class="content full-width wow fadeInUp">
                     <!--recipefinder-->
                     <div class="container recipefinder">
+                        
+                    {{ form_start(form) }}
                         <div class="left">
-                            {#<h3>{{ 'common.menu.recherchebyingredients'|trans }}</h3>
-                            <p>Click the ‘-’ to remove an ingredient, or click the ingredient itself to emphasize</p>
-                            <div class="f-row">
-                                <input type="text" placeholder="Add ingredients (one at a time)" />
-                                <button class="add">+</button>
+                            {{ form_errors(form.ingredients) }}
+                            <h3>{{ 'recettes.recherchebyingredients'|trans({},'messages') }}</h3>
+                            <p>{{ 'recettes.search_ingredients_instruction'|trans({},'messages') }}</p>
+                            
+                            <div id="ingredient-field-list" data-prototype="{{ _self.widget_prototype(form.ingredients, 'ingredient')|escape }}">
+                            {% for widget in form.ingredients.children %}
+                                    {{ _self.widget_prototype(widget, 'ingredient') }}
+                            {% endfor %}
                             </div>
-                            <div class="f-row">
-                                <input type="text" value="garlic" />
-                                <button class="remove">-</button>
+                            <div class="f-row full">
+                                <button id="add-ingredient" data-target="ingredient-field-list" class="add">{{ 'form.add.add_ingredient'|trans({},'messages') }}</button>
                             </div>
-                            <div class="f-row">
-                                <input type="submit" value="Search" />
-                            </div>#}
                         </div>
                         <div class="right">
 
-                            <h3>{{ 'common.menu.paramrecherche'|trans }}</h3>
+                            <h3>{{ 'recettes.paramrecherche'|trans({},'messages') }}</h3>
                             <div class="row">
-                                {{ form_start(form) }}
                                 {{ form_errors(form) }}
 
-                                <div class="one-half">
-                                    {{form_widget(form.difficulte) }}
-                                </div> 
-                                <div class="one-half">
-                                    {{form_widget(form.specialite) }}
-                                </div> 
-                                <div class="one-half">
-                                    {{form_widget(form.categorie) }}
-                                </div> 
-                                <div class="one-half">
-                                    {{ form_widget(form.titre, { 'attr': {'placeholder': 'form.add.title'|trans({},'messages'), 'type': 'search'} }) }}
-                                </div>
-                                <div class="one-half">
-                                    <input type="submit" value="{{ 'common.menu.search'|trans }}" />
-                                </div>
-                                {{ form_end(form) }}
+                                <div class="one-half">{{form_widget(form.difficulte) }}</div> 
+                                <div class="one-half">{{form_widget(form.specialite) }}</div> 
+                                <div class="one-half">{{form_widget(form.categorie) }}</div> 
+                                <div class="one-half">{{form_widget(form.pays) }}</div> 
+                                <div style="padding: 0 15px 30px;">{{ form_widget(form.titre, { 'attr': {'placeholder': 'form.add.title'|trans({},'messages'), 'type': 'search'} }) }}</div>
+                                <div class="one-half">&nbsp;{#{{form_widget(form.nbPersonne, { 'attr': {'placeholder': 'form.add.title'|trans({},'messages'), 'type': 'search'} }) }}#}</div> 
+                                <div class="one-half"><input type="submit" value="{{ 'common.menu.search'|trans }}" /></div>
 
                             </div>
                         </div>
+                        </form>
                     </div>
-
+                    {% if pagination is  defined %}
                     <header class="s-title">
-                        <h2 class="ribbon bright">{{ 'common.menu.recettes'|trans }}</h2>
+                        <h2 class="ribbon bright">{{ pagination.getTotalItemCount }}&nbsp;{{ 'recettes.search.nbResults'|trans({}, 'messages') }}</h2>
                         <div class="row tri">
-                            {% if pagination is  defined %}
                             <span>
                                 {{ 'recettes.sortby'|trans({},'messages') }} 
                                 {{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}  |   
                                 {% if pagination.isSorted('a.Titre') %} {% endif %} 
                                 {{ knp_pagination_sortable(pagination, 'Titre', 'a.titre') }}
                             </span>
-                            {% endif %}
                         </div>
                     </header>
+                    {% endif %}
                     <!--results-->
                     <div class="entries row">
                         {% if pagination is  defined %}
@@ -96,7 +87,7 @@
                             </div>
                             <!--item-->
                         {% else %}
-                            <p>{{ 'ingredients.sortby'|trans({},'messages') }}</p>
+                            <p style="text-align: center">{{ 'recettes.no_result'|trans({},'messages') }}</p>
                         {% endfor %}
                         
                         <div class="quicklinks">
@@ -114,8 +105,49 @@
     </main>
     <!--//main-->
 {% endblock %}
+{% macro widget_prototype(widget, field) %}
+    {% if widget.vars.prototype is defined %}
+        {% set row = widget.vars.prototype %}
+        {% set name = field ~ widget.vars.prototype.vars.name %}
+    {% else %}
+        {% set row = widget %}
+        {% set name = field ~ widget.vars.full_name %}
+    {% endif %}
+    
+    <div class="f-row ingredient"  data-content="{{ name }}">
+        {{ form_widget(row, {'attr': {'style':'width: 85% !important;','placeholder': 'form.add.ingredient'|trans({},'messages')} }) }}
+        <button  data-related="{{ name }}"  id="remove-ingredient" class="remove">-</button>
+    </div>
+    
+{% endmacro %}
 {% block script %}
     <script> new WOW().init();</script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    {% javascripts '@MealSquareRecetteBundle/Resources/public/js/script.js'%}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        
+        var addSelector = $('#add-ingredient');
+        var removeSelector = '#remove-ingredient';
+        
+        $(document).ready(function(){
+            
+            addSelector.click(function(event) {
+                addFormField($(this));
+                autocompleteIngredient($('input[data-id=libelle]'),$('input[data-id=id]'),"{{ path('meal_square_ajax_ingredient') }}");
+                return false;
+            });
+            $('body').on('click', removeSelector ,function(event) {
+                removeFormField($(this));
+                return false;
+            });
+
+        });
+        
+        
+    </script>
 {% endblock %}
 
 

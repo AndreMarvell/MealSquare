@@ -419,7 +419,7 @@ dl 			{display:inline-block;width:100%;margin:0 0 22px;}
 .recipefinder .left		{float:left;width:30%;}
 .recipefinder .right 	{float:right;width:70%;padding-left:30px;}
 .recipefinder .f-row 	{padding:10px 0 0 !important;}
-.recipefinder button 		{position:absolute;top:10px;right:0;font-size:37px;padding:0;width:37px;height:37px;line-height:37px;-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
+.recipefinder button:not(button.add)	{position:absolute;top:10px;right:0;font-size:37px;padding:0;width:37px;height:37px;line-height:37px;-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
 .recipefinder input[type="submit"] {float:right;}
 .recipefinder .gold 	{margin:0 3px 3px 0;}
 

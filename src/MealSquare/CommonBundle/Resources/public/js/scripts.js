@@ -1,6 +1,10 @@
 $(document).ready(function () {
 	//CUSTOM FORM ELEMENTS
 	$('select, input[type=radio],input[type=checkbox],input[type=file]').uniform();
+        $('input[type=file]').uniform({
+                fileDefaultText: 'Aucun fichier selectionné',
+                fileBtnText: 'Choisir une image',
+        });
 	
 	//MOBILE MENU
 	$('.main-nav').slicknav({
