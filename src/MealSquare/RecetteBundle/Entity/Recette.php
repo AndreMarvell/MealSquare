@@ -106,6 +106,27 @@ class Recette
      * @ORM\Column(name="archive", type="boolean")
      */
     private $archive  = false;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recetteDuJour", type="boolean")
+     */
+    private $recetteDuJour  = false;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recetteDuMois", type="boolean")
+     */
+    private $recetteDuMois  = false;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recetteDeLaSemaine", type="boolean")
+     */
+    private $recetteDeLaSemaine  = false;
 
     /**
      * @var \DateTime
@@ -982,5 +1003,77 @@ class Recette
     public function getLike()
     {
         return $this->like;
+    }
+
+    /**
+     * Set recetteDuJour
+     *
+     * @param boolean $recetteDuJour
+     *
+     * @return Recette
+     */
+    public function setRecetteDuJour($recetteDuJour)
+    {
+        $this->recetteDuJour = $recetteDuJour;
+
+        return $this;
+    }
+
+    /**
+     * Get recetteDuJour
+     *
+     * @return boolean
+     */
+    public function getRecetteDuJour()
+    {
+        return $this->recetteDuJour;
+    }
+
+    /**
+     * Set recetteDuMois
+     *
+     * @param boolean $recetteDuMois
+     *
+     * @return Recette
+     */
+    public function setRecetteDuMois($recetteDuMois)
+    {
+        $this->recetteDuMois = $recetteDuMois;
+
+        return $this;
+    }
+
+    /**
+     * Get recetteDuMois
+     *
+     * @return boolean
+     */
+    public function getRecetteDuMois()
+    {
+        return $this->recetteDuMois;
+    }
+
+    /**
+     * Set recetteDeLaSemaine
+     *
+     * @param boolean $recetteDeLaSemaine
+     *
+     * @return Recette
+     */
+    public function setRecetteDeLaSemaine($recetteDeLaSemaine)
+    {
+        $this->recetteDeLaSemaine = $recetteDeLaSemaine;
+
+        return $this;
+    }
+
+    /**
+     * Get recetteDeLaSemaine
+     *
+     * @return boolean
+     */
+    public function getRecetteDeLaSemaine()
+    {
+        return $this->recetteDeLaSemaine;
     }
 }
