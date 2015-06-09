@@ -45,6 +45,25 @@
                                         {% endif %}
                                     </p>
                                 </div>
+                                <div class="rate-like-display intro">
+                                    <p id="rate-display" class="one-half">
+                                        
+                                        {% if recette.note.average < 1 %}
+                                            {{ 'recettes.no_rate'|trans({},'messages') }}&nbsp;
+                                        {% else %}
+                                            {{ 'recettes.rate_display'|trans({},'messages') }}&nbsp;<span>{{recette.note.average}}</span>
+                                        {% endif %}
+                                    </p>
+                                    <p id="like-display" class="one-half" style="border-left: 2px solid white;">
+                                        {% if recette.like.numLikes ==0 %}
+                                            {{ 'recettes.no_like'|trans({},'messages') }}&nbsp;
+                                        {% elseif recette.like.numLikes ==1 %}
+                                            <span>1&nbsp;</span>{{ 'recettes.like_display'|trans({},'messages') }}
+                                        {% else %}
+                                            <span>{{recette.like.numLikes}}</span>&nbsp;{{ 'recettes.likes_display'|trans({},'messages') }}
+                                        {% endif %}
+                                    </p>
+                                </div>
                                 <div class="instructions">
                                     <ol>
                                         {% for block in recette.getRecetteBlocks() %}
@@ -69,7 +88,7 @@
                                     <dt>{{ 'recettes.saison'|trans({},'messages') }}</dt>
                                     <dd>{{recette.getSaison()}}</dd>
                                     <dt>{{ 'recettes.speciality'|trans({},'messages') }}</dt>
-                                    <dd>{{recette.getSpecialite()}}</dd>
+                                    <dd style="font-size: 11px;padding: 2px;">{{recette.getSpecialite() |slice(0, 13)}}...</dd>
                                 </dl>
 
                                 <dl class="user">
@@ -85,7 +104,7 @@
                                     <dl class="ingredients">
                                         {% for ingr in recette.ingredients %}
                                             <dt>{{ingr.quantite}}</dt>
-                                            <dd>{{ingr.ingredient.libelle}}</dd>
+                                            <dd><a style="color:white" href="{{ path('meal_square_recette_ingredient_show',{'id':ingr.ingredient.id}) }}" title="{{ingr.ingredient.libelle}}">{{ingr.ingredient.libelle}}</a></dd>
                                         {% endfor %}
                                     </dl>
                                 {% else %}
@@ -96,7 +115,18 @@
                                         </ul>
                                     </div>
                                 {% endif %}
-                                
+                                {% if not isRater %}
+                                    <div class="widget" style="text-align: center; color: rgb(219, 126, 121);">
+                                        <h3>{{ 'recettes.rate_recipe'|trans({},'messages') }}</h3>
+                                        <ul id="noter" class="note-recette">
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                            <li>5</li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
                             </article>
                             <!--//one-third-->
                         </div>
@@ -227,6 +257,9 @@
                 alert("{{ 'recettes.connect_to_like'|trans({},'messages') }}");
             {% else %}
                 button = $(this);
+                like_display = $('#like-display');
+                like_display.html('<i class="fa fa-spin fa-spinner"></i><br/><span>{{ 'recettes.loading'|trans({},'messages') }}</span>');
+                
                 button.html('<i class="fa fa-spin fa-spinner fa-3x"></i> <span>{{ 'recettes.loading'|trans({},'messages') }}</span>');
                 $.ajax({
                     url: "{{ path('meal_square_ajax_like_recette') }}",
@@ -241,6 +274,14 @@
                         }else{
                             button.html('<i class="ico i-favourites"></i> <span>{{ 'recettes.like'|trans({},'messages') }}</span>');
                         }
+                        if(data['likes'] === 0){
+                            like_display.html("{{ 'recettes.no_like'|trans({},'messages') }}&nbsp;");
+                        }else if(data['likes'] === 1){
+                            like_display.html("<span>1&nbsp;</span>{{ 'recettes.like_display'|trans({},'messages') }}");
+                        }else{
+                            like_display.html("<span>"+data['likes']+"</span>&nbsp;{{ 'recettes.likes_display'|trans({},'messages') }}");
+                        }
+                        
                     },
                     error: function (jqXHR, textStatus, errorThrown)
                     {
@@ -252,35 +293,77 @@
         
             
     </script>
-        <script>
-        $('#favoris-recette').click(function(event){
+    
+    <script>
+        $('#noter li').click(function(event){
             event.preventDefault();
             {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                alert("{{ 'recettes.connect_to_favourise'|trans({},'messages') }}");
+                alert("{{ 'recettes.connect_to_rate'|trans({},'messages') }}");
             {% else %}
-                button = $(this);
-                button.html('<i class="fa fa-spin fa-spinner fa-3x"></i> <span>{{ 'recettes.loading'|trans({},'messages') }}</span>');
+                container = $("#noter").parent();
+                note = $(this).html();
+                rate_display = $('#rate-display');
+                rate_display.html('<i class="fa fa-spin fa-spinner"></i><br/><br/>');
+                
+                container.html('<br/><i class="fa fa-spin fa-spinner fa-3x"></i><br/>');
                 $.ajax({
-                    url: "{{ path('meal_square_ajax_favoris_recette') }}",
+                    url: "{{ path('meal_square_ajax_rate_recette') }}",
                     dataType: "json",
-                    data : { id: "{{ recette.id }}" },
+                    data : { id: "{{ recette.note.id }}", note: note },
                     type: 'POST',
                     success: function (data)
                     {
-                        console.log(data);
-                        button.toggleClass("isFavoris");
-                        if(button.hasClass("isFavoris")){
-                            button.html('<i class="fa fa-3x fa-star"></i> <span>{{ 'recettes.remove_favourite'|trans({},'messages') }}</span>');
+                        container.toggleClass("isRater");
+                        container.html("<p style='padding:10px;color:white;'>Votre note a bien été prise en compte</p>");
+                        
+                        if(data['average'] < 1){
+                            rate_display.html("{{ 'recettes.no_rate'|trans({},'messages') }}&nbsp;");
                         }else{
-                            button.html('<i class="fa fa-3x fa-star"></i> <span>{{ 'recettes.add_favourite'|trans({},'messages') }}</span>');
+                            rate_display.html("{{ 'recettes.rate_display'|trans({},'messages') }}&nbsp;<span>"+data['average']+"</span>");
                         }
+                        
+                        
                     },
                     error: function (jqXHR, textStatus, errorThrown)
                     {
                         console.log(textStatus, errorThrown);
                     }
                 });
-                {% endif %}
+            {% endif %}
         });
+        
+            
     </script>
+    
+    <script>
+    $('#favoris-recette').click(function(event){
+        event.preventDefault();
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            alert("{{ 'recettes.connect_to_favourise'|trans({},'messages') }}");
+        {% else %}
+            button = $(this);
+            button.html('<i class="fa fa-spin fa-spinner fa-3x"></i> <span>{{ 'recettes.loading'|trans({},'messages') }}</span>');
+            $.ajax({
+                url: "{{ path('meal_square_ajax_favoris_recette') }}",
+                dataType: "json",
+                data : { id: "{{ recette.id }}" },
+                type: 'POST',
+                success: function (data)
+                {
+                    console.log(data);
+                    button.toggleClass("isFavoris");
+                    if(button.hasClass("isFavoris")){
+                        button.html('<i class="fa fa-3x fa-star"></i> <span>{{ 'recettes.remove_favourite'|trans({},'messages') }}</span>');
+                    }else{
+                        button.html('<i class="fa fa-3x fa-star"></i> <span>{{ 'recettes.add_favourite'|trans({},'messages') }}</span>');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+            {% endif %}
+    });
+</script>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace MealSquare\RecetteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use MealSquare\RecetteBundle\Entity\Like\Like;
+use MealSquare\RecetteBundle\Entity\Note\Rate;
 
 class AsynchroneController extends Controller
 {
@@ -37,7 +38,7 @@ class AsynchroneController extends Controller
                     ));
         
         if(is_null($like)){
-            $like = new Like($em->getRepository('MealSquareRecetteBundle:Like\LikeThread')->find($thread),$user);
+            $like = new Like($em->getRepository('MealSquareRecetteBundle:Like\LikeThread')->findOneById($thread),$user);
             $em->persist($like);
             $em->flush($like);
         }
@@ -50,7 +51,40 @@ class AsynchroneController extends Controller
         $em->flush($thread);
         
         $response = new Response();
-        $response->setContent(json_encode(array("success"=>true)));
+        $response->setContent(json_encode(array("success"=>true,"likes"=>$thread->getNumLikes())));
+        $response -> headers -> set('Content-Type', 'application/json');
+        
+        return $response;
+    }
+    
+    
+    public function rateAction()
+    {
+        
+        $request    = $this->get('request');
+        $em         = $this->getDoctrine()->getEntityManager();
+        $thread     = $request->request->get('id');
+        $note       = $request->request->get('note');
+        $user       = $this->get('security.context')->getToken()->getUser();
+        $rate       = $em->getRepository('MealSquareRecetteBundle:Note\Rate')->findOneBy(array(
+                        'thread' => $thread,
+                        'rater'  => $user
+                    ));
+        
+        
+        if(is_null($rate)){
+            $rate = new Rate($em->getRepository('MealSquareRecetteBundle:Note\RateThread')->findOneById($thread), $user, $note);
+            $em->persist($rate);
+            $em->flush($rate);
+        }
+        
+
+        
+        $thread = $rate->getThread();
+        $em->flush($thread);
+        
+        $response = new Response();
+        $response->setContent(json_encode(array("success"=>true,"average"=>$thread->getAverage())));
         $response -> headers -> set('Content-Type', 'application/json');
         
         return $response;

@@ -32,6 +32,7 @@ recettes:
     dislike: J'aime cette recette
     like: Je n'aime pas
     connect_to_like: Vous devez être connecté pour aimer cette recette
+    connect_to_rate: Vous devez être connecté pour noter cette recette
     connect_to_favourise: Vous devez être connecté pour ajouter cette recette à vos favoris
     loading: ...
     no_description: Aucune description disponible pour cette recette
@@ -41,6 +42,13 @@ recettes:
     variantes: Variantes de la recette
     versions: Versions de la recette
     mother: Recette Mère
+    rate_recipe: Noter la recette
+    rate_display: Cette recette a obtenu une note de 
+    likes_display: personnes ont aimé cette recette 
+    like_display: personne aime cette recette
+    no_like: Personne n'a encore aimé cette recette. Soyez le premier
+    no_rate: Personne n'a encore évalué cette recette. Soyez le premier
+    
     
 form:
     add:

@@ -20,6 +20,7 @@ common:
         submit_recipes: Ajouter une recette
         account: Mon compte
         search_recipes: Rechercher
+        news: Actualités
 
     # User account box
     user:

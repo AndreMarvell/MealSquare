@@ -35,6 +35,23 @@ and open the template in the editor.
 
 li.link-not-activated a{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
 
-a.isLiker, a.isFavoris{
-    background: rgb(40, 173, 97) !important;
-}
+a.isLiker, a.isFavoris{background: rgb(40, 173, 97) !important}
+
+ul.note-recette{}
+ul.note-recette li{background-color:#F4716A;float: left;color: white;width: 20%;border-left: 1px solid whitesmoke;font-weight: bold;}
+ul.note-recette li:hover{background-color:rgb(40, 173, 97);cursor: pointer; }
+
+.widget.isRater{text-align: center;background-color: green;color: white;}
+.rate-like-display{padding: 5px !important; border-radius: 5px; background: rgba(255,255,255,0.4) !important;}
+.rate-like-display p.one-half{
+   background: url(../images/like_rate.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #fff;
+  font-weight: 300 !important;
+  margin: 0.3em auto;
+  text-shadow: black 1px 1px;text-align: center; min-height: 66px;padding: 10px !important; color: white}
+.rate-like-display p.one-half span{font-weight: bold;color: rgb(40, 173, 97)}
+

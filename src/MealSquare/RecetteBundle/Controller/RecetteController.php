@@ -30,6 +30,7 @@ class RecetteController extends Controller {
     public function showAction($id) {
         $repository     = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Recette");
         $likeRepository = $this->getDoctrine()->getRepository('MealSquareRecetteBundle:Like\Like');
+        $rateRepository = $this->getDoctrine()->getRepository('MealSquareRecetteBundle:Note\Rate');
         $recette        = $repository->findOneById($id);
         $user           = $this->get('security.context')->getToken()->getUser();
         
@@ -46,13 +47,16 @@ class RecetteController extends Controller {
             // On vérifie si le user a déjà liker la recette
             $isLiker    = (!is_null($likeRepository->findOneBy(array('thread' => $recette->getLike(), 'liker'=>  $user))))?true:false;
             // On vérifie si le user a déjà cette recette en favoris
-            $isFavoris    = ($user instanceof \Application\Sonata\UserBundle\Entity\User && $user->getRecettesFavoris()->contains($recette));
+            $isFavoris  = ($user instanceof \Application\Sonata\UserBundle\Entity\User && $user->getRecettesFavoris()->contains($recette));
+            // On vérifie si le user a déjà noter la recette
+            $isRater    = (!is_null($rateRepository->findOneBy(array('thread' => $recette->getLike(), 'rater'=>  $user))))?true:false;
             
             return $this->render('MealSquareRecetteBundle:Recette:show.html.twig', array(
                 'recette' => $recette,
                 'isLiker'=>$isLiker,
                 'likers'=>$likers,
-                'isFavoris'=>$isFavoris
+                'isFavoris'=>$isFavoris,
+                'isRater'=>$isRater
             ));
         }
         

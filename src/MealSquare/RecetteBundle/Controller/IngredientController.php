@@ -28,7 +28,11 @@ class IngredientController extends Controller {
                 ->getRepository("MealSquareRecetteBundle:Ingredient");
         $ingredient = $repository->findOneById($id);
         
-        return $this->render('MealSquareRecetteBundle:Ingredient:show.html.twig', array('ingredient' => $ingredient));
+        if(is_null($ingredient)){
+                throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
+        }else{
+            return $this->render('MealSquareRecetteBundle:Ingredient:show.html.twig', array('ingredient' => $ingredient));
+        }
     }
 
 }

@@ -43,12 +43,12 @@ class Rate
     private $rate;
     
     
-    /**
-     * Constructor
-     */
-    function __construct() {
-        
+    function __construct(RateThread $thread, \Application\Sonata\UserBundle\Entity\User $rater, $rate) {
+        $this->thread = $thread;
+        $this->rater = $rater;
+        $this->rate = $rate;
     }
+
     
     
     /**
