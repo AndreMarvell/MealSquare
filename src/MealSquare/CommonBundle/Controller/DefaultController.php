@@ -26,24 +26,6 @@ class DefaultController extends Controller {
             'nbingredient' => $nbingredient,'nbuser' => $nbuser,'recette_de_la_journee' => $recette_de_la_journee));
     }
 
-    public function contactAction() {
-        return $this->render('MealSquareCommonBundle:Default:contact.html.twig');
-    }
-
-}
-<?php
-
-namespace MealSquare\CommonBundle\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
-
-class DefaultController extends Controller
-{
-    public function indexAction()
-    {
-        return $this->render('MealSquareCommonBundle:Default:index.html.twig');
-    }
     
     public function contactAction(\Symfony\Component\HttpFoundation\Request $request)
     {
