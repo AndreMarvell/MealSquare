@@ -35,6 +35,9 @@ and open the template in the editor.
 
 li.link-not-activated a{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
 
+a.link-not-activated{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
+
+
 a.isLiker, a.isFavoris{background: rgb(40, 173, 97) !important}
 
 ul.note-recette{}

@@ -1,0 +1,102 @@
+
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+{% spaceless %}
+
+{% block title %}
+    {{ 'common.menu.news'|trans }} - {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<main class="main" role="main">
+    <!--wrap-->
+    <div class="wrap clearfix">
+        <!--breadcrumbs-->
+        {% block sonata_page_breadcrumb %}
+            <nav class="breadcrumbs">
+                {{ sonata_block_render_event('breadcrumb', { 'context': 'news_archive', 'collection': collection, 'tag': tag, 'current_uri': app.request.requestUri }) }}
+            </nav>
+        {% endblock %}
+        
+        </nav>
+        <!--//breadcrumbs-->
+
+        <!--row-->
+        <div class="row">
+            <header class="s-title wow fadeInLeft">
+                <h1>{{ 'common.menu.news'|trans }}</h1>
+                <h2 class="ribbon bright">{{ pager.getResults()|length }} article(s)</h2>
+            </header>
+            <!--content-->
+            <section class="content three-fourth wow fadeInLeft">
+                {% for post in pager.getResults() %}
+                <article class="post">
+                    <div class="entry-meta">
+                        <div class="date">
+                            <span class="day">{{post.publicationDateStart|format_date('dd', 'fr', 'Europe/Paris', constant('IntlDateFormatter::LONG'))}}</span> 
+                            <span class="my">{{post.publicationDateStart|format_date('MMMM, Y', 'fr', 'Europe/Paris', constant('IntlDateFormatter::LONG'))}}</span>
+                        </div>
+                        <div class="avatar">
+                            <a href="#" class="link-not-activated">{% thumbnail post.author.avatar, 'square' with{'width':'100%',  'height':'100%' } %}<span>{{post.author.username}}</span></a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="entry-featured">
+                            <a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}">
+                                {% thumbnail post.image, 'wide' %}
+                            </a>
+                        </div>
+                        <div class="entry-content">
+                            <h2><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}">{{ post.title }}</a></h2>
+                            <p>{{ post.abstract|striptags|slice(0, 150) ~ '...'}}</p>
+                        </div>
+                        <div class="actions">
+                            <div>
+                                
+                                <div class="category">
+                                    <i class="ico i-category"></i>
+                                    {% for tag in post.tags %}
+                                        <a href="{{ url('sonata_news_tag', { 'tag': tag.slug } ) }}">{{tag.name}}</a>
+                                        {% if not loop.last %}-{% endif %}
+                                    {% endfor %}
+                                </div>
+                                {#<div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                <div class="leave_comment"><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}#comment">Laisser un commentaire</a></div>
+                                #}<div class="more"><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}">Lire</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% else %}
+                    <hr />
+                    <div>{{ 'no_post_found'|trans({}, 'SonataNewsBundle') }}</div>
+                {% endfor %}
+                <!--//blog entry-->
+                
+            <ul class="pagination">
+                <li{% if pager.page == pager.lastPage %} class="unavailable"{% endif %}>
+                    <a href="{{ url(route, route_parameters|merge({'page': pager.nextpage})) }}" title="{{ 'link_previous_page'|trans({}, 'SonataNewsBundle') }}">
+                        {{ 'link_previous_page'|trans({}, 'SonataNewsBundle') }}
+                    </a>
+                <li{% if pager.page == pager.firstPage %} class="unavailable"{% endif %}>
+                    <a href="{{ url(route, route_parameters|merge({'page': pager.previouspage})) }}" title="{{ 'link_next_page'|trans({}, 'SonataNewsBundle') }}">
+                        {{ 'link_next_page'|trans({}, 'SonataNewsBundle') }}
+                    </a>
+                </li>
+            </ul>
+
+            </section>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}
+{% endspaceless %}
+
+
+
