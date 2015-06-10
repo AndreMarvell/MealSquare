@@ -31,5 +31,16 @@ class IngredientRepository extends \Doctrine\ORM\EntityRepository
             }
 
             return $array;
+    }   
+     public function getNb() {
+ 
+        return $this->createQueryBuilder('l')
+ 
+                        ->select('COUNT(l)')
+ 
+                        ->getQuery()
+ 
+                        ->getSingleScalarResult();
+ 
     }
 }

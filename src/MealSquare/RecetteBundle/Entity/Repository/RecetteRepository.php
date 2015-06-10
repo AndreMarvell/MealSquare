@@ -65,4 +65,23 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getQuery()->getResult();
     }
 
+    public function getNb() {
+ 
+        return $this->createQueryBuilder('l')
+ 
+                        ->select('COUNT(l)')
+ 
+                        ->getQuery()
+ 
+                        ->getSingleScalarResult();
+ 
+    }
+    
+    public function getDayRecipe() {
+ 
+        $query = $this->createQueryBuilder('a');
+        $query->where('a.recetteDuJour =  true ');
+        $query->andWhere('a.visibilite = true');
+        return $query->getQuery()->getResult();
+    }
 }

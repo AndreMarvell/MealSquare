@@ -95,3 +95,22 @@ common:
         
         #Copyrights
         copyrights: Copyright © 2015 MealSquare. Tous droits réservés
+
+
+    home:
+        bienvenu: Bienvenu sur MealSquare !
+        les_chiffres : Les chiffres de MealSquare
+        ingredients : Ingrédients
+        recettes : Recettes
+        utilisateurs : Utilisateurs
+        postes : Postes
+        media: Photos
+        intro : est une communauté de recette de cuisine où les recettes viennent à la vie. Vous voulez savoir ce que vous allez gagner à nous rejoindre? 
+        intro_part2 : Vous pourrez gagner des prix exceptionnels, se faire de nouveaux amis et partager de délicieuses recettes.
+        mealsquare : MealSquare
+        nous_rejoindre : Nous rejoindre !
+        deja_membre : Déjà membre ? cliquer 
+        ici : ici
+        pour_connecter : pour vous connecter
+        membre: Membres
+        recette_de_la_journee : Recette de la journée

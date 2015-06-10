@@ -216,7 +216,7 @@ tr:nth-child(2n+1) td{background:#f6f6f6;}
 
 /*HOME*/
 .home .main 	{padding-top:0;}
-.intro 		{position:relative;top:0;left:0;width:100%;height:100vh;margin:0 0 30px;overflow:hidden;}
+.intro 		{position:relative;top:0;left:0;width:100%;height:60vh;margin:0 0 30px;overflow:hidden;}
 .bg img		{position:absolute;left:0;bottom:0;}
 .intro .wrap {margin-top:180px;}
 
@@ -263,7 +263,7 @@ h2.large		{background-position:0 0;width:572px;height:58px;position:static;font-
 .entry .excerpt 				{border-top:1px solid #ddd;width:100%;float:left;padding:15px 0 20px;}
 .entry .excerpt p 			{padding:0;}
 
-.featured h2					{font-size:16px;font-weight:700;}
+.featured h2					{font-size:14px;font-weight:700;}
 blockquote					{position:relative;color:#666;border-top:1px solid #ddd;border-bottom:1px solid #ddd;width:100%;padding:18px 0 21px;margin:0 0 23px;}
 blockquote:before 			{content:"";background:url(../images/ico/icons.png) -297px -17px no-repeat;width:15px;height:14px;float:left;position:relative;top:0;left:0;margin:0 5px 0 0;}
 .featured .actions > div 		{border:none;padding:0;font-size:14px;}
@@ -380,11 +380,16 @@ section.cta h2 	{padding:0;line-height:48px;}
 dl 			{display:inline-block;width:100%;margin:0 0 22px;}
 .recipe dt,
 .basic dt 	{float:left;margin:0 0 8px;padding:0 10px;height:35px;font-size:13px;line-height:37px;background:#fff;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 0 rgba(0,0,0,.15);box-shadow:0 1px 0 rgba(0,0,0,.15);}
+.crf dt 	{float:left;margin:0 0 8px;padding:0 10px;height:35px;font-size:13px;line-height:37px;background:#fff;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 0 rgba(0,0,0,.15);box-shadow:0 1px 0 rgba(0,0,0,.15);}
+
 .recipe dd,
 .basic dd 	{float:left;margin:0 0 8px;padding:0 15px;height:35px;font-size:14px;line-height:37px;font-weight:600;background:#FF7B74;color:#fff;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 0 rgba(0,0,0,.15);box-shadow:0 1px 0 rgba(0,0,0,.15);}	
+.crf dd 	{float:left;margin:0 0 8px;padding:0 15px;height:35px;font-size:14px;line-height:37px;font-weight:600;background:#FF7B74;color:#fff;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 0 rgba(0,0,0,.15);box-shadow:0 1px 0 rgba(0,0,0,.15);}	
 
 .basic dt 		{width:65%;}
+.crf dt 		{width:65%;}
 .basic dd 		{width:35%;background:#FF8E88;}
+.crf dd 		{width:35%;background:#DBBC94;}
 .user dt 			{width:50%;font-size:13px;}
 .user dd 		{width:50%;background:#DBBC94;}
 .user dd a 		{color:#fff;}

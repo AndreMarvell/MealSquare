@@ -52,6 +52,11 @@ recettes:
     rechercherecette: Recherche de recettes
     paramrecherche: Paramètres de la recherche
     recherchebyingredients : Rechercher par ingrédients
+    home_intro_instruction : Tout ce que vous devez faire c'est d'entrer un igredient, un plat ou un mot clé.
+    home_intro_instruction_categorie : Vous pouvez également choisir une catégorie spécifique, une saison, une spécialité.
+    home_intro_instruction_pub : Vous trouverez surement une recette à essayer.
+    home_commencer_plat : Trouvez une recette
+    no_recette_of_day : La recette du jour n'est oas encore disponible.
     search_ingredients_instruction: Cliquez sur ‘-’ pour retirer ingredient, ou ajoutez en grâce au bouton en dessous
     search:
         nbResults: résultat(s) trouvé(s)
