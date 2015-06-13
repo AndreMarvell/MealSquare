@@ -1,0 +1,66 @@
+{# empty Twig template #}
+<div class="entries row">
+    <!--featured recipe-->
+
+    <div class="featured two-third wow fadeInLeft">
+        {% if recette_de_la_journee is not null %}
+            <header class="s-title">
+                <h2 class="ribbon">{{ 'common.home.recette_de_la_journee'|trans }}</h2>
+            </header>
+            <article class="entry">
+
+                <figure>
+                    <div class="image">{% thumbnail recette_de_la_journee.image,'big' %}</div>
+                    <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette_de_la_journee.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+                </figure>
+                <div class="container">
+                    <h2><a href="{{ path('meal_square_recette_show',{'id':recette_de_la_journee.id}) }}">{{recette_de_la_journee.titre}}</a></h2>
+                    <p> {% if recette_de_la_journee.description is not null %}
+                        {{ recette_de_la_journee.description }}
+                    {% else %}
+                        {{ 'recettes.no_description'|trans({},'messages') }}
+                    {% endif %}</p>
+            </div>
+        </article>
+        {% else %}
+            <div class="container">
+                <h2> {{ 'recettes.no_recette_of_day'|trans({},'messages') }} </h2>
+            </div>
+            {% endif %} 
+            </div>
+
+            <!--//featured recipe-->
+
+            <!--featured member-->
+            {% if recette_de_la_journee is not null %}
+                <div class="featured one-third wow fadeInLeft" data-wow-delay=".2s">
+
+                    <article class="entry">
+                        <dl class="basic">
+                            <dt>{{ 'recettes.preparation_time'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getTempsPreparation()}} min</dd>
+                            <dt>{{ 'recettes.coocking_time'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getTempsCuisson()}} min</dd>
+                            <dt>{{ 'recettes.difficulty'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getDifficulte()}}</dd>
+                            <dt>{{ 'recettes.serves'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getNbPersonne()}}</dd>
+                            <dt>{{ 'recettes.saison'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getSaison()}}</dd>
+                            <dt>{{ 'recettes.speciality'|trans({},'messages') }}</dt>
+                            <dd style="font-size: 13px;padding: 2px;">{{recette_de_la_journee.getSpecialite() |slice(0, 13)}}...</dd>
+                        </dl>
+
+                        <dl class="crf">
+                            <dt>{{ 'recettes.category'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getCategorie()}}</dd>
+                            <dt>{{ 'recettes.autor'|trans({},'messages') }}</dt>
+                            <dd>{{recette_de_la_journee.getAuteur()}}</dd>
+                            <dt>{{ 'recettes.source'|trans({},'messages') }}</dt>
+                            <dd style="font-size: 13px;padding: 2px;">{{recette_de_la_journee.getSource() |slice(0, 13)}}...</dd>
+                        </dl>
+                    </article>
+                </div>
+            {% endif %}
+            <!--//featured member-->
+        </div>

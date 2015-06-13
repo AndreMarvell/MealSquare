@@ -8,22 +8,52 @@ use MealSquare\RecetteBundle\Entity\Recette;
 class DefaultController extends Controller {
 
     public function indexAction() {
-        
+
         $em = $this->getDoctrine()->getManager();
         $recetteRepo = $em->getRepository('MealSquareRecetteBundle:Recette');
         $ingredientRepo = $em->getRepository('MealSquareRecetteBundle:Ingredient');
         $userRepo = $em->getRepository('ApplicationSonataUserBundle:User');
+        $postRepo = $em->getRepository('ApplicationSonataNewsBundle:Post');
+        $galleryRepo = $em->getRepository('ApplicationSonataMediaBundle:Media');
+        
         $nbuser = $userRepo->createQueryBuilder('l')
-                        ->select('COUNT(l)')
-                        ->getQuery()
-                        ->getSingleScalarResult();
+                ->select('COUNT(l)')
+                ->getQuery()
+                ->getSingleScalarResult();
         $nbrecette = $recetteRepo->getNb();
         $nbingredient = $ingredientRepo->getNb();
-        $idrecetteofday =  $recetteRepo->getDayRecipe();
-        $recette_de_la_journee = $recetteRepo->findOneById($idrecetteofday);
         
-        return $this->render('MealSquareCommonBundle:Default:index.html.twig',array('nbrecette' => $nbrecette,
-            'nbingredient' => $nbingredient,'nbuser' => $nbuser,'recette_de_la_journee' => $recette_de_la_journee));
+        $nbpost = $postRepo->createQueryBuilder('l')
+                ->select('COUNT(l)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        
+        $nbmedia = $galleryRepo->createQueryBuilder('l')
+                ->select('COUNT(l)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        
+        $idrecetteofday = $recetteRepo->getDayRecipe();
+        $recette_de_la_journee = $recetteRepo->findOneById($idrecetteofday);
+
+        $query = $em->createQuery(
+                        'SELECT r FROM MealSquareRecetteBundle:Recette r
+                         WHERE r.visibilite = true
+                         ORDER BY r.dateCreation DESC'
+                );
+        $query->setMaxResults(6);
+        $recettes = $query->getResult();
+
+        $queryarticle = $em->createQuery(
+                        'SELECT p FROM ApplicationSonataNewsBundle:Post p
+                         WHERE p.enabled = true
+                         ORDER BY p.createdAt DESC'
+                );
+        $queryarticle->setMaxResults(3);
+        $articles = $queryarticle->getResult();
+
+        return $this->render('MealSquareCommonBundle:Default:index.html.twig', array('nbrecette' => $nbrecette,'nbpost' => $nbpost,'nbmedia' => $nbmedia,'articles' => $articles,
+                    'nbingredient' => $nbingredient, 'nbuser' => $nbuser, 'recette_de_la_journee' => $recette_de_la_journee, 'dernieres_recette' => $recettes));
     }
 
     

@@ -3,89 +3,97 @@
 
 
 {% block title %}
-   {{ingredient.libelle}}  - {{ parent() }}
+    {{ingredient.libelle}}  - {{ parent() }}
 {% endblock %}
 
 {% block main %}
-    
+
     <main class="main" role="main">
-		<!--wrap-->
-		<div class="wrap clearfix">
-			<!--breadcrumbs-->
-			<nav class="breadcrumbs">
-				<ul>
-					<li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
-                                        <li><a href="{{path('meal_square_recette_ingredient_list')}}" title="{{ 'common.menu.ingredients'|trans }}">{{ 'common.menu.ingredients'|trans }}</a></li>          
-                                        <li>{{ingredient.libelle}}</li>
-                            
-				</ul>
-			</nav>
-			<!--//breadcrumbs-->
-			
-			<!--row-->
-			<div class="row">
-				<header class="s-title wow fadeInLeft">
-					<h1>{{ingredient.libelle}}</h1>
-				</header>
-				
-				<!--content-->
-				<section class="content three-fourth wow fadeInLeft">
-					<!--blog entry-->
-					<article class="post">
-						<div class="entry-meta">
-							<div class="date">
-								<span class="day">30</span> 
-								<span class="my">July, 2014</span>
-							</div>
-						</div>
-						<div class="container">
-							<div class="entry-featured">{% thumbnail ingredient.image,'big' %}</div>
-							<div class="entry-content">
-								<h4>{{ingredient.libelle}}</h4>
-                                                                <p>{{ingredient.description}}</p>
-                                                        </div>
-							<div class="actions">
-								<div>
-									<div class="category"><i class="ico i-category"></i><a href="#">Tips and tricks</a></div>
-									<div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
-									<div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.html">Read more</a></div>
-								</div>
-							</div>
-						</div>
-					</article>
-					<!--//blog entry-->
-					
-				</section>
-				<!--//content-->
-				
-				<!--right sidebar-->
-				<aside class="sidebar one-fourth">
-					<div class="widget">
-						<ul class="categories right">
-							<li><a href="#">All recipes</a></li>
-							<li class="active"><a href="#">Tips and Tricks</a></li>
-							<li><a href="#">Events</a></li>
-							<li><a href="#">Inspiration</a></li>
-							<li><a href="#">Category name</a></li>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Dolor</a></li>
-							<li><a href="#">Sit amet</a></li>
-						</ul>
-					</div>
-					<div class="widget">
-						<h3>Advertisment</h3>
-						<a href="#"><img src="images/img.jpg" alt="" /></a>
-					</div>
-				</aside>
-				<!--//right sidebar-->
-			</div>
-			<!--//row-->
-		</div>
-		<!--//wrap-->
-	</main>
-	<!--//main-->
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    <li><a href="{{path('meal_square_recette_ingredient_list')}}" title="{{ 'common.menu.ingredients'|trans }}">{{ 'common.menu.ingredients'|trans }}</a></li>          
+                    <li>{{ingredient.libelle}}</li>
+
+                </ul>
+            </nav>
+            <!--//breadcrumbs-->
+
+            <!--row-->
+            <div class="row">
+                <header class="s-title wow fadeInLeft">
+                    <h1>{{ingredient.libelle}}</h1>
+                </header>
+
+                <!--content-->
+                <section class="content three-fourth wow fadeInLeft">
+                    <!--blog entry-->
+                    <article class="post">
+                        <div class="entry-meta">
+                            <div class="date">
+                                <span class="day">30</span> 
+                                <span class="my">July, 2014</span>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="entry-featured">{% thumbnail ingredient.image,'big' %}</div>
+                            <div class="entry-content">
+                                <h4>{{ingredient.libelle}}</h4>
+                                <p>{{ingredient.description}}</p>
+                            </div>
+                            <div class="actions">
+                                <div>
+                                    <div class="category"><i class="ico i-category"></i><a href="#">Tips and tricks</a></div>
+                                    <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                    <div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
+                                    <div class="more"><a href="blog_single.html">Read more</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!--//blog entry-->
+                    <div class="row">
+                        <div class="full-width">
+                            <div class="container box">
+                                <div class="entry-featured demoanimate wow flash" data-wow-delay=".4s" data-wow-duration="1s" data-wow-offset="300">{% thumbnail ingredient.image,'small' %}</div> 
+                                <h2>Flash</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--//content-->
+
+                <!--right sidebar-->
+                <aside class="sidebar one-fourth">
+                    <div class="widget">
+                        <ul class="categories right">
+                            <li><a href="#">All recipes</a></li>
+                            <li class="active"><a href="#">Tips and Tricks</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Inspiration</a></li>
+                            <li><a href="#">Category name</a></li>
+                            <li><a href="#">Lorem ipsum</a></li>
+                            <li><a href="#">Dolor</a></li>
+                            <li><a href="#">Sit amet</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <h3>Advertisment</h3>
+                        <a href="#"><img src="images/img.jpg" alt="" /></a>
+                    </div>
+                </aside>
+                <!--//right sidebar-->
+            </div>
+            <!--//row-->
+        </div>
+        <!--//wrap-->
+    </main>
+    <!--//main-->
 {% endblock %}
 {% block script %}
-   <script> new WOW().init(); </script>
+    <script> new WOW().init();</script>
 {% endblock %}

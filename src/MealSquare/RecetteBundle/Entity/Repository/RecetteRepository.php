@@ -84,4 +84,16 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
         $query->andWhere('a.visibilite = true');
         return $query->getQuery()->getResult();
     }
+    
+     public function getNewAddRecipe() {
+ 
+        return $this->createQueryBuilder('l')
+ 
+                        ->select('COUNT(l)')
+ 
+                        ->getQuery()
+ 
+                        ->getSingleScalarResult();
+ 
+    }
 }

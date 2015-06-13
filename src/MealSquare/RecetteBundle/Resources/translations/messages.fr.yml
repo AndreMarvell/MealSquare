@@ -57,6 +57,7 @@ recettes:
     home_intro_instruction_pub : Vous trouverez surement une recette à essayer.
     home_commencer_plat : Trouvez une recette
     no_recette_of_day : La recette du jour n'est oas encore disponible.
+    last_recette : Dernières recettes
     search_ingredients_instruction: Cliquez sur ‘-’ pour retirer ingredient, ou ajoutez en grâce au bouton en dessous
     search:
         nbResults: résultat(s) trouvé(s)

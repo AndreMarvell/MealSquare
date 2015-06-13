@@ -98,7 +98,7 @@ common:
 
 
     home:
-        bienvenu: Bienvenu sur MealSquare !
+        bienvenu: Bienvenue sur MealSquare !
         les_chiffres : Les chiffres de MealSquare
         ingredients : Ingrédients
         recettes : Recettes
@@ -114,3 +114,11 @@ common:
         pour_connecter : pour vous connecter
         membre: Membres
         recette_de_la_journee : Recette de la journée
+        plus_de_recette : Plus de recettes
+        haut : Retour Haut de la page
+        last_articles : Les derniers articles
+        more_articles : Voir plus d'article
+        no_article : Aucun article disponible
+        no_recette : Aucune recette disponible
+        voir_article : Voir Article
+        

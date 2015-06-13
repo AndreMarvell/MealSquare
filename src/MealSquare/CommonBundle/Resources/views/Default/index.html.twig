@@ -7,292 +7,66 @@
 {% block main %}
     <body class="home">
         <main class=" main" role="main">
-            <div class="intro">
-                <figure class="bg">
-                    {% image '@MealSquareCommonBundle/Resources/public/images/intro.jpg'  output="images/intro.jpg" %}
-                    <img src="{{ asset_url }}" alt="MealSquare logo">
-                    {% endimage %}
-                </figure>
-
-                <!--wrap-->
-                <div class="wrap clearfix">
-                    <!--row-->
-                    <div class="row">
-                        <article class="three-fourth text wow zoomIn animated" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; -webkit-animation-delay: 0.2s; animation-name: zoomIn; -webkit-animation-name: zoomIn;">
-                            <h1>{{ 'common.home.bienvenu'|trans }}</h1>
-                            <p><strong>{{ 'common.home.mealsquare'|trans }}</strong> {{ 'common.home.intro'|trans }}</p>
-                            <p>{{ 'common.home.intro_part2'|trans }}</p>
-                            <p>
-                                <a href="{{ path('sonata_user_registration_register') }}" class="button white more medium">{{ 'common.home.nous_rejoindre'|trans }}</a>
-                                {{ 'common.home.deja_membre'|trans }} <a href="{{ path('sonata_user_profile_show') }}"> {{ 'common.home.ici'|trans }}</a> {{ 'common.home.pour_connecter'|trans }}.</p>
-                        </article>
-
-                        <!--search recipes widget-->
-                        <div class="one-fourth wow fadeInDown animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; -webkit-animation-delay: 0.5s; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
-                            <div class="widget container">
-                                <div class="textwrap">
-                                    <h3>{{ 'recettes.rechercherecette'|trans({},'messages') }}</h3>
-                                    <p>{{ 'recettes.home_intro_instruction'|trans({},'messages') }}</p>
-                                    <p>{{ 'recettes.home_intro_instruction_categorie'|trans({},'messages') }}</p>
-                                    <p>{{ 'recettes.home_intro_instruction_pub'|trans({},'messages') }}</p>
-                                </div>
-
-                                <div class="f-row bwrap">
-                                    <a class="button white more medium" href="{{ path('meal_square_recette_search') }}">{{ 'recettes.home_commencer_plat'|trans({},'messages') }}</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--//search recipes widget-->
-                    </div>
-                    <!--//row-->
-                </div>
-                <!--//wrap-->
-            </div>
+            <!--intro  -->
+            {{ include( 'MealSquareCommonBundle:Default:intro.html.twig') }}
+            <!--//intro-->
             <div class="wrap clearfix">
                 <!--row-->
                 <div class="row">
-                    <!--content-->
-                    <section class="content full-width">
-                        <div class="icons dynamic-numbers">
-                            <header class="s-title wow fadeInDown">
-                                <h2 class="ribbon large">{{ 'common.home.les_chiffres'|trans }}</h2>
-                            </header>
 
-                            <!--row-->
-                            <div class="row wow fadeInUp">
+                    <!--bloc stat -->
+                    {{ include( 'MealSquareCommonBundle:Default:statistique.html.twig') }}
+                    <!--//bloc stat-->
 
-                                <!--item-->
-                                <div class="one-sixth">
-                                    <div class="container">
-                                        <i class="ico i-recipes"></i>
-                                        <span class="title dynamic-number" data-dnumber="{{nbrecette}}">0</span>
-                                        <span class="subtitle">{{ 'common.home.recettes'|trans }}</span>
-                                    </div>
-                                </div>
-                                <!--//item-->
-                                <!--item-->
-                                <div class="one-sixth">
-                                    <div class="container">
-                                        <i class="ico i-articles"></i>
-                                        <span class="title dynamic-number" data-dnumber="{{nbingredient}}">0</span>
-                                        <span class="subtitle">{{ 'common.home.ingredients'|trans }}</span>
-                                    </div>
-                                </div>
-                                <!--//item-->
-                                <!--item-->
-                                <div class="one-sixth">
-                                    <div class="container">
-                                        <i class="ico i-members"></i>
-                                        <span class="title dynamic-number" data-dnumber="{{nbuser}}">0</span>
-                                        <span class="subtitle">{{ 'common.home.membre'|trans }}</span>
-                                    </div>
-                                </div>
-                                <!--//item-->
-                                
-                            </div>
-                            <!--//row-->
-                        </div>
-                    </section>
-                    <!--//content-->
                     <!--content-->
                     <section class="content three-fourth">
                         <!--cwrap-->
                         <div class="cwrap">
                             <!--entries-->
-                            <div class="entries row">
-                                <!--featured recipe-->
-
-                                <div class="featured two-third wow fadeInLeft">
-                                    {% if recette_de_la_journee is not null %}
-                                        <header class="s-title">
-                                            <h2 class="ribbon">{{ 'common.home.recette_de_la_journee'|trans }}</h2>
-                                        </header>
-                                        <article class="entry">
-
-                                            <figure>
-                                                <div class="image">{% thumbnail recette_de_la_journee.image,'big' %}</div>
-                                                <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette_de_la_journee.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="{{ path('meal_square_recette_show',{'id':recette_de_la_journee.id}) }}">{{recette_de_la_journee.titre}}</a></h2>
-                                                <p> {% if recette_de_la_journee.description is not null %}
-                                                    {{ recette_de_la_journee.description }}
-                                                {% else %}
-                                                    {{ 'recettes.no_description'|trans({},'messages') }}
-                                                {% endif %}</p>
-                                        </div>
-                                    </article>
-                                    {% else %}
-                                        <div class="container">
-                                            <h2> {{ 'recettes.no_recette_of_day'|trans({},'messages') }} </h2>
-                                        </div>
-                                        {% endif %} 
-                                        </div>
-
-                                        <!--//featured recipe-->
-
-                                        <!--featured member-->
-                                        {% if recette_de_la_journee is not null %}
-                                        <div class="featured one-third wow fadeInLeft" data-wow-delay=".2s">
-
-                                            <article class="entry">
-                                                <dl class="basic">
-                                                    <dt>{{ 'recettes.preparation_time'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getTempsPreparation()}} min</dd>
-                                                    <dt>{{ 'recettes.coocking_time'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getTempsCuisson()}} min</dd>
-                                                    <dt>{{ 'recettes.difficulty'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getDifficulte()}}</dd>
-                                                    <dt>{{ 'recettes.serves'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getNbPersonne()}}</dd>
-                                                    <dt>{{ 'recettes.saison'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getSaison()}}</dd>
-                                                    <dt>{{ 'recettes.speciality'|trans({},'messages') }}</dt>
-                                                    <dd style="font-size: 13px;padding: 2px;">{{recette_de_la_journee.getSpecialite() |slice(0, 13)}}...</dd>
-                                                </dl>
-
-                                                <dl class="crf">
-                                                    <dt>{{ 'recettes.category'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getCategorie()}}</dd>
-                                                    <dt>{{ 'recettes.autor'|trans({},'messages') }}</dt>
-                                                    <dd>{{recette_de_la_journee.getAuteur()}}</dd>
-                                                    <dt>{{ 'recettes.source'|trans({},'messages') }}</dt>
-                                                    <dd style="font-size: 13px;padding: 2px;">{{recette_de_la_journee.getSource() |slice(0, 13)}}...</dd>
-                                                </dl>
-                                            </article>
-                                        </div>
-                                        {% endif %}
-                                        <!--//featured member-->
-                                    </div>
-                                    <!--//entries-->
+                            {{ include( 'MealSquareCommonBundle:Default:recettejournee.html.twig') }}
+                            <!--//entries-->
                                 </div>
                                 <!--//cwrap-->
 
                                 <!--cwrap-->
                                 <div class="cwrap">
                                     <header class="s-title">
-                                        <h2 class="ribbon bright">Latest recipes</h2>
+                                        <h2 class="ribbon bright">{{ 'recettes.last_recette'|trans({},'messages') }}</h2>
                                     </header>
 
                                     <!--entries-->
                                     <div class="entries row">
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-                                                        <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
+                                        {% for recette in dernieres_recette %}
+                                            <!--item-->
+                                            <div class="entry one-third wow fadeInLeft">
+                                                <figure>
+                                                    {% thumbnail recette.image, 'square' with {'width':'100%','height':'auto'} %}
+                                                    <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+                                                </figure>
+                                                <div class="container">
+                                                    <h2><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{recette.Titre | slice (0, 20)}}{% if recette.Titre|length > 20 %} ...{% endif %}</a></h2> 
+                                                    <div class="actions">
+                                                        <div>
+                                                            <div class="difficulty"><i class="ico i-medium"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}" style="font-size: 11px">{{recette.Difficulte}}</a></div>
+                                                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and recette.auteur is not null and app.user is not null and app.user.id == recette.auteur.id %}
+                                                                <div class="edit"><a href="{{ path('meal_square_recette_edit',{'id':recette.id}) }}"><i class="ico fa fa-edit"></i></a></div>   
+                                                                    {% endif %}
+                                                            <div class="likes"><i class="ico i-likes"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.like.numLikes }}</a></div>
+                                                            <div class="rates"><i class="ico fa fa-star"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.note.average }}</a></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay=".2s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                            </figure>
+                                            <!--item-->
+                                        {% else %}
                                             <div class="container">
-                                                <h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-                                                        <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
+                                                <h3> {{ 'common.home.no_recette'|trans({},'messages') }} </h3>
                                             </div>
-                                        </div>
-                                        <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay=".4s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-                                                        <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay=".6s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="recipe.html">Refreshing banana split with a twist for adults</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-                                                        <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay=".8s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="recipe.html">Sushi mania: this is the best sushi you have ever tasted</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-                                                        <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay="1s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="recipe.html"><i class="ico i-view"></i> <span>View recipe</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="recipe.html">Princess puffs - an old classic at its best</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-                                                        <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="recipe.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--item-->
+                                        {% endfor %}
 
                                         <div class="quicklinks">
-                                            <a href="#" class="button">More recipes</a>
-                                            <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
+                                            <a href="#" class="button">{{ 'common.home.plus_de_recette'|trans }}</a>
+                                            <a href="javascript:void(0)" class="button scroll-to-top">{{ 'common.home.haut'|trans }}</a>
                                         </div>
                                     </div>
                                     <!--//entries-->
@@ -302,75 +76,38 @@
                                 <!--cwrap-->
                                 <div class="cwrap">
                                     <header class="s-title">
-                                        <h2 class="ribbon bright">Latest articles</h2>
+                                        <h2 class="ribbon bright">{{ 'common.home.last_articles'|trans }}</h2>
                                     </header>
                                     <!--entries-->
                                     <div class="entries row">
+                                         {% for article in articles %}
                                         <!--item-->
                                         <div class="entry one-third wow fadeInLeft">
                                             <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
+                                                {% thumbnail article.image, 'square' with {'width':'100%','height':'auto'} %}
+                                                <figcaption><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}"><i class="ico i-view"></i> <span>{{ 'common.home.voir_article'|trans }}</span></a></figcaption>
                                             </figure>
                                             <div class="container">
-                                                <h2><a href="blog_single.html">Barbeque party</a></h2> 
+                                                <h4><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}">{{article.title | slice (0, 21)}}{% if article.title|length > 21 %} ...{% endif %}</a></h4> 
                                                 <div class="actions">
                                                     <div>
-                                                        <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
+                                                        <div class="date"><i class="ico i-date"></i><a href="#">{{ article.createdAt|date("d/m/Y") }}</a></div>
+                                                        <div class="comments"><i class="ico i-comments"></i><a href="#comments">27</a></div>
                                                     </div>
                                                 </div>
                                                 <div class="excerpt">
-                                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
+                                                    <p>{{article.abstract| slice (0, 65)}}{% if article.abstract|length > 65 %} ...{% endif %}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay=".2s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
-                                            </figure>
+                                         {% else %}
                                             <div class="container">
-                                                <h2><a href="blog_single.html">How to make sushi</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="excerpt">
-                                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-                                                </div>
+                                                <h3> {{ 'common.home.no_article'|trans }} </h3>
                                             </div>
-                                        </div>
-                                        <!--item-->
-
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft" data-wow-delay=".4s">
-                                            <figure>
-                                                <img src="images/img.jpg" alt="" />
-                                                <figcaption><a href="blog_single.html"><i class="ico i-view"></i> <span>View post</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h2><a href="blog_single.html">Make your own bread</a></h2> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="date"><i class="ico i-date"></i><a href="#">22 Dec 2014</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="blog_single.html#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="excerpt">
-                                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--item-->
-
+                                        {% endfor %}
                                         <div class="quicklinks">
-                                            <a href="#" class="button">More posts</a>
+                                            <a href="#" class="button">{{ 'common.home.more_articles'|trans }}</a>
                                             <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
                                         </div>
                                     </div>
@@ -409,42 +146,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="widget wow fadeInRight" data-wow-delay=".2s">
-                                    <h3>Tips and tricks</h3>
-                                    <ul class="articles_latest">
-                                        <li>
-                                            <a href="blog_single.html">
-                                                <img src="images/img.jpg" alt="" />
-                                                <h6>How to decorate cookies</h6>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog_single.html">
-                                                <img src="images/img.jpg" alt="" />
-                                                <h6>Make your own bread</h6>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog_single.html">
-                                                <img src="images/img.jpg" alt="" />
-                                                <h6>How to make sushi</h6>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog_single.html">
-                                                <img src="images/img.jpg" alt="" />
-                                                <h6>Barbeque party</h6>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog_single.html">
-                                                <img src="images/img.jpg" alt="" />
-                                                <h6>How to make a cheesecake</h6>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
+                                
                                 <div class="widget members wow fadeInRight" data-wow-delay=".4s">
                                     <h3>Our members</h3>
                                     <div id="members-list-options" class="item-options">
@@ -463,11 +165,6 @@
                                         <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Michelle S.</span></a></div></li>
                                         <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Bryan A.</span></a></div></li>
                                     </ul>
-                                </div>
-
-                                <div class="widget wow fadeInRight" data-wow-delay=".6s">
-                                    <h3>Advertisment</h3>
-                                    <a href="#"><img src="images/img.jpg" alt="" /></a>
                                 </div>
                             </aside>
                         </div>

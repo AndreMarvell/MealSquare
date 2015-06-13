@@ -1,0 +1,56 @@
+{# empty Twig template #}
+<!--content-->
+<section class="content full-width">
+    <div class="icons dynamic-numbers">
+        <header class="s-title wow fadeInDown">
+            <h2 class="ribbon large">{{ 'common.home.les_chiffres'|trans }}</h2>
+        </header>
+
+        <div class="row wow fadeInUp">
+
+            <!--item-->
+            <div class="one-sixth">
+                <div class="container">
+                    <i class="ico i-recipes"></i>
+                    <span class="title dynamic-number" data-dnumber="{{nbrecette}}">0</span>
+                    <span class="subtitle">{{ 'common.home.recettes'|trans }}</span>
+                </div>
+            </div>
+            <!--//item-->
+            <!--item-->
+            <div class="one-sixth">
+                <div class="container">
+                    <i class="ico i-articles"></i>
+                    <span class="title dynamic-number" data-dnumber="{{nbingredient}}">0</span>
+                    <span class="subtitle">{{ 'common.home.ingredients'|trans }}</span>
+                </div>
+            </div>
+            <!--//item-->
+            <!--item-->
+            <div class="one-sixth">
+                <div class="container">
+                    <i class="ico i-members"></i>
+                    <span class="title dynamic-number" data-dnumber="{{nbuser}}">0</span>
+                    <span class="subtitle">{{ 'common.home.membre'|trans }}</span>
+                </div>
+            </div>
+            <!--//item-->
+            <div class="one-sixth">
+                <div class="container">
+                    <i class="ico i-posts"></i>
+                    <span class="title dynamic-number" data-dnumber="{{nbpost}}">0</span>
+                    <span class="subtitle">{{ 'common.home.postes'|trans }}</span>
+                </div>
+            </div>
+
+            <div class="one-sixth">
+                <div class="container">
+                    <i class="ico i-photos"></i>
+                    <span class="title dynamic-number" data-dnumber="{{nbmedia}}">0</span>
+                    <span class="subtitle">photos</span>
+                </div>
+            </div>    
+        </div>
+    </div>
+</section>
+<!--//content-->

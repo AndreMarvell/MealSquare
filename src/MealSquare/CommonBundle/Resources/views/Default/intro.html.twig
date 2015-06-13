@@ -1,0 +1,42 @@
+{# empty Twig template #}
+<div class="intro">
+    <figure class="bg">
+        {% image '@MealSquareCommonBundle/Resources/public/images/intro.jpg'  output="images/intro.jpg" %}
+        <img src="{{ asset_url }}" alt="MealSquare logo">
+        {% endimage %}
+    </figure>
+
+    <!--wrap-->
+    <div class="wrap clearfix">
+        <!--row-->
+        <div class="row">
+            <article class="three-fourth text wow zoomIn animated" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; -webkit-animation-delay: 0.2s; animation-name: zoomIn; -webkit-animation-name: zoomIn;">
+                <h1>{{ 'common.home.bienvenu'|trans }}</h1>
+                <p><strong>{{ 'common.home.mealsquare'|trans }}</strong> {{ 'common.home.intro'|trans }}</p>
+                <p>{{ 'common.home.intro_part2'|trans }}</p>
+                <p>
+                    <a href="{{ path('sonata_user_registration_register') }}" class="button white more medium">{{ 'common.home.nous_rejoindre'|trans }}</a>
+                    {{ 'common.home.deja_membre'|trans }} <a href="{{ path('sonata_user_profile_show') }}"> {{ 'common.home.ici'|trans }}</a> {{ 'common.home.pour_connecter'|trans }}.</p>
+            </article>
+
+            <!--search recipes widget-->
+            <div class="one-fourth wow fadeInDown animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; -webkit-animation-delay: 0.5s; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="widget container">
+                    <div class="textwrap">
+                        <h3>{{ 'recettes.rechercherecette'|trans({},'messages') }}</h3>
+                        <p>{{ 'recettes.home_intro_instruction'|trans({},'messages') }}</p>
+                        <p>{{ 'recettes.home_intro_instruction_categorie'|trans({},'messages') }}</p>
+                        <p>{{ 'recettes.home_intro_instruction_pub'|trans({},'messages') }}</p>
+                    </div>
+
+                    <div class="f-row bwrap">
+                        <a class="button white more medium" href="{{ path('meal_square_recette_search') }}">{{ 'recettes.home_commencer_plat'|trans({},'messages') }}</a>
+                    </div>
+                </div>
+            </div>
+            <!--//search recipes widget-->
+        </div>
+        <!--//row-->
+    </div>
+    <!--//wrap-->
+</div>
