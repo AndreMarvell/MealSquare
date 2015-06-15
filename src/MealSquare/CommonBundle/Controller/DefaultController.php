@@ -35,7 +35,20 @@ class DefaultController extends Controller {
         
         $idrecetteofday = $recetteRepo->getDayRecipe();
         $recette_de_la_journee = $recetteRepo->findOneById($idrecetteofday);
+        
+        $idrecetteofweek = $recetteRepo->getWeekRecipe();
+        $recette_de_la_semaine = $recetteRepo->findOneById($idrecetteofweek);
 
+        $idrecetteofmonth = $recetteRepo->getMonthRecipe();
+        $recette_du_mois = $recetteRepo->findOneById($idrecetteofmonth);
+        
+        $idrecetteclassic = $recetteRepo->getClassicRecipe();
+        $recette_classic = $recetteRepo->findOneById($idrecetteclassic);
+        
+        $idrecetteselected = $recetteRepo->getSelectedRecipe();
+        $recette_selection = $recetteRepo->findOneById($idrecetteselected);
+        
+        
         $query = $em->createQuery(
                         'SELECT r FROM MealSquareRecetteBundle:Recette r
                          WHERE r.visibilite = true
@@ -52,8 +65,29 @@ class DefaultController extends Controller {
         $queryarticle->setMaxResults(3);
         $articles = $queryarticle->getResult();
 
-        return $this->render('MealSquareCommonBundle:Default:index.html.twig', array('nbrecette' => $nbrecette,'nbpost' => $nbpost,'nbmedia' => $nbmedia,'articles' => $articles,
-                    'nbingredient' => $nbingredient, 'nbuser' => $nbuser, 'recette_de_la_journee' => $recette_de_la_journee, 'dernieres_recette' => $recettes));
+        $queryuser = $em->createQuery(
+                        'SELECT p FROM ApplicationSonataUserBundle:User p
+                         WHERE p.enabled = true
+                         ORDER BY p.createdAt DESC'
+                );
+        $queryuser->setMaxResults(9);
+        $users = $queryuser->getResult();
+        
+        
+        return $this->render('MealSquareCommonBundle:Default:index.html.twig', array(
+            'nbrecette' => $nbrecette,
+            'nbpost' => $nbpost,
+            'nbmedia' => $nbmedia,
+            'articles' => $articles,
+            'nbingredient' => $nbingredient, 
+            'nbuser' => $nbuser,
+            'recette_de_la_journee' => $recette_de_la_journee,
+            'recette_de_la_semaine' => $recette_de_la_semaine,
+            'recette_du_mois' => $recette_du_mois,
+            'recette_classic' => $recette_classic,
+            'recette_selection' => $recette_selection,
+            'new_users' => $users,
+            'dernieres_recette' => $recettes));
     }
 
     

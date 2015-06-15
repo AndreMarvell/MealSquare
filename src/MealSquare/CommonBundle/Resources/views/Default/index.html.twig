@@ -25,189 +25,208 @@
                             <!--entries-->
                             {{ include( 'MealSquareCommonBundle:Default:recettejournee.html.twig') }}
                             <!--//entries-->
-                                </div>
-                                <!--//cwrap-->
-
-                                <!--cwrap-->
-                                <div class="cwrap">
-                                    <header class="s-title">
-                                        <h2 class="ribbon bright">{{ 'recettes.last_recette'|trans({},'messages') }}</h2>
-                                    </header>
-
-                                    <!--entries-->
-                                    <div class="entries row">
-                                        {% for recette in dernieres_recette %}
-                                            <!--item-->
-                                            <div class="entry one-third wow fadeInLeft">
-                                                <figure>
-                                                    {% thumbnail recette.image, 'square' with {'width':'100%','height':'auto'} %}
-                                                    <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
-                                                </figure>
-                                                <div class="container">
-                                                    <h2><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{recette.Titre | slice (0, 20)}}{% if recette.Titre|length > 20 %} ...{% endif %}</a></h2> 
-                                                    <div class="actions">
-                                                        <div>
-                                                            <div class="difficulty"><i class="ico i-medium"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}" style="font-size: 11px">{{recette.Difficulte}}</a></div>
-                                                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and recette.auteur is not null and app.user is not null and app.user.id == recette.auteur.id %}
-                                                                <div class="edit"><a href="{{ path('meal_square_recette_edit',{'id':recette.id}) }}"><i class="ico fa fa-edit"></i></a></div>   
-                                                                    {% endif %}
-                                                            <div class="likes"><i class="ico i-likes"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.like.numLikes }}</a></div>
-                                                            <div class="rates"><i class="ico fa fa-star"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.note.average }}</a></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--item-->
-                                        {% else %}
-                                            <div class="container">
-                                                <h3> {{ 'common.home.no_recette'|trans({},'messages') }} </h3>
-                                            </div>
-                                        {% endfor %}
-
-                                        <div class="quicklinks">
-                                            <a href="#" class="button">{{ 'common.home.plus_de_recette'|trans }}</a>
-                                            <a href="javascript:void(0)" class="button scroll-to-top">{{ 'common.home.haut'|trans }}</a>
-                                        </div>
-                                    </div>
-                                    <!--//entries-->
-                                </div>
-                                <!--//cwrap-->
-
-                                <!--cwrap-->
-                                <div class="cwrap">
-                                    <header class="s-title">
-                                        <h2 class="ribbon bright">{{ 'common.home.last_articles'|trans }}</h2>
-                                    </header>
-                                    <!--entries-->
-                                    <div class="entries row">
-                                         {% for article in articles %}
-                                        <!--item-->
-                                        <div class="entry one-third wow fadeInLeft">
-                                            <figure>
-                                                {% thumbnail article.image, 'square' with {'width':'100%','height':'auto'} %}
-                                                <figcaption><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}"><i class="ico i-view"></i> <span>{{ 'common.home.voir_article'|trans }}</span></a></figcaption>
-                                            </figure>
-                                            <div class="container">
-                                                <h4><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}">{{article.title | slice (0, 21)}}{% if article.title|length > 21 %} ...{% endif %}</a></h4> 
-                                                <div class="actions">
-                                                    <div>
-                                                        <div class="date"><i class="ico i-date"></i><a href="#">{{ article.createdAt|date("d/m/Y") }}</a></div>
-                                                        <div class="comments"><i class="ico i-comments"></i><a href="#comments">27</a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="excerpt">
-                                                    <p>{{article.abstract| slice (0, 65)}}{% if article.abstract|length > 65 %} ...{% endif %}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--item-->
-                                         {% else %}
-                                            <div class="container">
-                                                <h3> {{ 'common.home.no_article'|trans }} </h3>
-                                            </div>
-                                        {% endfor %}
-                                        <div class="quicklinks">
-                                            <a href="#" class="button">{{ 'common.home.more_articles'|trans }}</a>
-                                            <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
-                                        </div>
-                                    </div>
-                                    <!--//entries-->
-                                </div>
-                                <!--//cwrap-->
-                            </section>
-                            <!--//content-->
-                            <aside class="sidebar one-fourth">
-                                <div class="widget wow fadeInRight">
-                                    <h3>Recipe Categories</h3>
-                                    <ul class="boxed">
-                                        <li class="light"><a href="recipes.html" title="Appetizers"><i class="ico i-appetizers"></i> <span>Apetizers</span></a></li>
-                                        <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-cocktails"></i> <span>Cocktails</span></a></li>
-                                        <li class="dark"><a href="recipes.html" title="Deserts"><i class="ico i-deserts"></i> <span>Deserts</span></a></li>
-
-                                        <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-eggs"></i> <span>Eggs</span></a></li>
-                                        <li class="dark"><a href="recipes.html" title="Equipment"><i class="ico i-equipment"></i> <span>Equipment</span></a></li>
-                                        <li class="light"><a href="recipes.html" title="Events"><i class="ico i-events"></i> <span>Events</span></a></li>
-
-                                        <li class="dark"><a href="recipes.html" title="Fish"><i class="ico i-fish"></i> <span>Fish</span></a></li>
-                                        <li class="light"><a href="recipes.html" title="Ftness"><i class="ico i-fitness"></i> <span>Fitness</span></a></li>
-                                        <li class="medium"><a href="recipes.html" title="Healthy"><i class="ico i-healthy"></i> <span>Healthy</span></a></li>
-
-                                        <li class="light"><a href="recipes.html" title="Asian"><i class="ico i-asian"></i> <span>Asian</span></a></li>
-                                        <li class="medium"><a href="recipes.html" title="Mexican"><i class="ico i-mexican"></i> <span>Mexican</span></a></li>
-                                        <li class="dark"><a href="recipes.html" title="Pizza"><i class="ico i-pizza"></i> <span>Pizza</span></a></li>
-
-                                        <li class="medium"><a href="recipes.html" title="Kids"><i class="ico i-kids"></i> <span>Kids</span></a></li>
-                                        <li class="dark"><a href="recipes.html" title="Meat"><i class="ico i-meat"></i> <span>Meat</span></a></li>
-                                        <li class="light"><a href="recipes.html" title="Snacks"><i class="ico i-snacks"></i> <span>Snacks</span></a></li>
-
-                                        <li class="dark"><a href="recipes.html" title="Salads"><i class="ico i-salads"></i> <span>Salads</span></a></li>
-                                        <li class="light"><a href="recipes.html" title="Storage"><i class="ico i-storage"></i> <span>Storage</span></a></li>
-                                        <li class="medium"><a href="recipes.html" title="Vegetarian"><i class="ico i-vegetarian"></i> <span>Vegetarian</span></a></li>
-                                    </ul>
-                                </div>
-
-                                
-                                <div class="widget members wow fadeInRight" data-wow-delay=".4s">
-                                    <h3>Our members</h3>
-                                    <div id="members-list-options" class="item-options">
-                                        <a href="#">Newest</a>
-                                        <a class="selected" href="#">Active</a>
-                                        <a href="#">Popular</a>
-                                    </div>
-                                    <ul class="boxed">
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Kimberly C.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Alex J.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Denise M.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Jason H.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Jennifer W.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Anabelle Q.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Thomas M.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Michelle S.</span></a></div></li>
-                                        <li><div class="avatar"><a href="my_profile.html"><img src="images/avatar.jpg" alt="" /><span>Bryan A.</span></a></div></li>
-                                    </ul>
-                                </div>
-                            </aside>
                         </div>
-                        <!--//right sidebar-->
-                    </div>  
+                        <!--//cwrap-->
 
-                </main>
-            </body>
-            {% endblock %}
-                {% block script %}
-                    <script> new WOW().init();</script>
-                    <script>
-                        window.dynamicNumbersBound = false;
-                        var wow = new WOW();
-                        WOW.prototype.show = function (box) {
-                            wow.applyStyle(box);
-                            if (typeof box.parentNode !== 'undefined' && hasClass(box.parentNode, 'dynamic-numbers') && !window.dynamicNumbersBound) {
-                                bindDynamicNumbers();
-                                window.dynamicNumbersBound = true;
-                            }
-                            return box.className = "" + box.className + " " + wow.config.animateClass;
-                        };
-                        wow.init();
 
-                        function hasClass(element, cls) {
-                            return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-                        }
+                        <div class="cwrap">
+                            <header class="s-title">
+                                <h2 class="ribbon bright">{{ 'common.home.see_also'|trans }}</h2>
+                            </header>
 
-                        function bindDynamicNumbers() {
-                            $('.dynamic-number').each(function () {
-                                var startNumber = $(this).text();
-                                var endNumber = $(this).data('dnumber');
-                                var dynamicNumberControl = $(this);
+                            <div class="entries row">
+                                {{ include( 'MealSquareCommonBundle:Default:recettedelasemaine.html.twig') }}
+                                {{ include( 'MealSquareCommonBundle:Default:recettedumois.html.twig') }}
+                                {{ include( 'MealSquareCommonBundle:Default:recetteselectionne.html.twig') }}
+                                {{ include( 'MealSquareCommonBundle:Default:recetteclassic.html.twig') }}
+                            </div>
+                        </div>
 
-                                $({numberValue: startNumber}).animate({numberValue: endNumber}, {
-                                    duration: 2000,
-                                    easing: 'swing',
-                                    step: function () {
-                                        $(dynamicNumberControl).text(Math.ceil(this.numberValue));
-                                    }
-                                });
-                            });
-                        }
 
-                    </script>
-                {% endblock %}
+                        <!--cwrap-->
+                        <div class="cwrap">
+                            <header class="s-title">
+                                <h2 class="ribbon bright">{{ 'recettes.last_recette'|trans({},'messages') }}</h2>
+                            </header>
+
+                            <!--entries-->
+                            <div class="entries row">
+                                {% for recette in dernieres_recette %}
+                                    <!--item-->
+                                    <div class="entry one-third wow fadeInLeft">
+                                        <figure>
+                                            {% thumbnail recette.image, 'square' with {'width':'100%','height':'auto'} %}
+                                            <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h2><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{recette.Titre | slice (0, 20)}}{% if recette.Titre|length > 20 %} ...{% endif %}</a></h2> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="difficulty"><i class="ico i-medium"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}" style="font-size: 11px">{{recette.Difficulte}}</a></div>
+                                                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and recette.auteur is not null and app.user is not null and app.user.id == recette.auteur.id %}
+                                                        <div class="edit"><a href="{{ path('meal_square_recette_edit',{'id':recette.id}) }}"><i class="ico fa fa-edit"></i></a></div>   
+                                                            {% endif %}
+                                                    <div class="likes"><i class="ico i-likes"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.like.numLikes }}</a></div>
+                                                    <div class="rates"><i class="ico fa fa-star"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.note.average }}</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+                                {% else %}
+                                    <div class="container">
+                                        <h3> {{ 'common.home.no_recette'|trans({},'messages') }} </h3>
+                                    </div>
+                                {% endfor %}
+
+                                <div class="quicklinks">
+                                    <a href="#" class="button">{{ 'common.home.plus_de_recette'|trans }}</a>
+                                    <a href="javascript:void(0)" class="button scroll-to-top">{{ 'common.home.haut'|trans }}</a>
+                                </div>
+                            </div>
+                            <!--//entries-->
+                        </div>
+                        <!--//cwrap-->
+
+                        <!--cwrap-->
+                        <div class="cwrap">
+                            <header class="s-title">
+                                <h2 class="ribbon bright">{{ 'common.home.last_articles'|trans }}</h2>
+                            </header>
+                            <!--entries-->
+                            <div class="entries row">
+                                {% for article in articles %}
+                                    <!--item-->
+                                    <div class="entry one-third wow fadeInLeft">
+                                        <figure>
+                                            {% thumbnail article.image, 'square' with {'width':'100%','height':'auto'} %}
+                                            <figcaption><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}"><i class="ico i-view"></i> <span>{{ 'common.home.voir_article'|trans }}</span></a></figcaption>
+                                        </figure>
+                                        <div class="container">
+                                            <h4><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}">{{article.title | slice (0, 21)}}{% if article.title|length > 21 %} ...{% endif %}</a></h4> 
+                                            <div class="actions">
+                                                <div>
+                                                    <div class="date"><i class="ico i-date"></i><a href="#">{{ article.createdAt|date("d/m/Y") }}</a></div>
+                                                    <div class="comments"><i class="ico i-comments"></i><a href="#comments">27</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="excerpt">
+                                                <p>{{article.abstract| slice (0, 65)}}{% if article.abstract|length > 65 %} ...{% endif %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--item-->
+                                {% else %}
+                                    <div class="container">
+                                        <h3> {{ 'common.home.no_article'|trans }} </h3>
+                                    </div>
+                                {% endfor %}
+                                <div class="quicklinks">
+                                    <a href="#" class="button">{{ 'common.home.more_articles'|trans }}</a>
+                                    <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
+                                </div>
+                            </div>
+                            <!--//entries-->
+                        </div>
+                        <!--//cwrap-->
+                    </section>
+                    <!--//content-->
+                    <aside class="sidebar one-fourth">
+                        <div class="widget wow fadeInRight">
+                            <h3>Recipe Categories</h3>
+                            <ul class="boxed">
+                                <li class="light"><a href="recipes.html" title="Appetizers"><i class="ico i-appetizers"></i> <span>Apetizers</span></a></li>
+                                <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-cocktails"></i> <span>Cocktails</span></a></li>
+                                <li class="dark"><a href="recipes.html" title="Deserts"><i class="ico i-deserts"></i> <span>Deserts</span></a></li>
+
+                                <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-eggs"></i> <span>Eggs</span></a></li>
+                                <li class="dark"><a href="recipes.html" title="Equipment"><i class="ico i-equipment"></i> <span>Equipment</span></a></li>
+                                <li class="light"><a href="recipes.html" title="Events"><i class="ico i-events"></i> <span>Events</span></a></li>
+
+                                <li class="dark"><a href="recipes.html" title="Fish"><i class="ico i-fish"></i> <span>Fish</span></a></li>
+                                <li class="light"><a href="recipes.html" title="Ftness"><i class="ico i-fitness"></i> <span>Fitness</span></a></li>
+                                <li class="medium"><a href="recipes.html" title="Healthy"><i class="ico i-healthy"></i> <span>Healthy</span></a></li>
+
+                                <li class="light"><a href="recipes.html" title="Asian"><i class="ico i-asian"></i> <span>Asian</span></a></li>
+                                <li class="medium"><a href="recipes.html" title="Mexican"><i class="ico i-mexican"></i> <span>Mexican</span></a></li>
+                                <li class="dark"><a href="recipes.html" title="Pizza"><i class="ico i-pizza"></i> <span>Pizza</span></a></li>
+
+                                <li class="medium"><a href="recipes.html" title="Kids"><i class="ico i-kids"></i> <span>Kids</span></a></li>
+                                <li class="dark"><a href="recipes.html" title="Meat"><i class="ico i-meat"></i> <span>Meat</span></a></li>
+                                <li class="light"><a href="recipes.html" title="Snacks"><i class="ico i-snacks"></i> <span>Snacks</span></a></li>
+
+                                <li class="dark"><a href="recipes.html" title="Salads"><i class="ico i-salads"></i> <span>Salads</span></a></li>
+                                <li class="light"><a href="recipes.html" title="Storage"><i class="ico i-storage"></i> <span>Storage</span></a></li>
+                                <li class="medium"><a href="recipes.html" title="Vegetarian"><i class="ico i-vegetarian"></i> <span>Vegetarian</span></a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class="widget members wow fadeInRight" data-wow-delay=".4s">
+                            <h3>{{ 'common.home.our_members'|trans }} </h3>
+                            <div id="members-list-options" class="item-options">
+                                <a class="selected" href="javascript:void(0)">{{ 'common.home.newest'|trans }}</a>
+{#                                <a href="#">Active</a>#}
+{#                                <a href="#">Popular</a>#}
+                            </div>
+                            <ul class="boxed">
+                                {% for user in new_users %}
+                                    <li><div class="avatar">
+                                        <a href="#">
+                                        {% thumbnail user.avatar, 'square' with {'width':'100%','height':'auto'} %}
+                                        <span>{{user.username}}</span>
+                                        </a>
+                                        </div>
+                                    </li>
+                                {% else %}
+                                    <div class="container">
+                                        <li><h3> {{ 'common.home.no_user'|trans }} </h3></li>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+                <!--//right sidebar-->
+            </div>  
+
+        </main>
+    </body>
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+    <script>
+        window.dynamicNumbersBound = false;
+        var wow = new WOW();
+        WOW.prototype.show = function (box) {
+            wow.applyStyle(box);
+            if (typeof box.parentNode !== 'undefined' && hasClass(box.parentNode, 'dynamic-numbers') && !window.dynamicNumbersBound) {
+                bindDynamicNumbers();
+                window.dynamicNumbersBound = true;
+            }
+            return box.className = "" + box.className + " " + wow.config.animateClass;
+        };
+        wow.init();
+
+        function hasClass(element, cls) {
+            return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+        }
+
+        function bindDynamicNumbers() {
+            $('.dynamic-number').each(function () {
+                var startNumber = $(this).text();
+                var endNumber = $(this).data('dnumber');
+                var dynamicNumberControl = $(this);
+
+                $({numberValue: startNumber}).animate({numberValue: endNumber}, {
+                    duration: 2000,
+                    easing: 'swing',
+                    step: function () {
+                        $(dynamicNumberControl).text(Math.ceil(this.numberValue));
+                    }
+                });
+            });
+        }
+
+    </script>
+{% endblock %}

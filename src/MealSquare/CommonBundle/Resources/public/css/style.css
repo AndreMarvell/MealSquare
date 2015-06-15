@@ -245,6 +245,7 @@ tr:nth-child(2n+1) td{background:#f6f6f6;}
 
 .featured		{float:left;max-width:100%;position:relative;}
 h2.ribbon 		{background:url(../images/bgr/ribbons.png) -216px -61px no-repeat;padding:0 !important;width:189px;height:44px;text-align:center;font-size:16px;line-height:40px;font-weight:700;color:#fff !important;position:absolute;top:20px;left:35px;z-index:9999;display:inline-block;overflow:hidden;margin:0 0 30px;max-width:100%;}
+h3.ribbon 		{background:url(../images/bgr/ribbons.png) -216px -61px no-repeat;padding:0 !important;width:189px;height:44px;text-align:center;font-size:13px;line-height:40px;font-weight:700;color:#fff !important;position:absolute;top:20px;left:35px;z-index:9999;display:inline-block;overflow:hidden;margin:0 0 30px;max-width:100%;}
 h2.star			{background-position:-408px -61px;width:50px;height:60px;text-indent:-99999px;top:0;}
 h2.bright		{background-position:0 -60px;width:210px;height:45px;position:static;font-size:15px;line-height:43px;font-weight:600;margin:0 0 26px;}
 h2.large		{background-position:0 0;width:572px;height:58px;position:static;font-size:27px;line-height:56px;font-weight:600;max-width:100%;}

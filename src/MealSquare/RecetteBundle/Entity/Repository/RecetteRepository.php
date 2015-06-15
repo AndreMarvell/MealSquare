@@ -85,6 +85,41 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getQuery()->getResult();
     }
     
+    public function getWeekRecipe() {
+ 
+        $query = $this->createQueryBuilder('a');
+        $query->where('a.recetteDeLaSemaine =  true ');
+        $query->andWhere('a.visibilite = true');
+        return $query->getQuery()->getResult();
+    }
+    
+    public function getMonthRecipe() {
+ 
+        $query = $this->createQueryBuilder('a');
+        $query->where('a.recetteDuMois =  true ');
+        $query->andWhere('a.visibilite = true');
+        return $query->getQuery()->getResult();
+    }
+    
+     public function getSelectedRecipe() {
+ 
+        $query = $this->createQueryBuilder('a');
+        $query->where('a.selection =  true ');
+        $query->andWhere('a.visibilite = true');
+        return $query->getQuery()->getResult();
+    }
+    
+     public function getMoreRatedRecipe() {
+
+    }
+    
+    public function getClassicRecipe() {
+ 
+        $query = $this->createQueryBuilder('a');
+        $query->where('a.classique =  true ');
+        $query->andWhere('a.visibilite = true');
+        return $query->getQuery()->getResult();
+    }
      public function getNewAddRecipe() {
  
         return $this->createQueryBuilder('l')

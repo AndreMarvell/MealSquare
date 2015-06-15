@@ -105,8 +105,8 @@ common:
         utilisateurs : Utilisateurs
         postes : Postes
         media: Photos
-        intro : est une communauté de recette de cuisine où les recettes viennent à la vie. Vous voulez savoir ce que vous allez gagner à nous rejoindre? 
-        intro_part2 : Vous pourrez gagner des prix exceptionnels, se faire de nouveaux amis et partager de délicieuses recettes.
+        intro : text 1
+        intro_part2 : text 2
         mealsquare : MealSquare
         nous_rejoindre : Nous rejoindre !
         deja_membre : Déjà membre ? cliquer 
@@ -119,6 +119,18 @@ common:
         last_articles : Les derniers articles
         more_articles : Voir plus d'article
         no_article : Aucun article disponible
+        no_user : Pas d'utilisateur
         no_recette : Aucune recette disponible
+        no_recetteofweek : Desolé, Nous n'avons pas encore sélectionné la recette de la semaine
+        no_recetteofmonth : Desolé, Nous n'avons pas encore sélectionné la recette du mois
+        no_recetteselectionne : Desolé, Nous n'avons pas encore sélectionné de recette
         voir_article : Voir Article
-        
+        see_also : Voir aussi
+        our_members : Nos Membres
+        newest : Nouveau
+        recetteofweek : Recette de la semaine
+        recetteofmonth : Recette du mois
+        recetteselectionne : Notre sélection
+        recetteclassic : Le grand classic
+        no_recetteclassic : Desolé, Nous n'avons pas encore sélectionné le grand classic
+        recetterate : La plus noté
