@@ -23,3 +23,9 @@ services:
         arguments: [~, MealSquare\RecetteBundle\Entity\Ingredient, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Ingredient}
+
+    mealsquare.admin.raccourci:
+        class: MealSquare\RecetteBundle\Admin\RaccourciAdmin
+        arguments: [~, MealSquare\RecetteBundle\Entity\Raccourci, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Raccourci}

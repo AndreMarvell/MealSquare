@@ -14,17 +14,40 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class RecetteController extends Controller {
 
     public function listAction(Request $request) {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT a FROM MealSquareRecetteBundle:Recette a";
-        $query = $em->createQuery($dql);
+        $em         = $this->get('doctrine.orm.entity_manager');
+        $dql        = "SELECT a FROM MealSquareRecetteBundle:Recette a";
+        $query      = $em->createQuery($dql);
 
-        $paginator = $this->get('knp_paginator');
+        $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
                 $query, $request->query->get('page', 1)/* page number */, 20/* limit per page */
         );
+        $raccourcis = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Raccourci")->findBy(array('actif'=>true));
 
         // parameters to template
-        return $this->render('MealSquareRecetteBundle:Recette:list.html.twig', array('pagination' => $pagination));
+        return $this->render('MealSquareRecetteBundle:Recette:list.html.twig', array(
+            'pagination' => $pagination,
+            'raccourcis' => $raccourcis
+        ));
+    }
+    
+    public function raccourciAction($id, $slug) {
+        $raccourci     = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Raccourci")->find($id);
+        if(is_null($raccourci)){
+            throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
+        }else{
+            $recettes       = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Recette")->findRecipesByRaccourci($raccourci->getData());
+            $raccourcis     = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Raccourci")->findBy(array('actif'=>true));
+            $paginator      = $this->get('knp_paginator');
+            $pagination     = $paginator->paginate($recettes, $this->get('request')->query->get('page', 1), 20);
+
+            // parameters to template
+            return $this->render('MealSquareRecetteBundle:Recette:list.html.twig', array(
+                'pagination' => $pagination,
+                'current_raccourci'=>$raccourci,
+                'raccourcis'=>$raccourcis
+            ));
+        }
     }
 
     public function showAction($id) {
@@ -145,6 +168,7 @@ class RecetteController extends Controller {
                 throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
         }else{
             
+            $recette->getSpecialiteSaisonDifficulteIndex();
             $form = $this->createForm(new RecetteEditType(), $recette);
 
             $form->handleRequest($this->getRequest());
@@ -252,6 +276,7 @@ class RecetteController extends Controller {
             $isVersion  = (!is_null($recette->getAuteur()) && $usr->getId() == $recette->getAuteur()->getId());
             $clone      = $recette->copy();
             
+            $clone->getSpecialiteSaisonDifficulteIndex();
             $form = $this->createForm(new RecetteEditType(), $clone);
 
             $form->handleRequest($this->getRequest());

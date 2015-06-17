@@ -46,6 +46,10 @@ meal_square_recette_clone:
     path:     /recette/clone/{id}
     defaults: { _controller: MealSquareRecetteBundle:Recette:clone }
     
+meal_square_recette_raccourci:
+    path:     /recette/raccourci/{id}-{slug}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:raccourci }
+    
 meal_square_recette_search:
     path:     /search/
     defaults: { _controller: MealSquareRecetteBundle:Recherche:find }    

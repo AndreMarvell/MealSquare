@@ -73,6 +73,7 @@ class DefaultController extends Controller {
         $queryuser->setMaxResults(9);
         $users = $queryuser->getResult();
         
+        $raccourcis = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Raccourci")->findBy(array('actif'=>true));
         
         return $this->render('MealSquareCommonBundle:Default:index.html.twig', array(
             'nbrecette' => $nbrecette,
@@ -87,7 +88,9 @@ class DefaultController extends Controller {
             'recette_classic' => $recette_classic,
             'recette_selection' => $recette_selection,
             'new_users' => $users,
-            'dernieres_recette' => $recettes));
+            'dernieres_recette' => $recettes,
+            'raccourcis' => $raccourcis
+        ));
     }
 
     
