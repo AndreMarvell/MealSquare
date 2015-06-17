@@ -44,6 +44,31 @@ class ProfileFOSUser1Controller extends BaseController
             'blocks' => $this->container->getParameter('sonata.user.configuration.profile_blocks')
         ));
     }
+    
+    /**
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     */
+    public function otherAction($id)
+    {
+        $userRepository     = $this->getDoctrine()->getRepository("ApplicationSonataUserBundle:User");
+        $member             = $userRepository->find($id);
+        
+        if(is_null($member)){
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException("Profil not found");
+        }else{
+            
+            $recetteRepository  = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Recette");
+            $recettes           = $recetteRepository->findByAuteur($member);
+
+            return $this->render('SonataUserBundle:Profile:show_other.html.twig', array(
+                'membre'   => $member,
+                'recettes' => $recettes,
+                'blocks' => $this->container->getParameter('sonata.user.configuration.profile_blocks')
+            ));
+        }
+    }
 
 
 //    /**

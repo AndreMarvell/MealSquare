@@ -5,6 +5,12 @@
 {% block title %}
     {% if edit is defined %}
         {{ 'form.edit.title'|trans({},'messages') }} - {{ parent() }}
+    {% elseif isVersion is defined %}
+        {% if isVersion %}
+            {{ 'form.version.title'|trans({},'messages') }} - {{ parent() }}
+        {% else %}
+            {{ 'form.variante.title'|trans({},'messages') }} - {{ parent() }}
+        {% endif %}
     {% else %}
         {{ 'recettes.add'|trans({},'messages') }} - {{ parent() }}
     {% endif %}
@@ -23,7 +29,15 @@
                     {% if edit is defined %}
                         <li>{{ 'form.edit.title'|trans({},'messages') }}</li>
                     {% else %}
-                        <li>{{ 'recettes.add'|trans({},'messages') }}</li>
+                        {% if isVersion is defined %}
+                            {% if isVersion %}
+                                <li>{{ 'form.version.title'|trans({},'messages') }}</li>
+                            {% else %}
+                                <li>{{ 'form.variante.title'|trans({},'messages') }}</li>
+                            {% endif %}
+                        {% else %}
+                            <li>{{ 'recettes.add'|trans({},'messages') }}</li>
+                        {% endif %}
                     {% endif %}
                     
                 </ul>
@@ -36,7 +50,15 @@
                     {% if edit is defined %}
                         <h1>{{ 'form.edit.title'|trans({},'messages') }}</h1>
                     {% else %}
-                        <h1>{{ 'recettes.add'|trans({},'messages') }}</h1>
+                        {% if isVersion is defined %}
+                            {% if isVersion %}
+                                <h1>{{ 'form.version.title'|trans({},'messages') }}</h1>
+                            {% else %}
+                                <h1>{{ 'form.variante.title'|trans({},'messages') }}</h1>
+                            {% endif %}
+                        {% else %}
+                            <h1>{{ 'recettes.add'|trans({},'messages') }}</h1>
+                        {% endif %}
                     {% endif %}
                 </header>
 
@@ -108,7 +130,7 @@
 
                                 <section>
                                     <h2>{{ 'form.add.photo'|trans({},'messages') }}</h2>
-                                    {% if edit is defined %}
+                                    {% if edit is defined or isVersion is defined %}
                                         <div class="f-row" style="text-align: center">
                                             {% thumbnail form.vars.value.image, 'admin' with {'style':'border:3px solid rgb(181, 181, 181)'} %}
                                         </div>

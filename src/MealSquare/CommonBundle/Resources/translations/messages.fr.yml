@@ -103,17 +103,18 @@ common:
         ingredients : Ingrédients
         recettes : Recettes
         utilisateurs : Utilisateurs
-        postes : Postes
+        postes : Articles
         media: Photos
-        intro : text 1
-        intro_part2 : text 2
-        mealsquare : MealSquare
+        intro : est une encyclopédie communtautaire centrée autour des recettes de cuisines
+        intro_part2 : Dès aujourd'hui, oubliez l'ensemble de vos livres de cuisine, et optez pour une bibliothèque culinaire numérique.
+        mealsquare : MealSquare 
         nous_rejoindre : Nous rejoindre !
         deja_membre : Déjà membre ? cliquer 
         ici : ici
         pour_connecter : pour vous connecter
         membre: Membres
-        recette_de_la_journee : Recette de la journée
+        profil : Consulter votre profil
+        recette_de_la_journee : Recette du jour
         plus_de_recette : Plus de recettes
         haut : Retour Haut de la page
         last_articles : Les derniers articles
@@ -130,7 +131,7 @@ common:
         newest : Nouveau
         recetteofweek : Recette de la semaine
         recetteofmonth : Recette du mois
-        recetteselectionne : Notre sélection
+        recetteselection : Notre sélection
         recetteclassic : Le grand classic
         no_recetteclassic : Desolé, Nous n'avons pas encore sélectionné le grand classic
         recetterate : La plus noté

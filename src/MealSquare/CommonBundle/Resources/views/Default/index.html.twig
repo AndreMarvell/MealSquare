@@ -13,11 +13,9 @@
             <div class="wrap clearfix">
                 <!--row-->
                 <div class="row">
-
                     <!--bloc stat -->
                     {{ include( 'MealSquareCommonBundle:Default:statistique.html.twig') }}
                     <!--//bloc stat-->
-
                     <!--content-->
                     <section class="content three-fourth">
                         <!--cwrap-->
@@ -35,10 +33,9 @@
                             </header>
 
                             <div class="entries row">
-                                {{ include( 'MealSquareCommonBundle:Default:recettedelasemaine.html.twig') }}
-                                {{ include( 'MealSquareCommonBundle:Default:recettedumois.html.twig') }}
-                                {{ include( 'MealSquareCommonBundle:Default:recetteselectionne.html.twig') }}
-                                {{ include( 'MealSquareCommonBundle:Default:recetteclassic.html.twig') }}
+                                {{ include( 'MealSquareCommonBundle:Default:featured_recipe.html.twig', { 'recette': recette_du_mois, 'label': 'common.home.recetteofmonth'|trans({},'messages') }) }}
+                                {{ include( 'MealSquareCommonBundle:Default:featured_recipe.html.twig', { 'recette': recette_selection, 'label': 'common.home.recetteselection'|trans({},'messages') }) }}
+                                {{ include( 'MealSquareCommonBundle:Default:featured_recipe.html.twig', { 'recette': recette_classic, 'label': 'common.home.recetteclassic'|trans({},'messages') }) }}
                             </div>
                         </div>
 
@@ -48,7 +45,6 @@
                             <header class="s-title">
                                 <h2 class="ribbon bright">{{ 'recettes.last_recette'|trans({},'messages') }}</h2>
                             </header>
-
                             <!--entries-->
                             <div class="entries row">
                                 {% for recette in dernieres_recette %}
@@ -80,7 +76,7 @@
                                 {% endfor %}
 
                                 <div class="quicklinks">
-                                    <a href="#" class="button">{{ 'common.home.plus_de_recette'|trans }}</a>
+                                    <a href="{{ path('meal_square_recette_list')}}" class="button">{{ 'common.home.plus_de_recette'|trans }}</a>
                                     <a href="javascript:void(0)" class="button scroll-to-top">{{ 'common.home.haut'|trans }}</a>
                                 </div>
                             </div>
@@ -103,15 +99,12 @@
                                             <figcaption><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}"><i class="ico i-view"></i> <span>{{ 'common.home.voir_article'|trans }}</span></a></figcaption>
                                         </figure>
                                         <div class="container">
-                                            <h4><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}">{{article.title | slice (0, 21)}}{% if article.title|length > 21 %} ...{% endif %}</a></h4> 
+                                            <h5><a href="{{ url('sonata_news_view', { 'permalink': sonata_news_permalink(article) }) }}">{{article.title | slice (0, 26)}}{% if article.title|length > 26 %} ...{% endif %}</a></h5> 
                                             <div class="actions">
                                                 <div>
                                                     <div class="date"><i class="ico i-date"></i><a href="#">{{ article.createdAt|date("d/m/Y") }}</a></div>
-                                                    <div class="comments"><i class="ico i-comments"></i><a href="#comments">27</a></div>
+                                                    <div class="author"><i class="fa fa-user"></i>&nbsp;&nbsp;<a href="#comments">{{article.author.username}}</a></div>
                                                 </div>
-                                            </div>
-                                            <div class="excerpt">
-                                                <p>{{article.abstract| slice (0, 65)}}{% if article.abstract|length > 65 %} ...{% endif %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +115,8 @@
                                     </div>
                                 {% endfor %}
                                 <div class="quicklinks">
-                                    <a href="#" class="button">{{ 'common.home.more_articles'|trans }}</a>
-                                    <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
+                                    <a href="{{ path('sonata_news_archive')}}" class="button">{{ 'common.home.more_articles'|trans }}</a>
+                                    <a href="javascript:void(0)" class="button scroll-to-top">{{ 'common.home.haut'|trans }}</a>
                                 </div>
                             </div>
                             <!--//entries-->
@@ -172,10 +165,18 @@
                             <ul class="boxed">
                                 {% for user in new_users %}
                                     <li><div class="avatar">
-                                        <a href="#">
-                                        {% thumbnail user.avatar, 'square' with {'width':'100%','height':'auto'} %}
-                                        <span>{{user.username}}</span>
-                                        </a>
+                                        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") or app.user is null or app.user.id != user.id %}
+                                           <a class="ajax-popup-link" href="{{ path('meal_square_member_profil',{ 'id':user.id }) }}">
+                                                {% thumbnail user.avatar, 'square' with {'width':'100%','height':'auto'} %}
+                                                <span style="font-size: 10px">{{user.username}}</span>
+                                           </a> 
+                                        {% else %}
+                                            <a href="{{ path('fos_user_profile_show') }}">
+                                                {% thumbnail user.avatar, 'square' with {'width':'100%','height':'auto'} %}
+                                                <span style="font-size: 10px">{{user.username}}</span>
+                                           </a>    
+                                        {% endif %}
+                                        
                                         </div>
                                     </li>
                                 {% else %}
@@ -196,6 +197,15 @@
 {% block script %}
     <script> new WOW().init();</script>
     <script>
+        
+        $('.ajax-popup-link').magnificPopup({
+            closeBtnInside: true,
+            closeOnBgClick: true,
+            showCloseBtn: true,
+            midClick: true,
+            type: 'ajax'
+          });
+        
         window.dynamicNumbersBound = false;
         var wow = new WOW();
         WOW.prototype.show = function (box) {

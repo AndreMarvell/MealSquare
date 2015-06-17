@@ -29,7 +29,7 @@ sonata_media:
                 small: { width: 150 , quality: 95}
                 big:   { width: 500 , quality: 90}
                 wide:   { width: 800 , quality: 90}
-                square: { width: 100, height: 100 , quality: 80}
+                square: { width: 270, height: 270 , quality: 90}
                 
         recette:
             providers:

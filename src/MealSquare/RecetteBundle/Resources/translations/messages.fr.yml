@@ -4,6 +4,10 @@ ingredients:
     detail: Détail sur l'ingrédient
     sortby: Trier par
     no: Il n'y a aucun ingrédient disponible
+    videos: Techniques en vidéo
+    recettes: Recettes à base de 
+    no_techniques: Aucune technique en vidéo pour cet ingrédient
+    video_detail: Lire la vidéo
 
 recettes:
     ingredients : Liste des ingrédients de la recette
@@ -61,6 +65,7 @@ recettes:
     search_ingredients_instruction: Cliquez sur ‘-’ pour retirer ingredient, ou ajoutez en grâce au bouton en dessous
     search:
         nbResults: résultat(s) trouvé(s)
+    print: Imprimer la recette
     
 form:
     add:
@@ -98,6 +103,12 @@ form:
         
     edit:
         title: Editer une recette
+
+    version:
+        title: Version de recette
+        action: Créer une autre version de cette recette
         
-        
+    variante:
+        title: Variante de recette
+        action: Créer une variante de cette recette         
         

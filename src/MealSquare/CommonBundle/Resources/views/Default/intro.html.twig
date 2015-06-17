@@ -11,12 +11,20 @@
         <!--row-->
         <div class="row">
             <article class="three-fourth text wow zoomIn animated" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; -webkit-animation-delay: 0.2s; animation-name: zoomIn; -webkit-animation-name: zoomIn;">
-                <h1>{{ 'common.home.bienvenu'|trans }}</h1>
+                <h1>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        Bonjour {{ app.user.username }} !<br>
+                    {% endif %}
+                    {{ 'common.home.bienvenu'|trans }}
+                </h1>
                 <p><strong>{{ 'common.home.mealsquare'|trans }}</strong> {{ 'common.home.intro'|trans }}</p>
                 <p>{{ 'common.home.intro_part2'|trans }}</p>
-                <p>
-                    <a href="{{ path('sonata_user_registration_register') }}" class="button white more medium">{{ 'common.home.nous_rejoindre'|trans }}</a>
-                    {{ 'common.home.deja_membre'|trans }} <a href="{{ path('sonata_user_profile_show') }}"> {{ 'common.home.ici'|trans }}</a> {{ 'common.home.pour_connecter'|trans }}.</p>
+                {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <p><a href="{{ path('sonata_user_registration_register') }}" class="button white more medium">{{ 'common.home.nous_rejoindre'|trans }}</a></p>
+                    <p>{{ 'common.home.deja_membre'|trans }} <a href="{{ path('sonata_user_security_login') }}"> {{ 'common.home.ici'|trans }}</a> {{ 'common.home.pour_connecter'|trans }}.</p>
+                {% else %}
+                    <p><a href="{{ path('sonata_user_profile_show') }}" class="button white more medium">{{ 'common.home.profil'|trans }}</a></p>
+                {% endif %}
             </article>
 
             <!--search recipes widget-->

@@ -24,14 +24,17 @@ class IngredientController extends Controller {
     }
 
     public function showAction($id) {
-        $repository = $this->getDoctrine()
-                ->getRepository("MealSquareRecetteBundle:Ingredient");
+        $repository = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Ingredient");
         $ingredient = $repository->findOneById($id);
         
         if(is_null($ingredient)){
                 throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
         }else{
-            return $this->render('MealSquareRecetteBundle:Ingredient:show.html.twig', array('ingredient' => $ingredient));
+            $recettes   = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Recette")->findByIngredient($ingredient->getLibelle());
+            return $this->render('MealSquareRecetteBundle:Ingredient:show.html.twig', array(
+                'ingredient' => $ingredient,
+                'recettes' => $recettes
+            ));
         }
     }
 

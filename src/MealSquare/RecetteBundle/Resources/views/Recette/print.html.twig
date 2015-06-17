@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+            {{recette.titre}}  - MealSquare
+        </title>
+        
+    </head>
+    <body>
+        <main class="row main" role="main">
+            <!--//breadcrumbs-->
+            <div class="wrap clearfix">
+                <!--row-->
+                <div class="row">
+                    <h3>{{recette.titre}}</h3>
+                    <!--content-->
+                    <section class="content">
+                        <!--recipe-->
+                        <div class="recipe">
+                            <div class="row">
+                                <!--two-third-->
+                                <article class="two-third wow fadeInLeft">
+                                    <div class="image">{% thumbnail recette.image,'square' %}</div>
+                                    <div class="intro">
+                                        {% if recette.description is not null %}
+                                            <p><strong>{{ 'form.add.description_text'|trans({},'messages') }}</strong></p> 
+                                            <p>{{ recette.description }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <h3>Informations sur la recette</h3>
+                                    <ul class="basic">
+                                        <li>{{ 'recettes.preparation_time'|trans({},'messages') }} : {{recette.getTempsPreparation()}} min</li>
+                                        <li>{{ 'recettes.coocking_time'|trans({},'messages') }} : {{recette.getTempsCuisson()}} min</li>
+                                        <li>{{ 'recettes.difficulty'|trans({},'messages') }} : {{recette.getDifficulte()}}</li>
+                                        <li>{{ 'recettes.serves'|trans({},'messages') }} : {{recette.getNbPersonne()}}</li>
+                                        <li>{{ 'recettes.saison'|trans({},'messages') }} : {{recette.getSaison()}}</li>
+                                        <li>{{ 'recettes.speciality'|trans({},'messages') }} : {{recette.getSpecialite() |slice(0, 13)}}...</li>
+                                        <li>{{ 'recettes.category'|trans({},'messages') }} : {{recette.getCategorie()}}</li>
+                                        <li>{{ 'recettes.source'|trans({},'messages') }} : {{recette.getSource()}}</li>
+                                    </ul>
+
+                                    {% if recette.isIngredientsFormatted %}
+                                        <ul class="ingredients">
+                                            {% for ingr in recette.ingredients %}
+                                                <li>{{ingr.quantite}} : {{ingr.ingredient.libelle}}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="widget">
+                                            <h3>{{ 'recettes.ingredient_small_title'|trans({},'messages') }}</h3>
+                                            <ul class=" ingredient-non-formatted">
+                                                {{ recette.fullIngredients | raw }}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                    <div class="instructions">
+                                        <h3>Etapes</h3>
+                                        <ol>
+                                            {% for block in recette.getRecetteBlocks() %}
+                                                <li>{{ block.description | raw }}</li>
+                                                {% endfor %}    
+                                        </ol>
+                                    </div>
+                                </article>
+                                <!--//two-third-->
+                            </div>
+                        </div>
+                        <!--//recipe-->
+                    </section>
+                    <!--//content-->
+                </div>
+                <!--//row-->
+            </div>
+            <!--//wrap-->
+        </main>
+    <!--//main-->
+    {% javascripts '@MealSquareCommonBundle/Resources/public/js/jquery-1.11.1.min.js'%}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(document).ready(function(){
+            window.print();
+       });
+    </script>
+
+    </body>
+</html>

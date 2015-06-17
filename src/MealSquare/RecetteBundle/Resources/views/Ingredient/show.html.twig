@@ -37,10 +37,38 @@
                         <div class="full-width">
                             <div class="container box">
                                 <div class="entry-featured demoanimate wow flash" data-wow-delay=".4s" data-wow-duration="1s" data-wow-offset="300">{% thumbnail ingredient.image,'big' %}</div> 
-                                <h2>{{ingredient.libelle}}</h2>
                                 <p>{{ingredient.description}}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="ribbon bright">{{ 'ingredients.videos'|trans({},'messages')}}</h2>
+                    </div>
+                    <div class="entries row">
+                        {% if ingredient.galerie is not null %} 
+                            {% for galleryHasMedias in ingredient.galerie.GalleryHasMedias %}
+                                {% set technique = galleryHasMedias.media %}
+                                <!--item-->
+                                <div class="entry one-third wow fadeInLeft">
+                                    <figure>
+                                        {% thumbnail technique, 'square' with {'width':'100%','height':'auto'} %}
+                                        <figcaption><a class="video" href="{{technique.providerMetadata.provider_url~'watch?v='~technique.providerReference}}"><i style="margin:28% 0 3px" class="fa fa-play-circle fa-2x"></i> <span>{{ 'ingredients.video_detail'|trans({}, 'messages') }}</span></a></figcaption>
+                                    </figure>
+                                    <div class="container">
+                                        <p>{{technique.name}}</p> 
+                                    </div>
+                                </div>
+                                <!--item-->
+                            {% else %}
+                                <div class="container">
+                                    <h3> {{ 'ingredients.no_techniques'|trans({},'messages') }} </h3>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="container">
+                                <h3> {{ 'ingredients.no_techniques'|trans({},'messages') }} </h3>
+                            </div>
+                        {% endif %}
                     </div>
                 </section>
                 <!--//content-->
@@ -48,20 +76,15 @@
                 <!--right sidebar-->
                 <aside class="sidebar one-fourth">
                     <div class="widget">
-                        <ul class="categories right">
-                            <li><a href="#">All recipes</a></li>
-                            <li class="active"><a href="#">Tips and Tricks</a></li>
-                            <li><a href="#">Events</a></li>
-                            <li><a href="#">Inspiration</a></li>
-                            <li><a href="#">Category name</a></li>
-                            <li><a href="#">Lorem ipsum</a></li>
-                            <li><a href="#">Dolor</a></li>
-                            <li><a href="#">Sit amet</a></li>
+                        <h3>{{ 'ingredients.recettes'|trans({},'messages') ~ ' ' ~ ingredient.libelle }}</h3>
+                        <ul class="variantes-versions">
+                            {% for recette in recettes %}
+                                <li><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{% thumbnail recette.image,'small' with {'width':'32px'} %}
+                                <span>{{recette.titre}}</span></a><div class="clearfix"></div></li>
+                            {% else %}
+                                <li>Aucune recette disponible</li>
+                            {% endfor %}
                         </ul>
-                    </div>
-                    <div class="widget">
-                        <h3>Advertisment</h3>
-                        <a href="#"><img src="images/img.jpg" alt="" /></a>
                     </div>
                 </aside>
                 <!--//right sidebar-->
@@ -74,4 +97,9 @@
 {% endblock %}
 {% block script %}
     <script> new WOW().init();</script>
+    <script>
+        $('.video').magnificPopup({
+            type: 'iframe'
+          });
+    </script>
 {% endblock %}

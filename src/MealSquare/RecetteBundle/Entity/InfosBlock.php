@@ -55,8 +55,18 @@ class InfosBlock
     protected $recette;
     
     
+    public function copy() {
+        $clone = new InfosBlock();
+        
+        $clone->setTitre($this->titre);
+        $clone->setDescription($this->description);
+        $clone->setImage($this->image);
+        $clone->setLien($this->lien);
+        
+        return $clone;
+    }
 
-
+    
     /**
      * Get id
      *

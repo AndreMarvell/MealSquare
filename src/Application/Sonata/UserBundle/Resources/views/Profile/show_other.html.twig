@@ -1,0 +1,79 @@
+
+
+{% block main %}
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+
+            <!--content-->
+            <section class="content" style="float:none;padding: 20px;  background: #DECEB9 url(../../bundles/mealsquarecommon/images/bgr/body.jpg) 0 0 repeat;">
+                    <!--row-->
+                    <div class="row">
+                        <!--profile left part-->
+                        <div class="my_account one-fourth ">
+                            <figure>
+                                
+                                {% if membre.avatar is not null %}
+                                    {% thumbnail membre.avatar, 'square' %}
+                                {% else %}
+                                    {% image '@MealSquareCommonBundle/Resources/public/images/avatar.jpg'  output="images/avatar.jpg" %}
+                                    <img src="{{ asset_url }}" alt="MealSquare User">
+                                    {% endimage %}
+                                {% endif %}
+                            </figure>
+                            <div class="container">
+                                <h2>
+                                    {{ membre.username}}
+                                </h2> 
+                            </div>
+                            <ul class="boxed gold">
+                               {% for badge in membre.badges %}
+                                   <li class="medium"><a href="#badges" title="{{ badge.nom }}"><i class="ico {{ badge.icone }}"></i> <span>{{ badge.nom|e }}</span></a></li>
+                               {% endfor %}
+
+                           </ul>
+                        </div>
+                        <!--//profile left part-->
+
+                        <div class="three-fourth">
+                            <h2 class="ribbon bright">Ses recettes</h2>
+                            <!--my recipes-->
+                            <div class="tab-content" id="recipes">
+                                <div class="entries row">
+                                    {% for recette in recettes %}
+                                        <!--item-->
+                                        <div class="entry one-fourth">
+                                            <figure>
+                                                {% thumbnail recette.image, 'square' with {'width':'100%','height':'auto'} %}
+                                                <figcaption><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}"><i class="ico i-view"></i> <span>{{ 'recettes.detail'|trans({}, 'messages') }}</span></a></figcaption>
+                                            </figure>
+                                            <div class="container">
+                                                <h4 style="font-size: 12px; font-weight: 500; padding: 8px 0;"><a style="color: #666;" href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{recette.Titre | slice (0, 25)}}</a></h4> 
+                                                <div class="actions">
+                                                    <div>
+                                                        <div class="likes"><i class="ico i-likes"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.like.numLikes }}</a></div>
+                                                        <div class="rates"><i class="ico fa fa-star"></i><a href="{{ path('meal_square_recette_show',{'id':recette.id}) }}">{{ recette.note.average }}</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--item-->
+                                    {% else %}
+                                        <div class="container">{{ member.username }} n'a pas encore ajouté de recette</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!--//my recipes-->
+                        </div>
+                    </div>
+                    <!--//row-->
+            </section>
+            
+            <!--//content-->
+        </div>
+        <!--//wrap-->
+    </main>
+{% endblock %}
+
+
+

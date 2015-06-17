@@ -18,6 +18,10 @@ meal_square_recette_show:
     path:     /recette/{id}
     defaults: { _controller: MealSquareRecetteBundle:Recette:show }
 
+meal_square_recette_print:
+    path:     /recette/print/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:print }
+
 meal_square_recette_delete:
     path:     /recette/delete/{id}
     defaults: { _controller: MealSquareRecetteBundle:Recette:delete }
@@ -37,6 +41,10 @@ meal_square_recette_edit:
 meal_square_recette_add:
     path:     /recette/add/
     defaults: { _controller: MealSquareRecetteBundle:Recette:add }
+    
+meal_square_recette_clone:
+    path:     /recette/clone/{id}
+    defaults: { _controller: MealSquareRecetteBundle:Recette:clone }
     
 meal_square_recette_search:
     path:     /search/
@@ -61,3 +69,7 @@ meal_square_ajax_favoris_recette:
     path:     /asynchrone/recette/favoris/
     defaults: { _controller: MealSquareRecetteBundle:Asynchrone:favoris }
     condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+meal_square_member_profil:
+    path:     /profile/membre-{id}
+    defaults: { _controller: ApplicationSonataUserBundle:ProfileFOSUser1:other }

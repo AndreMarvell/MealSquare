@@ -64,6 +64,24 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
         
         return $query->getQuery()->getResult();
     }
+    
+    public function findByIngredient($ingredient) {
+        
+        $query = $this->createQueryBuilder('r');
+        $query->leftJoin('r.like', 'l');
+        $query->leftJoin('r.ingredients', 'iLine');
+        $query->leftJoin('iLine.ingredient', 'i');
+        $query->where(
+            $query->expr()->orX(
+                $query->expr()->like('i.libelle', ':ingredient'),
+                $query->expr()->like('r.full_ingredients', ':ingredient')
+            ));
+        $query->setParameter('ingredient','%'.$ingredient.'%');
+        $query->setMaxResults(10);
+        $query->orderBy("l.numLikes","DESC");
+        
+        return $query->getQuery()->getResult();
+    }
 
     public function getNb() {
  

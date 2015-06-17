@@ -41,6 +41,17 @@ class IngredientRecette
     protected $recette;
 
 
+    public function copy() {
+        
+        $clone = new IngredientRecette();
+        
+        $clone->setQuantite($this->quantite);
+        $clone->setIngredient($this->ingredient);
+        
+        return $clone;
+    }
+
+    
     /**
      * Get id
      *

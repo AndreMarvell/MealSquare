@@ -251,6 +251,38 @@ class Recette
         $this->versions = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+    public function copy(){
+        
+        $copy = new Recette();
+        
+        $copy->setTitre($this->titre);
+        $copy->setSource($this->source);
+        $copy->setSpecialite($this->specialite);
+        $copy->setNbPersonne($this->nbPersonne);
+        $copy->setVisibilite($this->visibilite);
+        $copy->setDifficulte($this->difficulte);
+        $copy->setTempsCuisson($this->tempsCuisson);
+        $copy->setTempsPreparation($this->tempsPreparation);
+        $copy->setPays($this->pays);
+        $copy->setArchive($this->archive);
+        $copy->setSaison($this->saison);
+        $copy->setDescription($this->description);
+        $copy->setImage($this->image);
+        $copy->setCategorie($this->categorie);
+        $copy->setTags($this->tags);
+        $copy->setFullIngredients($this->full_ingredients);
+        
+        foreach ($this->recetteBlocks as $blocks){
+            $copy->addRecetteBlock($blocks->copy());
+        }
+        foreach ($this->ingredients as $ing){
+            $copy->addIngredient($ing->copy());
+        }
+        
+        return $copy;
+    }
+
+    
     /**
      * Creer les entités comment thread
      *
@@ -260,8 +292,7 @@ class Recette
         $this->note = new \MealSquare\RecetteBundle\Entity\Note\RateThread("recette".$this->id);
         $this->like = new \MealSquare\RecetteBundle\Entity\Like\LikeThread("recette".$this->id);
     
-    }
-    
+    }    
     
 
     /**
@@ -1076,4 +1107,22 @@ class Recette
     {
         return $this->recetteDeLaSemaine;
     }
+    
+    function setTags($tags) {
+        $this->tags = $tags;
+    }
+
+    function setRecetteBlocks(\Doctrine\Common\Collections\Collection $recetteBlocks) {
+        $this->recetteBlocks = $recetteBlocks;
+    }
+
+    function setIngredients(\Doctrine\Common\Collections\Collection $ingredients) {
+        $this->ingredients = $ingredients;
+    }
+
+    function setFull_ingredients($full_ingredients) {
+        $this->full_ingredients = $full_ingredients;
+    }
+
+
 }
