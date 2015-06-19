@@ -27,7 +27,7 @@
                     <div class="row">
                         <!--profile left part-->
                         <div class="my_account one-fourth wow fadeInLeft">
-                            <figure>
+                            <figure id="profile-picture">
                                 
                                 {% if app.user.avatar is not null %}
                                     {% thumbnail app.user.avatar, 'square' %}
@@ -36,12 +36,14 @@
                                     <img src="{{ asset_url }}" alt="MealSquare User">
                                     {% endimage %}
                                 {% endif %}
+                                <a class="ajax-popup-link" style="display: none;position:absolute;right: 21px;top: 8px;" href="{{path('meal_square_user_avatar')}}" title="Changez votre photo de profil"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                             </figure>
                             <div class="container">
                                 <h2>
                                     {{ app.user.username}}
                                 </h2> 
                             </div>
+                            
                         </div>
                         <!--//profile left part-->
 
@@ -152,6 +154,22 @@
 {% endblock %}
 {% block script %}
     <script> new WOW().init();</script>
+    <script>
+        $('.ajax-popup-link').magnificPopup({
+            closeBtnInside:true,
+            midClick: true,
+            type: 'ajax'
+          });
+          
+        $('#profile-picture').hover(
+            function () {
+              $('.ajax-popup-link').show();
+            }, 
+            function () {
+              $('.ajax-popup-link').hide();
+            }
+          );
+    </script>
 {% endblock %}
 
 

@@ -101,6 +101,9 @@ form:
         source: Orgine de la recette
         tags: Ajouter des tags à votre recette
         
+    user:
+        avatar: Changez votre photo de profil
+        
     edit:
         title: Editer une recette
 

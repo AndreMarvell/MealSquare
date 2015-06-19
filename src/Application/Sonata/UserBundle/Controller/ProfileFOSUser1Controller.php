@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Model\UserInterface;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
+use Application\Sonata\UserBundle\Form\AvatarType;
 
 /**
  * This class is inspired from the FOS Profile Controller, except :
@@ -43,6 +44,38 @@ class ProfileFOSUser1Controller extends BaseController
             'recettes' => $recettes,
             'blocks' => $this->container->getParameter('sonata.user.configuration.profile_blocks')
         ));
+    }
+    
+    /**
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     */
+    public function avatarAction(){
+        $em = $this->getDoctrine()->getEntityManager();
+        $user= $this->get('security.context')->getToken()->getUser();
+        
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }else{
+            $form = $this->createForm(new AvatarType(), $user);
+
+            $form->handleRequest($this->getRequest());
+
+            if ($form->isValid()) {
+                $user = $form->getData();
+                $em->persist($user);
+                $em->flush();  
+                
+                return $this->redirect( $this->generateUrl('fos_user_profile_show'));
+            }
+
+            return $this->render('ApplicationSonataUserBundle:Profile:avatar.html.twig', array('form' => $form->createView()));
+
+        }
+        
+        
+        
     }
     
     /**

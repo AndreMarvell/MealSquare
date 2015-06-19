@@ -77,3 +77,7 @@ meal_square_ajax_favoris_recette:
 meal_square_member_profil:
     path:     /profile/membre-{id}
     defaults: { _controller: ApplicationSonataUserBundle:ProfileFOSUser1:other }
+    
+meal_square_user_avatar:
+    path:     /profile/avatar
+    defaults: { _controller: ApplicationSonataUserBundle:ProfileFOSUser1:avatar }

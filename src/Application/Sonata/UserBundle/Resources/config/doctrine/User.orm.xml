@@ -25,7 +25,10 @@
         
         
         <one-to-one field="avatar" target-entity="Application\Sonata\MediaBundle\Entity\Media">
-            <cascade><cascade-remove /></cascade>
+            <cascade>
+                <cascade-remove />
+                <cascade-persist/>
+            </cascade>
         </one-to-one>
 
     </entity>
