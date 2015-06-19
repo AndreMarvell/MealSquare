@@ -267,7 +267,6 @@ class Recette
         $copy->setArchive($this->archive);
         $copy->setSaison($this->saison);
         $copy->setDescription($this->description);
-        $copy->setImage($this->image);
         $copy->setCategorie($this->categorie);
         $copy->setTags($this->tags);
         $copy->setFullIngredients($this->full_ingredients);

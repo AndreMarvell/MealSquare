@@ -67,31 +67,16 @@
                 <!--right sidebar-->
                 <aside class="sidebar one-fourth">
                     <div class="widget wow fadeInRight">
-                        <h3>Recipe Categories</h3>
+                        <h3>{{ 'common.home.shortcut'|trans({},'messages') }}</h3>
                         <ul class="boxed">
-                            <li class="light"><a href="recipes.html" title="Appetizers"><i class="ico i-appetizers"></i> <span>Apetizers</span></a></li>
-                            <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-cocktails"></i> <span>Cocktails</span></a></li>
-                            <li class="dark"><a href="recipes.html" title="Deserts"><i class="ico i-deserts"></i> <span>Deserts</span></a></li>
-
-                            <li class="medium"><a href="recipes.html" title="Cocktails"><i class="ico i-eggs"></i> <span>Eggs</span></a></li>
-                            <li class="dark"><a href="recipes.html" title="Equipment"><i class="ico i-equipment"></i> <span>Equipment</span></a></li>
-                            <li class="light"><a href="recipes.html" title="Events"><i class="ico i-events"></i> <span>Events</span></a></li>
-
-                            <li class="dark"><a href="recipes.html" title="Fish"><i class="ico i-fish"></i> <span>Fish</span></a></li>
-                            <li class="light"><a href="recipes.html" title="Ftness"><i class="ico i-fitness"></i> <span>Fitness</span></a></li>
-                            <li class="medium"><a href="recipes.html" title="Healthy"><i class="ico i-healthy"></i> <span>Healthy</span></a></li>
-
-                            <li class="light"><a href="recipes.html" title="Asian"><i class="ico i-asian"></i> <span>Asian</span></a></li>
-                            <li class="medium"><a href="recipes.html" title="Mexican"><i class="ico i-mexican"></i> <span>Mexican</span></a></li>
-                            <li class="dark"><a href="recipes.html" title="Pizza"><i class="ico i-pizza"></i> <span>Pizza</span></a></li>
-
-                            <li class="medium"><a href="recipes.html" title="Kids"><i class="ico i-kids"></i> <span>Kids</span></a></li>
-                            <li class="dark"><a href="recipes.html" title="Meat"><i class="ico i-meat"></i> <span>Meat</span></a></li>
-                            <li class="light"><a href="recipes.html" title="Snacks"><i class="ico i-snacks"></i> <span>Snacks</span></a></li>
-
-                            <li class="dark"><a href="recipes.html" title="Salads"><i class="ico i-salads"></i> <span>Salads</span></a></li>
-                            <li class="light"><a href="recipes.html" title="Storage"><i class="ico i-storage"></i> <span>Storage</span></a></li>
-                            <li class="medium"><a href="recipes.html" title="Vegetarian"><i class="ico i-vegetarian"></i> <span>Vegetarian</span></a></li>
+                            {% for raccourci in raccourcis%}
+                                <li class="{%if loop.index is odd %}light{%else%} medium{%endif%}">
+                                    <a href="{{path('meal_square_recette_raccourci',{'id':raccourci.id, 'slug':raccourci.slug})}}" title="{{raccourci.description}}">
+                                        <i class="{{raccourci.icone}}"></i> 
+                                        <span>{{raccourci.nom}}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </aside>

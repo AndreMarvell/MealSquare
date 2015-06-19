@@ -10,9 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 class IngredientController extends Controller {
 
     public function listAction(Request $request) {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT a FROM MealSquareRecetteBundle:Ingredient a";
-        $query = $em->createQuery($dql);
+//        $em = $this->get('doctrine.orm.entity_manager');
+//        $dql = "SELECT a FROM MealSquareRecetteBundle:Ingredient a";
+//        $query = $em->createQuery($dql);
+        
+        $query = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Ingredient")->findAll();
+        $raccourcis = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Raccourci")->findBy(array('actif'=>true));
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -20,7 +23,10 @@ class IngredientController extends Controller {
         );
 
         // parameters to template
-        return $this->render('MealSquareRecetteBundle:Ingredient:list.html.twig', array('pagination' => $pagination));
+        return $this->render('MealSquareRecetteBundle:Ingredient:list.html.twig', array(
+            'pagination' => $pagination,
+            'raccourcis' => $raccourcis
+        ));
     }
 
     public function showAction($id) {

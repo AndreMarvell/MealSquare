@@ -36,7 +36,7 @@ and open the template in the editor.
 li.link-not-activated a{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
 
 a.link-not-activated{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: rgb(200, 200, 200);}
-
+.ingredient-non-formatted a{pointer-events: none;cursor: default;background-color: whitesmoke !important; color: #000;}
 
 a.isLiker, a.isFavoris{background: rgb(40, 173, 97) !important}
 

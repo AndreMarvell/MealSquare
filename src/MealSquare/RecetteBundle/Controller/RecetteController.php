@@ -276,6 +276,7 @@ class RecetteController extends Controller {
             $isVersion  = (!is_null($recette->getAuteur()) && $usr->getId() == $recette->getAuteur()->getId());
             $clone      = $recette->copy();
             
+            if($isVersion) $clone->setImage($recette->getImage());
             $clone->getSpecialiteSaisonDifficulteIndex();
             $form = $this->createForm(new RecetteEditType(), $clone);
 
