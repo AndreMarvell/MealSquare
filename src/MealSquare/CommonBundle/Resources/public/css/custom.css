@@ -11,10 +11,10 @@ and open the template in the editor.
 .pagination{text-align: center;margin: 0;list-style: none;}
 .pagination li {font-size: smaller;  display: inline-block;  margin-right: 2px;}
 .pagination li span{  color: inherit;  padding: 1px 6px;  border: 1px solid #EEE;  background: white;  display: block;    }
-.pagination li.active span{  color: #fff;  background: #F4716A;  border-color: #F4716A;}
+.pagination li.active span{  color: #fff;  background: #2C71A3;  border-color: #2C71A3;}
 .pagination li.disabled span{  color: gainsboro;  background: whitesmoke;  border-color: whitesmoke;}
 .pagination li a {  color: inherit;  padding: 1px 6px;  border: 1px solid #EEE;  background: white;  display: block;}
-.pagination li a:hover {  color: #F4716A;  border: 1px solid #F4716A;}
+.pagination li a:hover {  color: #2C71A3;  border: 1px solid #2C71A3;}
 .pagination ul li:before{content:"";} 
 
 .tri{text-align: right;margin: 15px 0 !important;}
@@ -23,7 +23,7 @@ and open the template in the editor.
 .variantes-versions{  width: 100%;margin: 0 0 30px;background: #fff;}
 .variantes-versions li{ padding: 7px 15px !important;font-size: 12px;}
 .variantes-versions li a{color: black;}
-.variantes-versions li a:hover{color: #F4716A;}
+.variantes-versions li a:hover{color: #2C71A3;}
 .variantes-versions li a span{vertical-align: -webkit-baseline-middle}
 .variantes-versions img{display: inline-block;vertical-align: middle;float: left;margin-right: 5px;}
 
@@ -41,7 +41,7 @@ a.link-not-activated{pointer-events: none;cursor: default;background-color: whit
 a.isLiker, a.isFavoris{background: rgb(40, 173, 97) !important}
 
 ul.note-recette{}
-ul.note-recette li{background-color:#F4716A;float: left;color: white;width: 20%;border-left: 1px solid whitesmoke;font-weight: bold;}
+ul.note-recette li{background-color:#2C71A3;float: left;color: white;width: 20%;border-left: 1px solid whitesmoke;font-weight: bold;}
 ul.note-recette li:hover{background-color:rgb(40, 173, 97);cursor: pointer; }
 
 .widget.isRater{text-align: center;background-color: green;color: white;}

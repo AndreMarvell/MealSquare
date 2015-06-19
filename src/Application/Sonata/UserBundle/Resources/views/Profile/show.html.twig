@@ -36,12 +36,15 @@
                                     <img src="{{ asset_url }}" alt="MealSquare User">
                                     {% endimage %}
                                 {% endif %}
-                                <a class="ajax-popup-link" style="display: none;position:absolute;right: 21px;top: 8px;" href="{{path('meal_square_user_avatar')}}" title="Changez votre photo de profil"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                <a class="ajax-popup-link" style="position: absolute; right: 21px; padding: 6px 5px 5px 9px; top: 8px; display: none; border-radius: 5px; background-color: white;" href="{{path('meal_square_user_avatar')}}" title="Changez votre photo de profil"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                             </figure>
                             <div class="container">
                                 <h2>
                                     {{ app.user.username}}
+                                     <a class="" style="position: absolute; right: 21px; padding: 6px 5px 5px 9px; top: 8px; border-radius: 5px; background-color: white;" href="{{path('fos_user_profile_edit')}}" title="Changez mes parametres"><i class="fa fa-cog fa-2x"></i></a>
+                          
                                 </h2> 
+                                    
                             </div>
                             
                         </div>

@@ -136,3 +136,6 @@ common:
         no_recetteclassic : Desolé, Nous n'avons pas encore sélectionné le grand classic
         recetterate : La plus noté
         shortcut: Quel type de recette cherchez vous?
+        
+    profile:
+        setting: Changer mes informations

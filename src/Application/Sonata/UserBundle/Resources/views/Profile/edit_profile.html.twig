@@ -1,0 +1,68 @@
+{# empty Twig template #}
+{% extends "MealSquareCommonBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Mon profil - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+        <!--wrap-->
+        <div class="wrap clearfix">
+            <!--breadcrumbs-->
+            <nav class="breadcrumbs">
+                <ul>
+                    <li><a href="{{path('meal_square_common_homepage')}}" title="{{ 'common.menu.home'|trans }}">{{ 'common.menu.home'|trans }}</a></li>
+                    <li><a href="{{path('sonata_user_profile_show')}}" title="{{ 'user_block_profile'|trans({}, 'SonataUserBundle') }}">{{ 'user_block_profile'|trans({}, 'SonataUserBundle') }}</a></li>
+                </ul>
+            </nav>
+            <!--//breadcrumbs-->
+
+
+            <!--content-->
+            <section class="content full-width wow fadeInUp">
+                <!--recipefinder-->
+                <div class="container recipefinder">
+
+                    {% block sonata_profile_content %}
+                        <div class="left">
+                            {% render url("sonata_user_profile_edit_authentication") %}
+                        </div>
+                        <div class="right">
+                            {{ form_errors(form) }}
+
+                            {% form_theme form _self %}
+
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{ "title_user_account" | trans({}, 'SonataUserBundle')}}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <form action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
+                                        {{ form_widget(form) }}
+                                        <div class="form-actions">
+                                            <button type="submit" name="submit"  class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endblock %}
+
+                    </div>
+                    </form>
+                </div>
+
+            </section>
+
+            <!--//content-->
+        </div>
+        <!--//wrap-->
+    </main>
+{% endblock %}
+{% block script %}
+    <script> new WOW().init();</script>
+{% endblock %}
+
+
+
