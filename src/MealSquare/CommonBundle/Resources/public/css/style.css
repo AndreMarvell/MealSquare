@@ -51,7 +51,7 @@ h4 {font-size:18px;font-weight:500;padding:18px 0;}
 h5 {font-size:15px;font-weight:500;padding:20px 0 19px;}
 h6 {font-size:14px;font-weight:600;padding:20px 0;}
 
-.s-title > h1	 {font-size:40px;line-height:1.2;font-weight:300;padding:0 15px 60px;margin-top:-10px;display:inline-block;width:100%;}
+.s-title > h1	 {font-size:40px;line-height:1.2;font-weight:300;padding:0 15px 30px;margin-top:-10px;display:inline-block;width:100%;}
 
 p 			{padding:0 0 18px;line-height:1.6;}
 p:empty 		{display:none;}
@@ -553,7 +553,7 @@ input[type="checkbox"], input[type="radio"] { box-sizing: border-box; width:100%
 input[type="search"] { -webkit-appearance: textfield;}
 input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
 input[type="search"],input[type="email"],input[type="text"],input[type="number"],input[type="password"],textarea {width:100% !important;border:1px solid #ddd;color:#666;font-size:13px;font-weight:400;padding:9px 10px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
-textarea	{resize: none;height:150px;}
+textarea	{resize: none;height:80px;}
 select {height:37px;font-size:13px;line-height:1;font-weight:600;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;border:1px solid #ddd;color:#666;}
 input[type="text"]:focus,
 input[type="email"]:focus,

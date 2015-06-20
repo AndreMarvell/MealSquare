@@ -15,7 +15,7 @@ class AsynchroneController extends Controller
  
         $term = $request->request->get('libelle');
         $array= $this->getDoctrine()
-            ->getEntityManager()
+            ->getManager()
             ->getRepository('MealSquareRecetteBundle:Ingredient')
             ->findIngredientsLike($term);
 
@@ -29,7 +29,7 @@ class AsynchroneController extends Controller
     {
         
         $request    = $this->get('request');
-        $em         = $this->getDoctrine()->getEntityManager();
+        $em         = $this->getDoctrine()->getManager();
         $thread     = $request->request->get('id');
         $user       = $this->get('security.context')->getToken()->getUser();
         $like       = $em->getRepository('MealSquareRecetteBundle:Like\Like')->findOneBy(array(
@@ -62,7 +62,7 @@ class AsynchroneController extends Controller
     {
         
         $request    = $this->get('request');
-        $em         = $this->getDoctrine()->getEntityManager();
+        $em         = $this->getDoctrine()->getManager();
         $thread     = $request->request->get('id');
         $note       = $request->request->get('note');
         $user       = $this->get('security.context')->getToken()->getUser();
@@ -94,7 +94,7 @@ class AsynchroneController extends Controller
     {
         
         $request    = $this->get('request');
-        $em         = $this->getDoctrine()->getEntityManager();
+        $em         = $this->getDoctrine()->getManager();
         $id         = $request->request->get('id');
 
         $repository = $em->getRepository("MealSquareRecetteBundle:Recette");

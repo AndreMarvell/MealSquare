@@ -26,6 +26,12 @@
             <div class="row">
                 <header class="s-title wow fadeInLeft">
                     <h1>{{recette.titre}}</h1>
+                    {% if recetteisVisible is defined and not recetteisVisible%}
+                        <h4 style="padding:10px;background-color: white;border-radius: 5px;margin-bottom: 15px;text-align: center;color: red">
+                            <i class="fa fa-eye-slash"></i>&nbsp;
+                            {{ 'recettes.not_visible'|trans({},'messages') }}
+                        </h4>
+                    {%endif%}
                 </header>
                 <!--content-->
                 <section class="content three-fourth">

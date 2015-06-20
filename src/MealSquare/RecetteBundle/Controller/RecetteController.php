@@ -10,12 +10,13 @@ use MealSquare\RecetteBundle\Form\RecetteType;
 use MealSquare\RecetteBundle\Form\RecetteEditType;
 use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\UserBundle\Model\UserInterface;
 
 class RecetteController extends Controller {
 
     public function listAction(Request $request) {
         $em         = $this->get('doctrine.orm.entity_manager');
-        $dql        = "SELECT a FROM MealSquareRecetteBundle:Recette a";
+        $dql        = "SELECT a FROM MealSquareRecetteBundle:Recette a WHERE a.visibilite = true AND a.archive =false";
         $query      = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -57,7 +58,13 @@ class RecetteController extends Controller {
         $recette        = $repository->findOneById($id);
         $user           = $this->get('security.context')->getToken()->getUser();
         
-        if(is_null($recette)){
+        $recetteisVisible   = (!is_null($recette) && !$recette->getArchive() && $recette->getVisibilite())? true :false;
+        $userIsOwner        = (!is_null($user) && $user instanceof UserInterface && !is_null($recette->getAuteur()) && $user->getId()==$recette->getAuteur()->getId());
+        
+        if(
+            is_null($recette) || 
+            (!$recetteisVisible && !$userIsOwner)
+        ){
                 throw new NotFoundHttpException("Désolé, la page que vous avez demandée semble introuvable !");
         }else{
             
@@ -79,7 +86,8 @@ class RecetteController extends Controller {
                 'isLiker'=>$isLiker,
                 'likers'=>$likers,
                 'isFavoris'=>$isFavoris,
-                'isRater'=>$isRater
+                'isRater'=>$isRater,
+                'recetteisVisible' => $recetteisVisible
             ));
         }
         
@@ -102,7 +110,7 @@ class RecetteController extends Controller {
     
     public function deleteFavorisAction($id) {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
         $recette = $repository->findOneById($id);
@@ -118,7 +126,7 @@ class RecetteController extends Controller {
     
     public function addFavorisAction($id) {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
         $recette = $repository->findOneById($id);
@@ -134,7 +142,7 @@ class RecetteController extends Controller {
     
     public function deleteAction($id) {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
         $recette = $repository->findOneById($id);
@@ -157,7 +165,7 @@ class RecetteController extends Controller {
     
     public function editAction($id) {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $usr= $this->get('security.context')->getToken()->getUser();
 
@@ -184,7 +192,7 @@ class RecetteController extends Controller {
                 $em->persist($recette);
                 $em->flush();  
 
-                if(!$recette->getArchive())
+                if(!$recette->getArchive() && $recette->getVisibilite())
                     return $this->redirect( $this->generateUrl( 'meal_square_recette_show', array('id' => $recette->getId()) ));
                 else
                     return $this->redirect( $this->generateUrl('fos_user_profile_show'));
@@ -201,7 +209,7 @@ class RecetteController extends Controller {
     
     public function addAction() {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(new RecetteType(), new Recette());
 
@@ -227,7 +235,7 @@ class RecetteController extends Controller {
             $em->flush();
 
             
-            if(!$recette->getArchive())
+            if(!$recette->getArchive() && $recette->getVisibilite())
                 return $this->redirect( $this->generateUrl( 'meal_square_recette_show', array('id' => $recette->getId()) ));
             else
                 return $this->redirect( $this->generateUrl('fos_user_profile_show'));
@@ -264,7 +272,7 @@ class RecetteController extends Controller {
     
     public function cloneAction($id) {
         
-        $em         = $this->getDoctrine()->getEntityManager();
+        $em         = $this->getDoctrine()->getManager();
         $usr        = $this->get('security.context')->getToken()->getUser();
         $repository = $em->getRepository("MealSquareRecetteBundle:Recette");
         $recette    = $repository->findOneById($id);

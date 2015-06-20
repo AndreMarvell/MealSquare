@@ -25,7 +25,9 @@ class RecetteEditType extends AbstractType
             ))
             ->add('nbPersonne')
             ->add('description')
-            ->add('visibilite')
+            ->add('visibilite', 'checkbox', array(
+                    'required'=>false
+                ))
             ->add('difficulte', 'choice', array(
                 'choices'   => array(
                                     '0' => 'Très facile',

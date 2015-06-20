@@ -14,6 +14,7 @@ recettes:
     ingredient_small_title : Ingrédients de la recette
     detail: Détail sur la recette
     sortby: Trier par
+    not_visible: Cette recette n'est pas visible aux autres utilisateurs. Editez la pour le changer.
     no: Il n'y a aucune recette disponible
     preparation_time: Temps de préparation
     coocking_time: Temps de cuisson
