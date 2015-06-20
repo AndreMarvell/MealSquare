@@ -1,5 +1,5 @@
 
-<img alt="MealSquare logo" width="300px" src="http://mealsquare.ovh/images/ico/logo.jpg"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/12/1418948033symfony-logo.png" alt="Logo Foodsquare" width="100px"/>
+<img alt="MealSquare logo" width="300px" src="http://mealsquare.ovh/images/ico/logo.jpg"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/12/1418948033symfony-logo.png" alt="Logo Foodsquare" width="40px"/>
 MealSquare
 ========================
 
@@ -32,15 +32,6 @@ parameters:
 
 Ensuite faite un *update* de composer (qui va se charger de télécharger toutes les dépendances), puis un *assets:install* pour installer l'ensemble des ressources publiques des bundles.
 
-En cas de probleme lors de l'ajout d'une image
-
-``` sql
-
-INSERT INTO `mealsquare`.`classification__category` (`id`, `parent_id`, `context`, `media_id`, `name`, `enabled`, `slug`, `description`, `position`, `created_at`, `updated_at`) VALUES (NULL, NULL, 'recette', NULL, 'recette', '1', 'recette', 'recette', NULL, CURRENT_DATE(), CURRENT_DATE());
-UPDATE `mealsquare`.`classification__context` SET `created_at` = CURRENT_DATE(), `updated_at` = CURRENT_DATE() WHERE `classification__context`.`id` = 'recette';
-
-```
-PS: Le faire egalement pour ingredient, news et badge
 
 ## Etude du projet
 
