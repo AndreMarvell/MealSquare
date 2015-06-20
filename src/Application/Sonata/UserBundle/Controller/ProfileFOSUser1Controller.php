@@ -93,7 +93,11 @@ class ProfileFOSUser1Controller extends BaseController
         }else{
             
             $recetteRepository  = $this->getDoctrine()->getRepository("MealSquareRecetteBundle:Recette");
-            $recettes           = $recetteRepository->findByAuteur($member);
+            $recettes           = $recetteRepository->findBy(array(
+                                'auteur' =>$member,
+                                'visibilite'=>true,
+                                'archive'=>false
+                            ));
 
             return $this->render('SonataUserBundle:Profile:show_other.html.twig', array(
                 'membre'   => $member,
