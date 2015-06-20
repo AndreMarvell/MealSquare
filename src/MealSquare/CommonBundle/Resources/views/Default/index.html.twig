@@ -71,7 +71,7 @@
                                     <!--item-->
                                 {% else %}
                                     <div class="container">
-                                        <h3> {{ 'common.home.no_recette'|trans({},'messages') }} </h3>
+                                        <h2> {{ 'common.home.no_recette'|trans({},'messages') }} </h2>
                                     </div>
                                 {% endfor %}
 
@@ -111,7 +111,7 @@
                                     <!--item-->
                                 {% else %}
                                     <div class="container">
-                                        <h3> {{ 'common.home.no_article'|trans }} </h3>
+                                        <h2> {{ 'common.home.no_article'|trans }} </h2>
                                     </div>
                                 {% endfor %}
                                 <div class="quicklinks">
@@ -163,11 +163,11 @@
                                         {% endif %}
                                         
                                         </div>
-                                    </li>
+                                    </li>{#
                                 {% else %}
                                     <div class="container">
                                         <li><h3> {{ 'common.home.no_user'|trans }} </h3></li>
-                                    </div>
+                                    </div>#}
                                 {% endfor %}
                             </ul>
                         </div>
