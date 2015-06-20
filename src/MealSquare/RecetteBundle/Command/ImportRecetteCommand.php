@@ -38,7 +38,7 @@ class ImportRecetteCommand extends ContainerAwareCommand{
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         
-        $lettres = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+        $lettres = array(/*'a','b','c','d','e','f','g','h',*/'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
         
         $this->em = $this->getContainer()->get('doctrine')->getManager();
         $this->ingredient_repository = $this->em->getRepository('MealSquareRecetteBundle:Ingredient');
@@ -57,13 +57,17 @@ class ImportRecetteCommand extends ContainerAwareCommand{
                 $answer = $acurl->http_request();
 
                 preg_match('/<div class="view-content">(.*)<h2 class="element-invisible">Pages<\/h2>/isU', $answer, $matches);
-                preg_match_all(
-                    '/<div class="mad__listing--recette__row__media">(?:.*)<a href="(.*)">(?:.*)<img/isU', 
-                    $matches[1],
-                    $recettes);
-                
-                foreach ($recettes[1] as $link){
-                    $this->getRecipe("http://madame.lefigaro.fr".$link);
+                if(isset($matches[1])){
+                    preg_match_all(
+                        '/<div class="mad__listing--recette__row__media">(?:.*)<a href="(.*)">(?:.*)<img/isU', 
+                        $matches[1],
+                        $recettes);
+
+                    foreach ($recettes[1] as $link){
+                        $this->getRecipe("http://madame.lefigaro.fr".$link);
+                    }
+                }else{
+                    echo PHP_EOL.'Il n\' y a aucune recette sur cette page'.PHP_EOL;
                 }
             }
         }
