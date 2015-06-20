@@ -9,12 +9,13 @@ class DefaultController extends Controller {
 
     public function indexAction() {
 
-        $em = $this->getDoctrine()->getManager();
-        $recetteRepo = $em->getRepository('MealSquareRecetteBundle:Recette');
+        $em             = $this->getDoctrine()->getManager();
+        $recetteRepo    = $em->getRepository('MealSquareRecetteBundle:Recette');
         $ingredientRepo = $em->getRepository('MealSquareRecetteBundle:Ingredient');
-        $userRepo = $em->getRepository('ApplicationSonataUserBundle:User');
-        $postRepo = $em->getRepository('ApplicationSonataNewsBundle:Post');
-        $galleryRepo = $em->getRepository('ApplicationSonataMediaBundle:Media');
+        $userRepo       = $em->getRepository('ApplicationSonataUserBundle:User');
+        $postRepo       = $em->getRepository('ApplicationSonataNewsBundle:Post');
+        $galleryRepo    = $em->getRepository('ApplicationSonataMediaBundle:Gallery');
+        $mediaRepo      = $em->getRepository('ApplicationSonataMediaBundle:Media');
         
         $nbuser = $userRepo->createQueryBuilder('l')
                 ->select('COUNT(l)')
@@ -28,17 +29,20 @@ class DefaultController extends Controller {
                 ->getQuery()
                 ->getSingleScalarResult();
         
-        $nbmedia = $galleryRepo->createQueryBuilder('l')
+        $nbmedia = $mediaRepo->createQueryBuilder('l')
                 ->select('COUNT(l)')              
                 ->where('l.context = :ct ')
                 ->setParameter('ct','ingredient')
+                ->orWhere('l.context = :ct_i ')
+                ->setParameter('ct_i','recette')
                 ->getQuery()
                 ->getSingleScalarResult();
         
-        $nbastuce = $galleryRepo->createQueryBuilder('l')
-                ->select('COUNT(l)')              
-                ->where('l.context = :ct ')
-                ->setParameter('ct','avatar')
+        $nbastuce = $ingredientRepo->createQueryBuilder('i')
+                ->select('COUNT(m)')
+                ->join('i.galerie','g')
+                ->join('g.galleryHasMedias','ghm')
+                ->join('ghm.media','m')
                 ->getQuery()
                 ->getSingleScalarResult();
         
