@@ -18,6 +18,7 @@ common:
         account: Mon compte
         search_recipes: Rechercher
         news: Actualités
+        connect: Se Connecter
 
     # User account box
     user:

@@ -21,7 +21,11 @@
         <nav class="user-nav" role="navigation">
                 <ul>
                         <li class="light"><a href="{{ path('meal_square_recette_search') }}" title="{{ 'common.menu.search_recipes'|trans }}"><i class="ico i-search"></i> <span>{{ 'common.menu.search_recipes'|trans }}</span></a></li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li class="medium"><a href="{{ path('sonata_user_profile_show') }}" title="{{ 'common.menu.account'|trans }}"><i class="ico i-account"></i> <span>{{ 'common.menu.account'|trans }}</span></a></li>
+                    {%else%}
+                        <li class="medium"><a href="{{ path('sonata_user_profile_show') }}" title="{{ 'common.menu.connect'|trans }}"><i class="ico i-account"></i> <span>{{ 'common.menu.connect'|trans }}</span></a></li>
+                    {% endif %}
                         <li class="dark"><a href="{{ path('meal_square_recette_add') }}" title="{{ 'common.menu.submit_recipes'|trans }}"><i class="ico i-submitrecipe"></i> <span>{{ 'common.menu.submit_recipes'|trans }}</span></a></li>
                 </ul>
         </nav>
