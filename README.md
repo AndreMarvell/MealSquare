@@ -7,7 +7,7 @@ MealSquare est une application web de gestion de recette MARMITON like. Dévelop
 
 ## Configuration
 
-Creer un fichier parameters.yml dans le repertoire app/config/
+Creer un fichier parameters.yml dans le repertoire app/config/ que vous adapterez à vos besoin
 
 ``` yml
 # app/config/parameters.yml
@@ -27,6 +27,8 @@ parameters:
     debug_toolbar: true
     debug_redirects: false
     use_assetic_controller: true
+    unix_socket: /Applications/MAMP/tmp/mysql/mysql.sock
+    uri_media: /uploads/media
 
 ```
 
