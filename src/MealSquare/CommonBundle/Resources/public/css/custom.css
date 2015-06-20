@@ -52,3 +52,7 @@ ul.note-recette li:hover{background-color:rgb(40, 173, 97);cursor: pointer; }
 .rate-like-display p.one-half span{font-weight: bold;color: rgb(40, 173, 97)}
 
 .ui-autocomplete li.ui-menu-item:hover{  color: white !important;background-color: rgb(255, 142, 136)!important;}
+
+.sonata_breadcrumb .breadcrumb ol { counter-reset: item }
+.sonata_breadcrumb ol li { display: block }
+.sonata_breadcrumb ol li:before { content: counter(item) " "; counter-increment: item }

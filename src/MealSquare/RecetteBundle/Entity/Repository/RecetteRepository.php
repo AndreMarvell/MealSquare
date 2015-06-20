@@ -82,7 +82,7 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
         }elseif  (isset($data['pays'])) {
             $query->where('a.pays = :pays');
             $query->setParameter('pays',$data['pays']);
-        }elseif(isset($data['specialite'])) {
+        }elseif(isset($data['specialite']) && isset($specialites[$data['specialite']])) {
             $specialite = $specialites[$data['specialite']];
             $query->where('a.specialite = :specialite');
             $query->setParameter('specialite',$specialite);
