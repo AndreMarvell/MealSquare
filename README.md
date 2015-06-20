@@ -1,5 +1,5 @@
 
-<img alt="MealSquare logo" width="300px" src="https://lh6.googleusercontent.com/4n6_jrvkn6_qqpAkWQLEt4l9kf5lwwl4brjfvlUwvIL54u4x0FgEnHfGb7Z9WtsYSYLV2heyoCkqdN0=w1896-h865"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/12/1418948033symfony-logo.png" alt="Logo Foodsquare" width="100px"/>
+<img alt="MealSquare logo" width="300px" src="http://mealsquare.ovh/images/ico/logo.jpg"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/12/1418948033symfony-logo.png" alt="Logo Foodsquare" width="100px"/>
 MealSquare
 ========================
 
