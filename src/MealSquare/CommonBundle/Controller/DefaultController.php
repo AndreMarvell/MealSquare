@@ -29,7 +29,16 @@ class DefaultController extends Controller {
                 ->getSingleScalarResult();
         
         $nbmedia = $galleryRepo->createQueryBuilder('l')
-                ->select('COUNT(l)')
+                ->select('COUNT(l)')              
+                ->where('l.context = :ct ')
+                ->setParameter('ct','ingredient')
+                ->getQuery()
+                ->getSingleScalarResult();
+        
+        $nbastuce = $galleryRepo->createQueryBuilder('l')
+                ->select('COUNT(l)')              
+                ->where('l.context = :ct ')
+                ->setParameter('ct','avatar')
                 ->getQuery()
                 ->getSingleScalarResult();
         
@@ -52,6 +61,7 @@ class DefaultController extends Controller {
         $query = $em->createQuery(
                         'SELECT r FROM MealSquareRecetteBundle:Recette r
                          WHERE r.visibilite = true
+                         AND  r.archive = false
                          ORDER BY r.dateCreation DESC'
                 );
         $query->setMaxResults(6);
@@ -89,6 +99,7 @@ class DefaultController extends Controller {
             'recette_selection' => $recette_selection,
             'new_users' => $users,
             'dernieres_recette' => $recettes,
+            'nbastuce' => $nbastuce,
             'raccourcis' => $raccourcis
         ));
     }
