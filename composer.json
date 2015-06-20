@@ -17,6 +17,7 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
+        "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         
         "bmatzner/fontawesome-bundle": "~4.0",
@@ -38,9 +39,6 @@
         "sonata-project/media-bundle": "dev-master",
         "sonata-project/user-bundle": "dev-master",
         "sonata-project/news-bundle": "dev-master"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "post-root-package-install": [
