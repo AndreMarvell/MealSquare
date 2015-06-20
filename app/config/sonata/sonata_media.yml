@@ -75,7 +75,7 @@ sonata_media:
 
     cdn:
         server:
-            path: http://localhost/MealSquare/web/uploads/media # http://media.sonata-project.org/
+            path: %uri_media% # http://media.sonata-project.org/
 
     filesystem:
         local:
