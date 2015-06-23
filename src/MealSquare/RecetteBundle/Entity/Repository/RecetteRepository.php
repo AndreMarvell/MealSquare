@@ -29,13 +29,15 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository {
         if(isset($data['ingredients'])){
             $query->leftJoin('a.ingredients', 'iLine');
             $query->leftJoin('iLine.ingredient', 'i');
+            $i = 0;
             foreach ($data['ingredients'] as $ing){
                 $query->andWhere(
                     $query->expr()->orX(
-                        $query->expr()->like('i.libelle', ':libelle'),
-                        $query->expr()->like('a.full_ingredients', ':libelle')
+                        $query->expr()->like('i.libelle', ':libelle'.$i),
+                        $query->expr()->like('a.full_ingredients', ':libelle'.$i)
                     ));
-                $query->setParameter('libelle','%'.$ing.'%');
+                $query->setParameter('libelle'.$i,'%'.$ing.'%');
+                $i++;
             }
         }
         if ($data['pays'] != null) {
